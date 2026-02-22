@@ -23,3 +23,13 @@ Queue Warteschlange (dynamischer Speicher!):
 -	Enqueue
 -	Dequeue
 -	Ist Leer?
+
+Auto einparken: zufallszahl generieren
+
+Ablauf:
+User Abfragen
+Struct Parkhaus erzeugen
+Beginn for loop:
+- Autos überprüfen, wenn nötig ausparken
+- Zufallszahl: wenn nötig auto generieren
+- Auto einparken (in parkhaus ODER in queue)
