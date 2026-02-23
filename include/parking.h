@@ -12,13 +12,15 @@
  * at runtime based on simulation parameters
  */
 typedef struct Parkhaus{
+    int size;
+    int empty_spaces;
     Car *ptr_spaces; /**< Pointer to an array of `Car` objects (parking spots). */
 } Parkhaus;
 
 /**
 * @brief Initialize new Parkhaus
 * 
-* This function creates and initializes a new `Parkhaus` struct, allocating memory for itself
+* This function creates and initializes a new `Parkhaus` struct, allocating memory for itself and
 * its `spaces` array based on the parameters of the provided `Simulation`.
 * To be called at the beginning of he simulation, once the simulation parameters are known.
 *
@@ -51,7 +53,8 @@ int close_parkhaus(Parkhaus *ptr_parkhaus);
 * @brief Inserts new car into the spaces array of a Parkhaus
 *
 * Inserts a struct Car into the `spaces` array of the specified struct Parkhaus if there
-* is space. Sets the Car structs time remaining and time of entry variables.
+* is space. Sets the Car structs time remaining and time of entry variables and reduces the
+* empty_spaces count of the Parkhaus struct by one. 
 * Returns `1` if there are no free spaces in the Parkhaus and then doesn't insert the car.
 * Call this function when a new car has been generated. If necessary can be called even if
 * there are no free spaces.
@@ -70,7 +73,7 @@ int park_car(Parkhaus *ptr_parkhaus, Car *ptr_car);
 *
 * Iterates through every Car struct in the `spaces` array of the Parkhaus struct and decreses its 
 * remaining time value by 1. If the remaining time value theeby reaches 0, the Car is removed from
-* the array.
+* the array and the empty_spaces count of the Parkhaus struct is increased by 1.
 * This function must be called exactly once in every simulation step.
 * 
 *
@@ -80,5 +83,7 @@ int park_car(Parkhaus *ptr_parkhaus, Car *ptr_car);
 *            - `-1` if an error occurred (e.g., `p` is `NULL`).
 */
 int update_parkhaus(Parkhaus *ptr_parkhaus);
+
+
 
 #endif
