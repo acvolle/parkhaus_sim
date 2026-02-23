@@ -20,6 +20,7 @@ typedef struct Parkhaus{
 * 
 * This function creates and initializes a new `Parkhaus` struct, allocating memory for itself
 * its `spaces` array based on the parameters of the provided `Simulation`.
+* To be called at the beginning of he simulation, once the simulation parameters are known.
 *
 * @param[in] s Pointer to the current Simulation (cannot be `NULL`)
 * @return Pointer to the created Parkhaus (return `NULL` in case of error)
@@ -33,6 +34,7 @@ Parkhaus* init_parkhaus(Simulation *s);
 * 
 * This function releases all dynamically allocated memory associated with the provided
 * `Parkhaus` struct, including the `spaces` array.
+* To be called at the end of the simulation.
 * 
 * @param[in] p Pointer to the Parkhaus that will be freed (cannot be `NULL`)
 * @return int Status code:
@@ -59,5 +61,6 @@ int close_parkhaus(Parkhaus *p);
 *            - `-1` if an error occurred (e.g., `p` is `NULL` or memory could not be freed).
 */
 int park_car(Parkhaus *p, Car *c);
+
 
 #endif
