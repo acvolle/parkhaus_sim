@@ -53,10 +53,11 @@ int close_parkhaus(Parkhaus *ptr_parkhaus);
 * Inserts a struct Car into the `spaces` array of the specified struct Parkhaus if there
 * is space. Sets the Car structs time remaining and time of entry variables.
 * Returns `1` if there are no free spaces in the Parkhaus and then doesn't insert the car.
+* Call this function when a new car has been generated. If necessary can be called even if
+* there are no free spaces.
 *
 * @param[out] ptr_parkhaus Pointer to Parkhaus in which the car should be parked (cannot be `NULL`)
 * @param[out] ptr_car Pointer to Car which will be parked
-* 
 * @return int Status code:
 *            - `0` if the operation succeeded.
 *            - `1` if there are no free spaces
@@ -68,11 +69,12 @@ int park_car(Parkhaus *ptr_parkhaus, Car *ptr_car);
 * @brief Updates all Car structs in a Parkhaus struct
 *
 * Iterates through every Car struct in the `spaces` array of the Parkhaus struct and decreses its 
-* remaining time value by 1. If th remaining time value theeby reaches 0, the Car is removed from
+* remaining time value by 1. If the remaining time value theeby reaches 0, the Car is removed from
 * the array.
+* This function must be called exactly once in every simulation step.
+* 
 *
 * @param[out] ptr_parkhaus Pointer to Parkhaus struct which is to be updated
-*
 * @return int Status code:
 *            - `0` if the operation succeeded.
 *            - `-1` if an error occurred (e.g., `p` is `NULL`).
