@@ -34,7 +34,7 @@ Parkhaus* init_parkhaus(Simulation *s);
 * This function releases all dynamically allocated memory associated with the provided
 * `Parkhaus` struct, including the `spaces` array.
 * 
-* @param[in] s Pointer to the Parkhaus that will be freed (cannot be `NULL`)
+* @param[in] p Pointer to the Parkhaus that will be freed (cannot be `NULL`)
 * @return int Status code:
 *            - `0` if the operation succeeded.
 *            - `-1` if an error occurred (e.g., `p` is `NULL` or memory could not be freed).
