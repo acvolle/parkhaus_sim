@@ -57,10 +57,24 @@ int close_parkhaus(Parkhaus *p);
 * 
 * @return int Status code:
 *            - `0` if the operation succeeded.
-             - `1` if there are no free spaces
-*            - `-1` if an error occurred (e.g., `p` is `NULL` or memory could not be freed).
+*            - `1` if there are no free spaces
+*            - `-1` if an error occurred (e.g., `p` is `NULL`).
 */
 int park_car(Parkhaus *p, Car *c);
 
+/**
+* @brief Updates all Car structs in a Parkhaus struct
+*
+* Iterates through every Car struct in the `spaces` array of the Parkhaus struct and decreses its 
+* remaining time value by 1. If th remaining time value theeby reaches 0, the Car is removed from
+* the array.
+*
+* @param[out] ptr_parkhaus Pointer to Parkhaus struct which is to be updated
+*
+* @return int Status code:
+*            - `0` if the operation succeeded.
+*            - `-1` if an error occurred (e.g., `p` is `NULL`).
+*/
+int update_parkhaus(Parkhaus *ptr_parkhaus);
 
 #endif
