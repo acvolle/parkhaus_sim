@@ -1,4 +1,5 @@
 #include "../include/car.h";
+#include "../include/simulation.h"
 #ifndef PARKING_H
 #define PARKING_H
 
@@ -83,7 +84,6 @@ int park_car(Parkhaus *ptr_parkhaus, Car *ptr_car);
 *            - `-1` if an error occurred (e.g., `p` is `NULL`).
 */
 int update_parkhaus(Parkhaus *ptr_parkhaus);
-
 
 
 #endif
