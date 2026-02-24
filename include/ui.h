@@ -72,6 +72,8 @@ void ui_print_final_stats(int avg_parking_duration, int avg_waiting_duration, in
 /**
 * @brief Write statistics from struct Stats into a txt file.
 *
+* To be called each cycle
+*
 * @param[in] ptr_sim reference to struct Simulation
 * @param[out] fp reference to the txt file
 * @return 0 for sucess, -1 for error
