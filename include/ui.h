@@ -1,6 +1,7 @@
 #ifndef UI_H
 #define UI_H
 
+#include <stdio.h>
 #include "simulation.h"
 
 /** ### HEADER FILE FOR UI FUNCTIONALITY ###
@@ -29,7 +30,7 @@ void ui_print_welcome();
 * - first line stating all simulation parameters
 * - second line stating all the stats seperated by commas
 * @param[in] ptr_sim reference to struct Simulation
-* @param[out] ptr_file reference to the txt file
+* @param[out] fp reference to the txt file
 * @return 0 for sucess, -1 for error
 */
 int ui_write_start_log(const Simulation *ptr_sim, FILE* fp);
@@ -63,5 +64,17 @@ void ui_print_stats(const Simulation *ptr_sim);
 * @return 0 for sucess, -1 for error
 */
 int ui_write_stats(const Simulation *ptr_sim, FILE* fp);
+
+/**
+ * @brief Asks the user to input the 5 simulations parameters
+ *
+ * Using the ui_get_int function
+ * and saves them to the struct Simulation
+ * To be called before starting the simulation!
+ * 
+ * @param[out] ptr_sim reference to struct Simulation
+ * @return 0 for sucess, -1 for error
+ */
+int ui_get_params(Simulation *ptr_sim);
 
 #endif
