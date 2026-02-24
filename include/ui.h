@@ -52,9 +52,22 @@ int ui_get_int(const char *prompt, int min, int max);
 /**
 * @brief Print out all the stats to console.
 *
+* To be called each cycle
+*
 * @param[in] ptr_sim reference to struct Simulation
 */
 void ui_print_stats(const Simulation *ptr_sim);
+
+/**
+* @brief Print out all the final stats to console.
+*
+* To be called after sucessful simulation
+*
+* @param[in] avg_parking_duration Message shown to user
+* @param[in] avg_waiting_duration Minimum defined value
+* @param[in] avg_waiting_count Maximum defined value
+*/
+void ui_print_final_stats(int avg_parking_duration, int avg_waiting_duration, int avg_waiting_count);
 
 /**
 * @brief Write statistics from struct Stats into a txt file.
