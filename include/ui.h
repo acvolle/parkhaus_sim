@@ -29,11 +29,11 @@ void ui_print_welcome();
 * For the beginning of the simulation, print into txt file:
 * - first line stating all simulation parameters
 * - second line stating all the stats seperated by commas
-* @param[in] ptr_sim reference to struct Simulation
+* @param[in] p_config reference to struct Config
 * @param[out] fp reference to the txt file
 * @return 0 for sucess, -1 for error
 */
-int ui_write_start_log(const Simulation *ptr_sim, FILE* fp);
+int ui_write_start_log(const Config *p_config, FILE* fp);
 
 /**
  * @brief Get an integer value from user input.
@@ -54,9 +54,9 @@ int ui_get_int(const char *prompt, int min, int max);
 *
 * To be called each cycle
 *
-* @param[in] ptr_sim reference to struct Simulation
+* @param[in] p_config reference to struct Config
 */
-void ui_print_stats(const Simulation *ptr_sim);
+void ui_print_stats(const Config *p_config);
 
 /**
 * @brief Print out all the final stats to console.
@@ -74,11 +74,11 @@ void ui_print_final_stats(int avg_parking_duration, int avg_waiting_duration, in
 *
 * To be called each cycle
 *
-* @param[in] ptr_sim reference to struct Simulation
+* @param[in] p_config reference to struct Config
 * @param[out] fp reference to the txt file
 * @return 0 for sucess, -1 for error
 */
-int ui_write_stats(const Simulation *ptr_sim, FILE* fp);
+int ui_write_stats(const Config *p_config, FILE* fp);
 
 /**
  * @brief Asks the user to input the 5 simulations parameters
@@ -87,9 +87,9 @@ int ui_write_stats(const Simulation *ptr_sim, FILE* fp);
  * and saves them to the struct Simulation
  * To be called before starting the simulation!
  * 
- * @param[out] ptr_sim reference to struct Simulation
+ * @param[out] p_stats reference to struct Stats
  * @return 0 for sucess, -1 for error
  */
-int ui_get_params(Simulation *ptr_sim);
+int ui_get_params(Stats *p_stats);
 
 #endif
