@@ -22,17 +22,21 @@
 
 ##### Struct Car:
 
- 	id (unique)
-
-    Einfahrtszeit
-
- 	Wartezeit in der Queue (durchlaufene Zyklen ab Ankunft bis Einfahrt)
-
- 	verbleibende Parkdauer (wird beim Einfahren zugewiesen und jeden Zyklus reduziert)
+* id (unique)
+* Einfahrtszeit
+* Wartezeit in der Queue (durchlaufene Zyklen ab Ankunft bis Einfahrt)
+* verbleibende Parkdauer (wird beim Einfahren zugewiesen und jeden Zyklus reduziert)
 
 ##### Struct Parkhaus:
 
 * Array von pointern auf Cars der Größe \[Anzahl von Parkplätzen]
+
+##### Struct Config:
+* Space count
+* max parking duration
+* Sim Dauer
+* Ankunftswahrscheinlichkeit
+* seed
 
 ##### Struct Stats:
 * Aktuelle Auslastung Parkhaus (% und absolut)
@@ -42,12 +46,9 @@
 * durchschnittliche übrige Parkdauer im Parkhaus?
 
 ##### Struct Simulation:
-* Space count
-* max parking duration
-* Sim Dauer
-* Ankunftswahrscheinlichkeit
-* seed
+* struct Config
 * struct Stats
+* unsigned int current_step
 
 ##### Queue Warteschlange (dynamischer Speicher!):
 
