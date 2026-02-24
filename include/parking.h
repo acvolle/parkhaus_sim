@@ -1,4 +1,4 @@
-#include "../include/car.h";
+#include "../include/car.h"
 #include "../include/simulation.h"
 #ifndef PARKING_H
 #define PARKING_H
@@ -15,7 +15,7 @@
 typedef struct Parkhaus{
     int size;
     int empty_spaces;
-    Car *ptr_spaces; /**< Pointer to an array of `Car` objects (parking spots). */
+    Car **ptr_spaces; /**< Pointer to an array of `Car` pointers (represent parking spots). */
 } Parkhaus;
 
 /**
@@ -53,7 +53,7 @@ int close_parkhaus(Parkhaus *ptr_parkhaus);
 /**
 * @brief Inserts new car into the spaces array of a Parkhaus
 *
-* Inserts a struct Car into the `spaces` array of the specified struct Parkhaus if there
+* Inserts a pointer to a Car into the `spaces` array of the specified struct Parkhaus if there
 * is space. Sets the Car structs time remaining and time of entry variables and reduces the
 * empty_spaces count of the Parkhaus struct by one. 
 * Returns `1` if there are no free spaces in the Parkhaus and then doesn't insert the car.
@@ -72,8 +72,8 @@ int park_car(Parkhaus *ptr_parkhaus, Car *ptr_car);
 /**
 * @brief Updates all Car structs in a Parkhaus struct
 *
-* Iterates through every Car struct in the `spaces` array of the Parkhaus struct and decreses its 
-* remaining time value by 1. If the remaining time value theeby reaches 0, the Car is removed from
+* Iterates through every Car pointer in the `spaces` array of the Parkhaus struct and decreses the
+ *stucts its remaining time value by 1 (if it is not NULL). If the remaining time value thereby reaches 0, the Car is removed from
 * the array and the empty_spaces count of the Parkhaus struct is increased by 1.
 * This function must be called exactly once in every simulation step.
 * 
