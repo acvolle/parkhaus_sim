@@ -30,7 +30,7 @@ typedef struct Parkhaus{
 *
 * @note The allocated memory for the parkhaus must be freed with the close_parkhaus() function
 */
-Parkhaus* init_parkhaus(Simulation *ptr_simulation);
+Parkhaus* init_parkhaus(Config *ptr_config);
 
 
 /**
