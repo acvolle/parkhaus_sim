@@ -18,9 +18,13 @@
 
 * Ausgabe der Statistiken
 
+* Schreiben der Statistiken in txt Datei
+
 ##### Struct Car:
 
  	id (unique)
+
+    Einfahrtszeit
 
  	Wartezeit in der Queue (durchlaufene Zyklen ab Ankunft bis Einfahrt)
 
@@ -28,7 +32,22 @@
 
 ##### Struct Parkhaus:
 
-* Array von Cars der Größe \[Anzahl von Parkplätzen]
+* Array von pointern auf Cars der Größe \[Anzahl von Parkplätzen]
+
+##### Struct Stats:
+* Aktuelle Auslastung Parkhaus (% und absolut)
+* Aktuell wartende Autos
+* durchschn. Wartezeit in der Schlange (Durchschnitt der aktuellen Elemente der Queue)
+* maximale Wartezeit in der Schlange aktuell
+* durchschnittliche übrige Parkdauer im Parkhaus?
+
+##### Struct Simulation:
+* Space count
+* max parking duration
+* Sim Dauer
+* Ankunftswahrscheinlichkeit
+* seed
+* struct Stats
 
 ##### Queue Warteschlange (dynamischer Speicher!):
 
