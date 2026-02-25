@@ -30,6 +30,15 @@ typedef struct Config{
 */
 Config* new_config();
 
+/**
+* @brief Frees the memory allocated to the config struct
+*
+* @param[out] p_config Pointer to the Config struct to be freed
+* @return int Status code:
+*            - `0` if the operation succeeded.
+*            - `-1` if an error occurred (e.g., `p_config` is `NULL`).
+*/
+int free_config(Config *p_config);
 
 
 #endif
