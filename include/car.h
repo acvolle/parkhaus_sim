@@ -34,14 +34,14 @@ typedef struct Car
  */
 
  
-Car init_car(int Simulation, int Time);
+Car init_car(int max_duration, int current_time);
 
 /**
  * @brief deletes a struct of the type car
  * 
  * removes the dynamically created car as it no longer serves
  * any porpuse after it exits the garage (Parkhaus)
- * expect return 0 when succesful, return -1 when functions has failed
+ * expect return 0 when succesful, return -1 when functions has faile
  */
 
 int remove_car(Car *pCardelete );
