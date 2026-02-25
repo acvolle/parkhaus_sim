@@ -43,20 +43,20 @@ int enqueue(Queue *p_queue, Car *p_car);
  * @param[out] p_dequeued_car pointer to dequeued car
  * @return 0 for sucess, -1 for empty queue
  */
-int dequeue(Queue *q, Car *p_dequeued_car);
+int dequeue(Queue *p_queue, Car *p_dequeued_car);
 
 /**
  * @brief Checks if queue is empty
  * 
  * @return true for empty queue, else false
  */
-bool queue_is_empty(const Queue *q);
+bool queue_is_empty(const Queue *p_queue);
 
 /**
  * @brief Deletes every item from queue
  * 
  * To be used after the simulation to free memory
  */
-void queue_clear(Queue *q);
+void queue_clear(Queue *p_queue);
 
 #endif
