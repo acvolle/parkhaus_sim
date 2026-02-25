@@ -14,9 +14,9 @@
 typedef struct {
     float occupancy;
     int cars_waiting;
-    float avg_wait_time;
     int first_car_wait_time;
-    float avg_remaining_parking_time;
+    float avg_wait_time;
+    float stress_score;
 } Stats;
 
 /**
