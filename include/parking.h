@@ -1,8 +1,7 @@
-#include "../include/car.h"
-#include "../include/simulation.h"
 #ifndef PARKING_H
 #define PARKING_H
 
+#include "../include/car.h"
 /**
  * @brief Represents the simulated parking garage
  * @see Car
@@ -25,12 +24,12 @@ typedef struct Parkhaus{
 * its `spaces` array based on the parameters of the provided `Simulation`.
 * To be called at the beginning of he simulation, once the simulation parameters are known.
 *
-* @param[in] ptr_simulation Pointer to the current Simulation (cannot be `NULL`)
+* @param[in] spaces_count number of parking spaces
 * @return Pointer to the created Parkhaus (return `NULL` in case of error)
 *
 * @note The allocated memory for the parkhaus must be freed with the close_parkhaus() function
 */
-Parkhaus* init_parkhaus(Config *ptr_config);
+Parkhaus* init_parkhaus(unsigned int spaces_count);
 
 
 /**
