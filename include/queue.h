@@ -53,7 +53,7 @@ int dequeue(Queue *p_queue, Car *p_dequeued_car);
 bool queue_is_empty(const Queue *p_queue);
 
 /**
- * @brief Deletes every item from queue
+ * @brief Deletes every item from queue and the queue itself
  * 
  * To be used after the simulation to free memory
  */
