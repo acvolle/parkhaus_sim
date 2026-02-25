@@ -1,6 +1,5 @@
 #ifndef CAR_H
 #define CAR_H
-#include "../include/simulation.h"
 
 /**## HEADER FILE FOR CARS 
  * - all functions include the word car
@@ -23,6 +22,7 @@ typedef struct Car
     int id_number;
     int arrival_time;
     int park_span;
+    int used_span;
 } Car;
 /**
  * @brief Functions that creates car
@@ -34,16 +34,17 @@ typedef struct Car
  */
 
  
-Car* init_car(int *pSimulation, int *pTime);
+Car init_car(int Simulation, int Time);
 
 /**
  * @brief deletes a struct of the type car
  * 
  * removes the dynamically created car as it no longer serves
  * any porpuse after it exits the garage (Parkhaus)
+ * expect return 0 when succesful, return -1 when functions has failed
  */
 
-Car* remove_car(Car *pCardelete );
+int remove_car(Car *pCardelete );
 
 
 
