@@ -70,11 +70,11 @@ static int car_gen_bool(const int probability);
 * @param[out] p_queue Pointer to the Queue in which the Car struct can be enqueued
 * @return int Status code:
 *            - `0` if the operation succeeded.
-*            - `-1` if an error occurred (e.g., `p_config` is `NULL`).
+*            - `-1` if an error occurred (e.g., pointer is `NULL`).
 */
+static int generate_car(Parkhaus *p_parkhaus, Queue *p_queue);
 
-int generate_car(Parkhaus *p_parkhaus, Queue *p_queue);
-
+int 
 
 #endif
 
