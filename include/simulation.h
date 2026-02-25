@@ -41,5 +41,20 @@ Config* new_config();
 int free_config(Config *p_config);
 
 
+/**
+* @brief Determines whether a new car should be generated
+* 
+* Uses rand() to generate a random number between 1 and 100. Will, based on that, return either
+* either 1 if a Car should be generated, else 0. 
+*
+* @param[in] seed const int seed the randomizer should use
+* @param[in] probability const int probability of a new car being generated.
+* @return int should car be generated?:
+*            - `0` if no Car should be generated.
+*            - `1` if a car should be generated.
+*/
+int car_gen_bool(const int probability);
+
+
 #endif
 
