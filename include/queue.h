@@ -13,7 +13,7 @@ typedef struct Node {
 } Node;
 
 /**
- * @brief Verwalter-Struktur für die Warteschlange
+ * @brief Struct for the linked list
  */
 typedef struct {
     Node* head; // first element
@@ -34,15 +34,16 @@ void queue_init(Queue *p_queue);
  * @param[in] p_car car to add
  * @return 0 for sucess, -1 for failed allocation
  */
-int enqueue(Queue *p_queue, Car p_car);
+int enqueue(Queue *p_queue, Car *p_car);
 
 /**
  * @brief removes the oldest car from queue (FIFO)
  * 
  * @param[in, out] p_queue queue to use 
+ * @param[out] p_dequeued_car pointer to dequeued car
  * @return 0 for sucess, -1 for empty queue
  */
-int dequeue(Queue *q);
+int dequeue(Queue *q, Car *p_dequeued_car);
 
 /**
  * @brief Checks if queue is empty
