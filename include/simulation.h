@@ -77,21 +77,23 @@ int car_gen_bool(const int probability);
 int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue);
 
 /**
-* @brief Runs a single timestep of the simualtion
+* @brief Runs a single timestep of the simulation
 *
 * Updates the `Parkhaus` struct.
 * If there are `Car` structs in the Queue, as many as have space in the `Parkhaus` struct are parked in the
 * `Parkhaus` struct (via their pointers).
 * Randomly (using simulation parameters) determines whether a new `Car` struct is generated, and
 * then parks it (if there is a free space) or else enqueues it in the `Queue`. 
+* Simultaneously gets current statistics and saves them in the `Stats` struct.
 *
 * @param[out] p_parkhaus Pointer to the Parkhaus struct where a Car might be parked.
 * @param[out] p_queue Pointer to the Queue which the Car might be added to.
 * @param[in] p_config Pointer to the Config struct of the current simulation.
+* @param[out] p_stats Pointer to the Stast struct where current statisctics will be saved.
 * @return * @return int Status code:
 *            - `0` if the operation succeeded.
 *            - `-1` if an error occurred (e.g., pointer is `NULL`).
 */
-int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config);
+int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats);
 
 #endif
