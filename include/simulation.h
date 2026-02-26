@@ -59,7 +59,7 @@ int free_config(Config *p_config);
  * @param[in] probability The probability (0-100) of generating a new car.
  * @return int `1` if a car should be generated, `0` otherwise.
  */
-static int car_gen_bool(const int probability);
+int car_gen_bool(const int probability);
 
 
 /**
@@ -74,7 +74,7 @@ static int car_gen_bool(const int probability);
 *            - `0` if the operation succeeded.
 *            - `-1` if an error occurred (e.g., pointer is `NULL`).
 */
-static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue);
+int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue);
 
 /**
 * @brief Runs a single timestep of the simualtion
