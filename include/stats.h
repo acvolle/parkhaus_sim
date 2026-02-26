@@ -2,6 +2,7 @@
 #define STATS_H
 
 #include <stdio.h>
+#include "queue.h"
 
 /** ### HEADER FILE FOR CALCULATING STATS ###
  * 
@@ -30,31 +31,30 @@ typedef struct {
 int stats_occupancy_rate(int car_count, int spaces_count, Stats *p_stats);
 
 /**
- * @brief Write the current number of waiting cars into a struct Stats
+ * @brief Write the current queue-based stats into struct Stats
  *
- * @param[in] queued_cars number of waiting cars
+ * This function reads from the queue and calculates
+ * - waiting time of the next car to leave the queue 
+ * - number of cars waiting
+ * - average waiting time of all cars in the queue
+ * and writes the values into the struct Stats
+ * @param[in] p_queue reference to struct Queue
  * @param[out] p_stats reference to struct Stats
  * @return 0 for sucess, -1 for error
  */
-int stats_cars_waiting(int queued_cars, Stats *p_stats);
+int stats_queue_stats(const Queue *p_queue, Stats *p_stats);
 
 /**
- * @brief Write the current waiting time of the first car into a struct Stats
+ * @brief Update the stress score
  *
- * @param[in] waiting_time waiting time of the next car to leave the queue
- * @param[out] p_stats reference to struct Stats
+ * This function reads the gathered stats,
+ * calculates the stess score
+ * (exact formula tbd!!!!!!!!!!)
+ * and writes the new score into the struct Stats
+ * 
+ * @param[in,out] p_stats reference to struct Stats
  * @return 0 for sucess, -1 for error
  */
-int stats_first_car_waiting_time(int waiting_time, Stats *p_stats);
-
-/**
- * @brief Write the current number of waiting cars into a struct Stats
- *
- * @param[in] 
- * @param[out] p_stats reference to struct Stats
- * @return 0 for sucess, -1 for error
- */
-int stats_avg_wait_time(int , Stats *p_stats);
-
+int stats_stress_score(Stats *p_stats);
 
 #endif
