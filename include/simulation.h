@@ -1,9 +1,11 @@
+#ifndef SIMULATION_H
+#define SIMULATION_H
+
 #include <stdlib.h>
 #include "parking.h"
 #include "stats.h"
 #include "queue.h"
-#ifndef SIMULATION_H
-#define SIMULATION_H
+
 
 /**
  * @brief A struct to save simulation parameters
