@@ -1,7 +1,7 @@
 #ifndef PARKING_H
 #define PARKING_H
 
-#include "../include/car.h"
+#include "car.h"
 /**
  * @brief Represents the simulated parking garage
  * @see Car
@@ -11,78 +11,76 @@
  * represents an individual parking spot. The size of the array is determined
  * at runtime based on simulation parameters
  */
-typedef struct Parkhaus{
+typedef struct Parkhaus
+{
     int size;
     int empty_spaces;
     Car **ptr_spaces; /**< Pointer to an array of `Car` pointers (represent parking spots). */
 } Parkhaus;
 
 /**
-* @brief Initialize new Parkhaus
-* 
-* This function creates and initializes a new `Parkhaus` struct, allocating memory for itself and
-* its `spaces` array based on the parameters of the provided `Simulation`.
-* To be called at the beginning of he simulation, once the simulation parameters are known.
-*
-* @param[in] spaces_count number of parking spaces
-* @return Pointer to the created Parkhaus (return `NULL` in case of error)
-*
-* @note The allocated memory for the parkhaus must be freed with the close_parkhaus() function
-*/
-Parkhaus* init_parkhaus(unsigned int spaces_count);
-
+ * @brief Initialize new Parkhaus
+ *
+ * This function creates and initializes a new `Parkhaus` struct, allocating memory for itself and
+ * its `spaces` array based on the parameters of the provided `Simulation`.
+ * To be called at the beginning of he simulation, once the simulation parameters are known.
+ *
+ * @param[in] spaces_count number of parking spaces
+ * @return Pointer to the created Parkhaus (return `NULL` in case of error)
+ *
+ * @note The allocated memory for the parkhaus must be freed with the close_parkhaus() function
+ */
+Parkhaus *init_parkhaus(unsigned int spaces_count);
 
 /**
-* @brief Delete Parkhaus and free allocated memory
-* 
-* This function releases all dynamically allocated memory associated with the provided
-* `Parkhaus` struct, including the `spaces` array.
-* To be called at the end of the simulation.
-* 
-* @param[in] ptr_parkhaus Pointer to the Parkhaus that will be freed (cannot be `NULL`)
-* @return int Status code:
-*            - `0` if the operation succeeded.
-*            - `-1` if an error occurred (e.g., `p` is `NULL` or memory could not be freed).
-*
-* @warning After calling this function, the pointer `p` is invalid. Do not dereference it.
-*/
+ * @brief Delete Parkhaus and free allocated memory
+ *
+ * This function releases all dynamically allocated memory associated with the provided
+ * `Parkhaus` struct, including the `spaces` array.
+ * To be called at the end of the simulation.
+ *
+ * @param[in] ptr_parkhaus Pointer to the Parkhaus that will be freed (cannot be `NULL`)
+ * @return int Status code:
+ *            - `0` if the operation succeeded.
+ *            - `-1` if an error occurred (e.g., `p` is `NULL` or memory could not be freed).
+ *
+ * @warning After calling this function, the pointer `p` is invalid. Do not dereference it.
+ */
 int close_parkhaus(Parkhaus *ptr_parkhaus);
 
-
 /**
-* @brief Inserts new car into the spaces array of a Parkhaus
-*
-* Inserts a pointer to a Car into the `spaces` array of the specified struct Parkhaus if there
-* is space. Sets the Car structs time remaining and time of entry variables and reduces the
-* empty_spaces count of the Parkhaus struct by one. 
-* Returns `1` if there are no free spaces in the Parkhaus and then doesn't insert the car.
-* Call this function when a new car has been generated. If necessary can be called even if
-* there are no free spaces.
-*
-* @param[out] ptr_parkhaus Pointer to Parkhaus in which the car should be parked (cannot be `NULL`)
-* @param[out] ptr_car Pointer to Car which will be parked
-* @return int Status code:
-*            - `0` if the operation succeeded.
-*            - `1` if there are no free spaces
-*            - `-1` if an error occurred (e.g., `p` is `NULL`).
-*/
+ * @brief Inserts new car into the spaces array of a Parkhaus
+ *
+ * Inserts a pointer to a Car into the `spaces` array of the specified struct Parkhaus if there
+ * is space. Sets the Car structs time remaining and time of entry variables and reduces the
+ * empty_spaces count of the Parkhaus struct by one.
+ * Returns `1` if there are no free spaces in the Parkhaus and then doesn't insert the car.
+ * Call this function when a new car has been generated. If necessary can be called even if
+ * there are no free spaces.
+ *
+ * @param[out] ptr_parkhaus Pointer to Parkhaus in which the car should be parked (cannot be `NULL`)
+ * @param[out] ptr_car Pointer to Car which will be parked
+ * @return int Status code:
+ *            - `0` if the operation succeeded.
+ *            - `1` if there are no free spaces
+ *             - `-1` if an error occurred (e.g., `p` is `NULL`).
+ */
 int park_car(Parkhaus *ptr_parkhaus, Car *ptr_car);
 
 /**
-* @brief Updates all Car structs in a Parkhaus struct
-*
-* Iterates through every Car pointer in the `spaces` array of the Parkhaus struct and decreses the
+ * @brief Updates all Car structs in a Parkhaus struct
+ *
+ * Iterates through every Car pointer in the `spaces` array of the Parkhaus struct and decreses the
  *stucts its remaining time value by 1 (if it is not NULL). If the remaining time value thereby reaches 0, the Car is removed from
-* the array and the empty_spaces count of the Parkhaus struct is increased by 1.
-* This function must be called exactly once in every simulation step.
-* 
-*
-* @param[out] ptr_parkhaus Pointer to Parkhaus struct which is to be updated
-* @return int Status code:
-*            - `0` if the operation succeeded.
-*            - `-1` if an error occurred (e.g., `p` is `NULL`).
-*/
+ * the array and the empty_spaces count of the Parkhaus struct is increased by 1.
+ * This function must be called exactly once in every simulation step.
+ *
+ *
+ * @param[out] ptr_parkhaus Pointer to Parkhaus struct which is to be updated
+ * @return int Status code:
+ *            - `0` if the operation succeeded.
+ *            - `-1` if an error occurred (e.g., `p` is `NULL`).
+ */
 int update_parkhaus(Parkhaus *ptr_parkhaus);
-
 
 #endif
