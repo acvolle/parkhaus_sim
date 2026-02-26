@@ -30,18 +30,23 @@ typedef struct Car
  * based on the the parameters of the simulation
  * a car is created, utilizing the time of arrival as
  * both the ID and point of reference for time
- * 
+ * @param[in] id_number int, 
+ * @param[in] current_time int,
+ * @param[in] max_duration int,
+ * @return CAR pointer
  */
 
  
-Car init_car(int max_duration, int current_time);
+Car* init_car(int  id_number, int current_time, int max_duration);
 
 /**
  * @brief deletes a struct of the type car
  * 
  * removes the dynamically created car as it no longer serves
  * any porpuse after it exits the garage (Parkhaus)
- * expect return 0 when succesful, return -1 when functions has faile
+ * expect return 0 when succesful, return -1 when functions has failed
+ * 
+ * para
  */
 
 int remove_car(Car *pCardelete );
