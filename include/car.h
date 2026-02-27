@@ -46,10 +46,11 @@ Car* init_car(int  id_number, int current_time, int max_duration);
  * any porpuse after it exits the garage (Parkhaus)
  * expect return 0 when succesful, return -1 when functions has failed
  * 
- * para
+ * @param[in] pointer 
+ * @return NULL POINTER
  */
 
-int remove_car(Car *pCardelete );
+int delete_car(Car *pCardelete );
 
 
 
