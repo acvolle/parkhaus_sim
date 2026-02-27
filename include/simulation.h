@@ -5,7 +5,9 @@
 #include "parking.h"
 #include "stats.h"
 #include "queue.h"
-
+/* SIMULATION OPERATIONS HEADER FILE
+   This modul
+*/
 
 /**
  * @brief A struct to save simulation parameters
@@ -34,9 +36,9 @@ typedef struct Config{
 * The allocated memory for the Condig struct must be cleared at the end of the simulation!
 * Use free_config()
 * 
-* @return pointer to the created Config struct (NULL if error)
+* @return the created Config struct (NULL if error)
 */
-Config* new_config();
+Config new_config();
 
 /**
 * @brief Frees the memory allocated to the config struct
@@ -73,11 +75,12 @@ int car_gen_bool(const int probability);
 *
 * @param[out] p_parkhaus Pointer to Parkhaus in which the Car structshould be parked
 * @param[out] p_queue Pointer to the Queue in which the Car struct can be enqueued
+* @param[in] p_config Pointer to the Config file, from which information is read
 * @return int Status code:
 *            - `0` if the operation succeeded.
 *            - `-1` if an error occurred (e.g., pointer is `NULL`).
 */
-int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue);
+int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config p_config);
 
 /**
 * @brief Runs a single timestep of the simulation
