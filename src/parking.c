@@ -17,7 +17,23 @@ int close_parkhaus(Parkhaus *p_parkhaus){
 
 // Inserts new Car into the spaces array of a Parkhaus
 int park_car(Parkhaus *p_parkhaus, Car *p_car){
-
+/*
+    IF p_parkhaus != NULL && (p_car != NULL) THEN
+        IF parkhaus_is_full THEN
+            return 1
+        ELSE
+            FOR i<-0 TO p_parkhaus->size DO
+                IF spaces array[i] == NULL THEN
+                   spaces array[i] <- p_car
+                   return 0
+                END IF
+            END FOR
+            return -1 (this can only be reaches if is_full is false but there isn't actually space --> error!)
+        END IF
+    ELSE
+        return -1
+    END IF
+*/
 }
 
 
@@ -27,7 +43,7 @@ int update_parkhaus(Parkhaus *p_parkhaus){
 /*
     IF p_parkhaus != NULL THEN
         FOR i<-0 TO p_parkhaus->size DO
-            IF Car pointer in array[i] != NULL THEN
+            IF Car pointer in spaces array[i] != NULL THEN
                 Car pointer->remaining time --;
                 IF remaining time == 0 THEN
                     free memory of Car
