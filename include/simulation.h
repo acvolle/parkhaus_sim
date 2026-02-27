@@ -5,8 +5,23 @@
 #include "parking.h"
 #include "stats.h"
 #include "queue.h"
+
 /* SIMULATION OPERATIONS HEADER FILE
-   This modul
+   This module includes all the structs and functions that are needed to actually run the simulation step by 
+   step. It includes the Config struct, which saves the parameters of the simulation (the number of spaces in 
+   the garage the longest time a car can park, the length of the simulation, the probability of a new car being 
+   generated, and a random seed) as integers. 
+   Because the Config struct is passed to a UI function to have the parameters set after being initialised, 
+   its memory is dynamically allocated on the heap. Therefore Config structs are created with the new_config() 
+   function and their memory freed with the free_config() function.
+   The Config parameters are used by the run_timestep() function which executes the actual simulation steps:
+    - Updating the Parkhaus via update_parkhaus() in Parkhaus.h
+    - Emptying the queue as much as possible
+    - Randomly seeing if a car should be added and then sorting it into the Parkhaus or Queue
+    - Writing the statistics for the timestep
+   The module also includes two static functions in its source file(car_gen_bool() and input_new_car()) that 
+   run_timestep() outsources some functionalities to. 
+
 */
 
 /**
@@ -80,7 +95,7 @@ int car_gen_bool(const int probability);
 *            - `0` if the operation succeeded.
 *            - `-1` if an error occurred (e.g., pointer is `NULL`).
 */
-int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config p_config);
+int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config);
 
 /**
 * @brief Runs a single timestep of the simulation
