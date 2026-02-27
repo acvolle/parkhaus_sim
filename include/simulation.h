@@ -40,7 +40,6 @@ typedef struct Config{
   This is because a Config struct is initialized before the values are known, and then passed to a UI function
   which fills in the values input by the user.*/
 
-
 /**
 * @brief Initializes a new Config struct
 * 
@@ -65,38 +64,6 @@ Config new_config();
 */
 int free_config(Config *p_config);
 
-
-/**
- * @brief Randomly determines if a new car should be generated.
- *
- * Uses `rand()` to generate a random number between 1 and 100.
- * Returns `1` if a car should be generated (random number <= probability),
- * otherwise returns `0`.
- * Called by 
- *
- * @note The `srand()` function must be called in `main()` before using this function.
- *
- * @param[in] probability The probability (0-100) of generating a new car.
- * @return int `1` if a car should be generated, `0` otherwise.
- */
-int car_gen_bool(const int probability);
-
-
-/**
-* @brief Initializes new Car struct and either parks or enqueues it
-*
-* Creates a new `Car` struct, then attempts to park it using `park_car()` (see `parking.h`).
-* If parking fails, the `Car` is enqueued into the provided `Queue`.
-*
-* @param[out] p_parkhaus Pointer to Parkhaus in which the Car structshould be parked
-* @param[out] p_queue Pointer to the Queue in which the Car struct can be enqueued
-* @param[in] p_config Pointer to the Config file, from which information is read
-* @return int Status code:
-*            - `0` if the operation succeeded.
-*            - `-1` if an error occurred (e.g., pointer is `NULL`).
-*/
-int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config);
-
 /**
 * @brief Runs a single timestep of the simulation
 *
@@ -119,4 +86,5 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
 /*This function serves as a unified interface for other operations to the main function, and
 primarily calls other functions from this and other modules. This reduces the number of function
 calls in main and increases modularity*/
+
 #endif
