@@ -46,5 +46,18 @@ int update_parkhaus(Parkhaus *p_parkhaus){
 
 //Checks if a Parkhaus is full
 int parkhaus_is_full(Parkhaus *p_parkhaus){
+/*
+    IF p_parkhaus != NULL THEN
+        IF p_parkhaus->occupied spaces < p_parkhaus->size THEN
+            return 0
+        ELSE IF p_parkhaus->occupied spaces == p_parkhaus->size THEN
+            return 1
+        ELSE
+            return -1
+        END IF
+    ELSE
+        return -1
+    END IF
+*/
 
 }
