@@ -21,12 +21,33 @@ typedef struct {
 } Stats;
 
 /**
+ * @brief Reserve memory for new struct Stats
+ * 
+ * @return Pointer to struct or NULL for alloc error
+ */
+Stats* stats_create(void);
+
+/**
+ * @brief Sets all values inside a struct Stats to 0
+ * 
+ * @return 0 for success, -1 for error
+ */
+int stats_clear(Stats *p_stats);
+
+/**
+ * @brief Frees memory from a struct Stats
+ * 
+ * @return 0 for success, -1 for error
+ */
+int stats_delete(Stats *p_stats);
+
+/**
  * @brief Write the current occupancy rate into a struct Stats
  *
  * @param[in] car_count number of occupied spaces
  * @param[in] spaces_count total number of parking spaces
  * @param[out] p_stats reference to struct Stats
- * @return 0 for sucess, -1 for error
+ * @return 0 for success, -1 for error
  */
 int stats_occupancy_rate(int car_count, int spaces_count, Stats *p_stats);
 
@@ -40,7 +61,7 @@ int stats_occupancy_rate(int car_count, int spaces_count, Stats *p_stats);
  * and writes the values into the struct Stats
  * @param[in] p_queue reference to struct Queue
  * @param[out] p_stats reference to struct Stats
- * @return 0 for sucess, -1 for error
+ * @return 0 for success, -1 for error
  */
 int stats_queue_stats(const Queue *p_queue, Stats *p_stats);
 
@@ -53,7 +74,7 @@ int stats_queue_stats(const Queue *p_queue, Stats *p_stats);
  * and writes the new score into the struct Stats
  * 
  * @param[in,out] p_stats reference to struct Stats
- * @return 0 for sucess, -1 for error
+ * @return 0 for success, -1 for error
  */
 int stats_stress_score(Stats *p_stats);
 
