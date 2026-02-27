@@ -23,7 +23,21 @@ Parkhaus *init_parkhaus(unsigned int spaces_count){
 
 //Delete Parkhaus and free allocated memory
 int close_parkhaus(Parkhaus *p_parkhaus){
-
+/*
+    IF p_parkhaus != NULL THEN 
+        free memory allocated to spaces array
+        IF free memory failed THEN
+            return -1
+        END IF
+        free memory allocated to Parkhaus struct
+        IF free memory failed THEN
+            return -1
+        END IF
+        return 0
+    ELSE 
+        return -1
+    END IF
+*/
 }
 
 
