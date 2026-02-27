@@ -10,6 +10,7 @@ Parkhaus *init_parkhaus(unsigned int spaces_count){
     END IF
     spaces array pointer <- allocate space for Car pointer array of size spaces_count
     IF spaces array pointer == NULL THEN
+        free space allocated for Parkhaus pointer
         OUTPUT error message
         return NULL
     END IF
@@ -25,6 +26,11 @@ Parkhaus *init_parkhaus(unsigned int spaces_count){
 int close_parkhaus(Parkhaus *p_parkhaus){
 /*
     IF p_parkhaus != NULL THEN 
+        FOR i <- 0 TO p_parkhaus_size-1 DO
+            IF spaces array[i] != NULL THEN
+                free memory allocated to Car pointer in spaces_array[i]
+                spaces_array[i] <- NULL
+            END IF
         free memory allocated to spaces array
         IF free memory failed THEN
             return -1
@@ -49,9 +55,10 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car){
         IF parkhaus_is_full THEN
             return 1
         ELSE
-            FOR i<-0 TO p_parkhaus->size DO
+            FOR i<-0 TO p_parkhaus->size-1 DO
                 IF spaces array[i] == NULL THEN
                    spaces array[i] <- p_car
+                   p_parkhaus->occupied_spaces + 1
                    return 0
                 END IF
             END FOR
@@ -69,12 +76,13 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car){
 int update_parkhaus(Parkhaus *p_parkhaus){
 /*
     IF p_parkhaus != NULL THEN
-        FOR i<-0 TO p_parkhaus->size DO
+        FOR i<-0 TO p_parkhaus->size-1 DO
             IF Car pointer in spaces array[i] != NULL THEN
                 Car pointer->remaining time --;
                 IF remaining time == 0 THEN
                     free memory of Car
                     delete pointer to Car from array
+                    p_parkhaus->occupied_spaces - 1
                 END IF
             END IF
         END FOR
