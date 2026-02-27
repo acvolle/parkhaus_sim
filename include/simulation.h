@@ -10,7 +10,7 @@
 /**
  * @brief A struct to save simulation parameters
  * 
- * Values are set at start of the simulation by the user and cannot be changed during the simulation.
+ * Values are set at start of the simulation by the user and should not be changed during the simulation.
  */
 typedef struct Config{
     int num_spaces; /**< Number of spaces to be initalised in the parking garage */
@@ -19,6 +19,9 @@ typedef struct Config{
     int gen_probability; /**< Probability of a new Car being generated each time step */
     int random_seed; /**< Random seed for the randomization of incoming cars */
 }Config;
+/*The members of the Config struct are not constant, even though they are not chnaged during the simulation.
+  This is because a Config struct is initialized before the values are known, and then passed to a UI function
+  which fills in the values input by the user.*/
 
 
 /**
