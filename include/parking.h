@@ -15,7 +15,7 @@ typedef struct Parkhaus
 {
     int size;
     int empty_spaces;
-    Car **ptr_spaces; /**< Pointer to an array of `Car` pointers (represent parking spots). */
+    Car **p_spaces; /**< Pointer to an array of `Car` pointers (represent parking spots). */
 } Parkhaus;
 
 /**
@@ -39,14 +39,14 @@ Parkhaus *init_parkhaus(unsigned int spaces_count);
  * `Parkhaus` struct, including the `spaces` array.
  * To be called at the end of the simulation.
  *
- * @param[in] ptr_parkhaus Pointer to the Parkhaus that will be freed (cannot be `NULL`)
+ * @param[in] p_parkhaus Pointer to the Parkhaus that will be freed (cannot be `NULL`)
  * @return int Status code:
  *            - `0` if the operation succeeded.
  *            - `-1` if an error occurred (e.g., `p` is `NULL` or memory could not be freed).
  *
  * @warning After calling this function, the pointer `p` is invalid. Do not dereference it.
  */
-int close_parkhaus(Parkhaus *ptr_parkhaus);
+int close_parkhaus(Parkhaus *p_parkhaus);
 
 /**
  * @brief Inserts new car into the spaces array of a Parkhaus
@@ -58,14 +58,14 @@ int close_parkhaus(Parkhaus *ptr_parkhaus);
  * Call this function when a new car has been generated. If necessary can be called even if
  * there are no free spaces.
  *
- * @param[out] ptr_parkhaus Pointer to Parkhaus in which the car should be parked (cannot be `NULL`)
- * @param[out] ptr_car Pointer to Car which will be parked
+ * @param[out] p_parkhaus Pointer to Parkhaus in which the car should be parked (cannot be `NULL`)
+ * @param[out] p_car Pointer to Car which will be parked
  * @return int Status code:
  *            - `0` if the operation succeeded.
  *            - `1` if there are no free spaces
  *             - `-1` if an error occurred (e.g., `p` is `NULL`).
  */
-int park_car(Parkhaus *ptr_parkhaus, Car *ptr_car);
+int park_car(Parkhaus *p_parkhaus, Car *p_car);
 
 /**
  * @brief Updates all Car structs in a Parkhaus struct
@@ -76,11 +76,11 @@ int park_car(Parkhaus *ptr_parkhaus, Car *ptr_car);
  * This function must be called exactly once in every simulation step.
  *
  *
- * @param[out] ptr_parkhaus Pointer to Parkhaus struct which is to be updated
+ * @param[out] p_parkhaus Pointer to Parkhaus struct which is to be updated
  * @return int Status code:
  *            - `0` if the operation succeeded.
  *            - `-1` if an error occurred (e.g., `p` is `NULL`).
  */
-int update_parkhaus(Parkhaus *ptr_parkhaus);
+int update_parkhaus(Parkhaus *p_parkhaus);
 
 #endif
