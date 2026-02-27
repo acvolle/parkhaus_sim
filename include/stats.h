@@ -30,6 +30,7 @@ Stats* stats_create(void);
 /**
  * @brief Sets all values inside a struct Stats to 0
  * 
+ * @param[in] p_stats reference to struct Stats
  * @return 0 for success, -1 for error
  */
 int stats_clear(Stats *p_stats);
@@ -37,6 +38,7 @@ int stats_clear(Stats *p_stats);
 /**
  * @brief Frees memory from a struct Stats
  * 
+ * @param[in] p_stats reference to struct Stats
  * @return 0 for success, -1 for error
  */
 int stats_delete(Stats *p_stats);
