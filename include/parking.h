@@ -67,7 +67,7 @@ Parkhaus *init_parkhaus(unsigned int spaces_count);
  * @param[in] p_parkhaus Pointer to the `Parkhaus` that will be freed (cannot be `NULL`)
  * @return int Status code:
  *            - `0` if the operation succeeded.
- *            - `-1` if an error occurred (e.g., `p` is `NULL` or memory could not be freed).
+ *            - `-1` if an error occurred (e.g., pointer is `NULL` or memory could not be freed).
  *
  * @warning After calling this function, the pointer `p` is invalid. Do not dereference it.
  */
@@ -88,7 +88,7 @@ int close_parkhaus(Parkhaus *p_parkhaus);
  * @return int Status code:
  *            - `0` if the operation succeeded.
  *            - `1` if there are no free spaces
- *             - `-1` if an error occurred (e.g., `p` is `NULL`).
+ *             - `-1` if an error occurred (e.g., pointer is `NULL`).
  */
 int park_car(Parkhaus *p_parkhaus, Car *p_car);
 /*Note: this function has three return values so that it can be called safely even if it is not possible to
@@ -108,7 +108,7 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car);
  * @param[out] p_parkhaus Pointer to Parkhaus struct which is to be updated
  * @return int Status code:
  *            - `0` if the operation succeeded.
- *            - `-1` if an error occurred (e.g., `p` is `NULL`).
+ *            - `-1` if an error occurred (e.g., pointer is `NULL`).
  */
 int update_parkhaus(Parkhaus *p_parkhaus);
 /*This function is necessary because each Car struct seperately saves its own remaining time (the time until it
@@ -126,6 +126,7 @@ int update_parkhaus(Parkhaus *p_parkhaus);
  * @return int 
  *            - `0` if there are still free spaces
  *            - `1` if the array is full of pointers
+ *            - `-1` if an error occured (e.g. Pointer is NULL)
  */
 int parkhaus_is_full(Parkhaus *p_parkhaus);
 
