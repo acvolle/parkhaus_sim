@@ -2,6 +2,26 @@
 #define PARKING_H
 
 #include "car.h"
+/* HEADER FILE FOR PARKING GARAGE
+This module includes the struct Parkhaus, which represents the parking garage to be
+simulated. Its main feature is an array of Car pointers, which represents all the individual 
+parking spaces. The Cars are accessed via the pointers as their memory will be dynamically 
+allocated. The Parkhaus struct also includes the size of the array, as defined by the user,
+which is used to iterate through it. The number of empty spaces is also saved as an integer,
+this is updated every time a change is made and eliminates the need for repeated iterations through
+the array any time the current number of empty spaces is needed. 
+A Parkhaus struct is accessed and changed by a number of functions, wherefore its memory is allocated
+dynamically; it is passed to different functions and accessed via pointers.
+The following functions are defined to manage the Parkhaus struct during the simulation:
+- init_parkhaus(): dynamically allocates memory for the Parkhaus struct based on the size defined by
+  the user and returns a pointer to it
+- close_parkhaus(): frees the memory allocated to the Parkhaus struct
+- park_car(): places a pointer to a Car struct in the array if there is space
+- update_parkhaus(): updates the remaining tieme of all the Cars whose pointers are in the array and
+  removes those whose parking time is up.
+*/
+
+
 /**
  * @brief Represents the simulated parking garage
  * @see Car
@@ -71,8 +91,9 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car);
  * @brief Updates all Car structs in a Parkhaus struct
  *
  * Iterates through every Car pointer in the `spaces` array of the Parkhaus struct and decreses the
- *stucts its remaining time value by 1 (if it is not NULL). If the remaining time value thereby reaches 0, the Car is removed from
- * the array and the empty_spaces count of the Parkhaus struct is increased by 1.
+ * stucts its remaining time value by 1 (if it is not NULL). If the remaining time value thereby 
+ * reaches 0, the Car is removed from the array and the empty_spaces count of the Parkhaus struct is 
+ * increased by 1.
  * This function must be called exactly once in every simulation step.
  *
  *
