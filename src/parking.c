@@ -29,6 +29,9 @@ int close_parkhaus(Parkhaus *p_parkhaus){
         FOR i <- 0 TO p_parkhaus_size-1 DO
             IF spaces array[i] != NULL THEN
                 free memory allocated to Car pointer in spaces_array[i]
+                IF free Car memory failed THEN
+                    return -1
+                END IF
                 spaces_array[i] <- NULL
             END IF
         free memory allocated to spaces array
