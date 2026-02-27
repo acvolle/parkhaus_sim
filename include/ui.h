@@ -86,10 +86,10 @@ int ui_write_stats(const Config *p_config, FILE *fp);
  * Using the ui_get_int function
  * and saves them to the struct Simulation
  * To be called before starting the simulation!
- *
- * @param[out] p_stats reference to struct Stats
+ * 
+ * @param[out] p_config reference to struct Config
  * @return 0 for sucess, -1 for error
  */
-int ui_get_params(Stats *p_stats);
+int ui_get_params(Config *p_config);
 
 #endif
