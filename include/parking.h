@@ -20,6 +20,8 @@ The following functions are defined to manage the Parkhaus struct during the sim
 - park_car(): places a pointer to a Car struct in the array if there is space
 - update_parkhaus(): updates the remaining tieme of all the Cars whose pointers are in the array and
   removes those whose parking time is up.
+- parkhaus_is_full(): checks whether or not there are still free spaces (this is a very easy operation
+   but provides increased modularization).
 */
 
 /**
@@ -110,4 +112,19 @@ int update_parkhaus(Parkhaus *p_parkhaus);
 /*This function is necessary because each Car struct seperately saves its own remaining time (the time until it
  leaves the Parkhaus). It is necessary to iterate through each one of them and decrease this value by one until
  the time runs out once every timestep of the simulation*/
-#endif
+
+
+/**
+ * @brief Checks if a Parkhaus is full
+ * 
+ * Checks if all the spaces in the `spaces` array of a `Parkhaus` are occupied.
+ * Returns `1` if all of them are, else `0`.
+ * 
+ * @param[in] p_parkhaus Pointer to the Parkhaus which should be checked
+ * @return int 
+ *            - `0` if there are still free spaces
+ *            - `1` if the array is full of pointers
+ */
+int parkhaus_is_full(Parkhaus *p_parkhaus);
+
+ #endif
