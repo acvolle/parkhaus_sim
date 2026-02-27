@@ -116,5 +116,7 @@ int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config);
 *            - `-1` if an error occurred (e.g., pointer is `NULL`).
 */
 int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats);
-
+/*This function serves as a unified interface for other operations to the main function, and
+primarily calls other functions from this and other modules. This reduces the number of function
+calls in main and increases modularity*/
 #endif
