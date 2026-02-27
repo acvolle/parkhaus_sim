@@ -8,9 +8,9 @@ This module includes the struct Parkhaus, which represents the parking garage to
 simulated. Its main feature is an array of Car pointers, which represents all the individual 
 parking spaces. The Cars are accessed via the pointers as their memory will be dynamically 
 allocated. The Parkhaus struct also includes the size of the array, as defined by the user,
-which is used to iterate through it. The number of empty spaces is also saved as an integer,
+which is used to iterate through it. The number of occupied spaces is also saved as an integer,
 this is updated every time a change is made and eliminates the need for repeated iterations through
-the array any time the current number of empty spaces is needed. 
+the array any time the current number of occupied spaces is needed. 
 A Parkhaus struct is accessed and changed by a number of functions, wherefore its memory is allocated
 dynamically; it is passed to different functions and accessed via pointers.
 The following functions are defined to manage the Parkhaus struct during the simulation:
@@ -33,8 +33,8 @@ The following functions are defined to manage the Parkhaus struct during the sim
  */
 typedef struct Parkhaus
 {
-    int size;
-    int empty_spaces;
+    const int size; /**< Size of the spaces array */
+    int occupied_spaces; /**< Number of occupied spaces in the spaces array */
     Car **p_spaces; /**< Pointer to an array of `Car` pointers (represent parking spots). */
 } Parkhaus;
 /*Note: the spaces array is never sorted. Cars pointers are input into the first free spot while
@@ -72,13 +72,13 @@ Parkhaus *init_parkhaus(unsigned int spaces_count);
 int close_parkhaus(Parkhaus *p_parkhaus);
 
 /**
- * @brief Inserts new car into the spaces array of a Parkhaus
+ * @brief Inserts new Car into the spaces array of a Parkhaus
  *
- * Inserts a pointer to a Car into the first free space of the `spaces` array of the specified struct
- * Parkhaus if there is space. Sets the Car structs time remaining and time of entry variables and 
- * reduces the empty_spaces count of the Parkhaus struct by one.
- * Returns `1` if there are no free spaces in the Parkhaus and then doesn't insert the car.
- * Call this function when a new car has been generated. If necessary can be called even if
+ * Inserts a pointer to a `Car` into the first free space of the `spaces` array of the specified struct
+ * `Parkhaus` if there is space. Sets the `Car` structs time remaining and time of entry variables and 
+ * reduces the empty_spaces count of the `Parkhaus` struct by one.
+ * Returns `1` if there are no free spaces in the `Parkhaus` and then doesn't insert the car.
+ * Call this function when a new `Car` has been generated. If necessary can be called even if
  * there are no free spaces.
  *
  * @param[out] p_parkhaus Pointer to Parkhaus in which the car should be parked (cannot be `NULL`)
