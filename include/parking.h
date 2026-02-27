@@ -91,6 +91,8 @@ int close_parkhaus(Parkhaus *p_parkhaus);
  *             - `-1` if an error occurred (e.g., `p` is `NULL`).
  */
 int park_car(Parkhaus *p_parkhaus, Car *p_car);
+/*Note: this function has three return values so that it can be called safely even if it is not possible to
+  park a car. */
 
 
 /**
