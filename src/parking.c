@@ -1,9 +1,22 @@
 #include "../include/parking.h"
 
 // Initialize new Parkhaus
-
 Parkhaus *init_parkhaus(unsigned int spaces_count){
-
+/*
+    Parkhaus pointer <- allocate space for Parkhaus struct
+    IF Parkhaus pointer == NULL THEN
+        OUTPUT error message
+        return NULL
+    END IF
+    spaces array pointer <- allocate space for Car pointer array of size spaces_count
+    IF spaces array pointer == NULL THEN
+        OUTPUT error message
+        return NULL
+    END IF
+    Parkhaus pointer->size = spaces_count
+    Parkhaus pointer->occupied_spaces = 0
+    return Parkhaus pointer
+*/
 }
 
 
