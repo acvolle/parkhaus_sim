@@ -2,6 +2,7 @@
 #define PARKING_H
 
 #include "car.h"
+
 /* HEADER FILE FOR PARKING GARAGE
 This module includes the struct Parkhaus, which represents the parking garage to be
 simulated. Its main feature is an array of Car pointers, which represents all the individual 
@@ -21,7 +22,6 @@ The following functions are defined to manage the Parkhaus struct during the sim
   removes those whose parking time is up.
 */
 
-
 /**
  * @brief Represents the simulated parking garage
  * @see Car
@@ -37,6 +37,9 @@ typedef struct Parkhaus
     int empty_spaces;
     Car **p_spaces; /**< Pointer to an array of `Car` pointers (represent parking spots). */
 } Parkhaus;
+/*Note: the spaces array is never sorted. Cars pointers are input into the first free spot while
+  iteration through. Since adding a new car has a runtime of O(n) anyways, it would not be efficient
+  to additionally move together all the pointers when a Car from the middle of the array is removed*/
 
 /**
  * @brief Initialize new Parkhaus
@@ -71,9 +74,9 @@ int close_parkhaus(Parkhaus *p_parkhaus);
 /**
  * @brief Inserts new car into the spaces array of a Parkhaus
  *
- * Inserts a pointer to a Car into the `spaces` array of the specified struct Parkhaus if there
- * is space. Sets the Car structs time remaining and time of entry variables and reduces the
- * empty_spaces count of the Parkhaus struct by one.
+ * Inserts a pointer to a Car into the first free space of the `spaces` array of the specified struct
+ * Parkhaus if there is space. Sets the Car structs time remaining and time of entry variables and 
+ * reduces the empty_spaces count of the Parkhaus struct by one.
  * Returns `1` if there are no free spaces in the Parkhaus and then doesn't insert the car.
  * Call this function when a new car has been generated. If necessary can be called even if
  * there are no free spaces.
@@ -86,6 +89,7 @@ int close_parkhaus(Parkhaus *p_parkhaus);
  *             - `-1` if an error occurred (e.g., `p` is `NULL`).
  */
 int park_car(Parkhaus *p_parkhaus, Car *p_car);
+
 
 /**
  * @brief Updates all Car structs in a Parkhaus struct
@@ -103,5 +107,7 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car);
  *            - `-1` if an error occurred (e.g., `p` is `NULL`).
  */
 int update_parkhaus(Parkhaus *p_parkhaus);
-
+/*This function is necessary because each Car struct seperately saves its own remaining time (the time until it
+ leaves the Parkhaus). It is necessary to iterate through each one of them and decrease this value by one until
+ the time runs out once every timestep of the simulation*/
 #endif
