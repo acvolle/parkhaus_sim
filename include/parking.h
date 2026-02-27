@@ -46,7 +46,7 @@ typedef struct Parkhaus
  *
  * This function creates and initializes a new `Parkhaus` struct, allocating memory for itself and
  * its `spaces` array based on the parameters of the provided `Simulation`.
- * To be called at the beginning of he simulation, once the simulation parameters are known.
+ * To be called at the beginning of the simulation, once the simulation parameters are known.
  *
  * @param[in] spaces_count number of parking spaces
  * @return Pointer to the created Parkhaus (return `NULL` in case of error)
@@ -62,7 +62,7 @@ Parkhaus *init_parkhaus(unsigned int spaces_count);
  * `Parkhaus` struct, including the `spaces` array.
  * To be called at the end of the simulation.
  *
- * @param[in] p_parkhaus Pointer to the Parkhaus that will be freed (cannot be `NULL`)
+ * @param[in] p_parkhaus Pointer to the `Parkhaus` that will be freed (cannot be `NULL`)
  * @return int Status code:
  *            - `0` if the operation succeeded.
  *            - `-1` if an error occurred (e.g., `p` is `NULL` or memory could not be freed).
@@ -94,9 +94,9 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car);
 /**
  * @brief Updates all Car structs in a Parkhaus struct
  *
- * Iterates through every Car pointer in the `spaces` array of the Parkhaus struct and decreses the
+ * Iterates through every `Car` pointer in the `spaces` array of the `Parkhaus` struct and decreses the
  * stucts its remaining time value by 1 (if it is not NULL). If the remaining time value thereby 
- * reaches 0, the Car is removed from the array and the empty_spaces count of the Parkhaus struct is 
+ * reaches 0, the `Car` is removed from the array and the empty_spaces count of the `Parkhaus` struct is 
  * increased by 1.
  * This function must be called exactly once in every simulation step.
  *
