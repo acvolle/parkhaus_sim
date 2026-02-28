@@ -27,34 +27,11 @@
 #include "simulation.h"
 
 /**
- * @brief Print a visual border to separate elements on console.
- *
- * Should be changed to static and moved to ui.c
- */
-void ui_print_border(void);
-
-/**
  * @brief Print welcome message to user in the beginning.
  *
  * To be called in main.c
  */
 void ui_print_welcome(void);
-
-/**
- * @brief Get an integer value from user input.
- *
- * Should be changed to static and moved to ui.c
- * 
- * Asks the user to input an integer,
- * then checks if input is valid and integer is between min and max value.
- * If not, ask the user again and specify the min and max values.
- *
- * @param[in] prompt Message shown to user
- * @param[in] min Minimum defined value
- * @param[in] max Maximum defined value
- * @return validated input
- */
-int ui_get_int(const char *prompt, int min, int max);
 
 /**
  * @brief Asks the user to input the 5 simulations parameters
