@@ -102,7 +102,7 @@ int ui_write_stats(const Stats *p_stats, FILE *fp);
  *
  * @param[in] p_stats reference to struct Stats
  */
-void ui_print_stats(const Config *p_config);
+void ui_print_stats(const Stats *p_stats);
 
 /**
  * @brief Print out all the final stats to console.
