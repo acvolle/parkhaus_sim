@@ -50,7 +50,7 @@ static int car_gen_bool(const int probability){
 * @brief Initializes new Car struct and either parks or enqueues it
 *
 * Creates a new `Car` struct, then attempts to park it using `park_car()` (see `parking.h`).
-* If parking fails, the `Car` is enqueued into the provided `Queue`.
+* If parking fails, the `Car` (pointer) is enqueued into the provided `Queue`.
 * Called by run_timestep()
 *
 * @param[out] p_parkhaus Pointer to Parkhaus in which the Car structshould be parked
@@ -61,5 +61,8 @@ static int car_gen_bool(const int probability){
 *            - `-1` if an error occurred (e.g., pointer is `NULL`).
 */
 static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config){
-    
+
 }
+
+
+static int gen_park_duration(Config *p_config);
