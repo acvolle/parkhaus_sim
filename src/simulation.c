@@ -34,7 +34,15 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
  * @return int `1` if a car should be generated, `0` otherwise.
  */
 static int car_gen_bool(const int probability){
-
+/*
+    Generate random number
+    value <- random number % 100
+    IF value <= probability THEN
+        return 1
+    ELSE
+        return 0
+    ENDIF
+*/
 }
 
 
