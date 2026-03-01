@@ -52,7 +52,7 @@ int close_parkhaus(Parkhaus *p_parkhaus){
 
 
 // Inserts new Car into the spaces array of a Parkhaus
-int park_car(Parkhaus *p_parkhaus, Car *p_car){
+int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time){
 /*
     IF p_parkhaus != NULL && (p_car != NULL) THEN
         IF parkhaus_is_full THEN
@@ -61,6 +61,7 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car){
             FOR i<-0 TO p_parkhaus->size-1 DO
                 IF spaces array[i] == NULL THEN
                    spaces array[i] <- p_car
+                   p_car->arrival_time <- current_time
                    p_parkhaus->occupied_spaces + 1
                    return 0
                 END IF
