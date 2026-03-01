@@ -16,6 +16,39 @@ int free_config(Config *p_config){
 
 // Runs a single timestep of the simulation
 int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats){
+/*
+    IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) && (p_stats 1= NULL) THEN
+        update_parkhaus(p_parkhaus)
+        new Car pointer <- NULL
+        WHILE (!parkhaus_is_full && (!queue_is_empty)) DO
+             Car pointer <- deqeue(p_queue)
+             park_car(p_parkhaus, Car pointer, CURRENT_TIME)
+        END WHILE
+        IF car_gen_bool == 1 DO
+            IF input_new_car == 1 (Error) DO
+                OUTPUT error message
+                return -1
+            END IF
+        IF stats_clear(p_stats) THEN
+            OUTPUT error message
+            return -1
+        END IF
+        IF write stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats) THEN
+            OUTPUT error message
+            return -1
+        END IF
+        IF write stats_queue_stats(p_queue, p_stats) THEN
+            OUTPUT error message
+            return -1
+        END IF
+        IF write stats_stress_score(p_stats) THEN
+            OUTPUT error message
+            return -1
+        END IF
+    ELSE 
+        return -1
+    END IF
+*/
 
 }
 
