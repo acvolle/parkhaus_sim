@@ -57,11 +57,11 @@ IF p_config = NULL THEN
     OUTPUT error message
     return -1
 END IF
-config.num_spaces           <- ui_get_int("Enter number of spaces: ",                                   1, 9999)
-config.max_parking_time     <- ui_get_int("Enter max. parking duration in timesteps: ",                 1, 9999)
-config.simulation_duration  <- ui_get_int("Enter how many timesteps you want to simulate: ",            1, 9999)
-config.gen_probability      <- ui_get_int("Enter probability for new cars to arrive per timestep (%): ",1, 100)
-config.random_seed          <- ui_get_int("Enter your seed (random number): ",                          0, 32767)
+p_config->num_spaces           <- ui_get_int("Enter number of spaces: ",                                   1, 9999)
+p_config->max_parking_time     <- ui_get_int("Enter max. parking duration in timesteps: ",                 1, 9999)
+p_config->simulation_duration  <- ui_get_int("Enter how many timesteps you want to simulate: ",            1, 9999)
+p_config->gen_probability      <- ui_get_int("Enter probability for new cars to arrive per timestep (%): ",1, 100)
+p_config->random_seed          <- ui_get_int("Enter your seed (random number): ",                          0, 32767)
 return 0
 */
 {
@@ -90,7 +90,7 @@ IF p_stats = NULL OR fp = NULL THEN
     OUTPUT error message
     return -1
 END IF
-write the 5 stats into txt file with fputs(), seperated by commas, new line
+with fprintf(), write the 5 stats into txt file, seperated by commas, new line
 return 0
 */
 {
@@ -104,11 +104,11 @@ IF p_stats = NULL THEN
     OUTPUT error message
     return -1
 END IF
-OUTPUT stats.occupancy_rate         // bar chart 0-100 possible
-OUTPUT stats.cars_waiting
-OUTPUT stats.first_car_wait_time
-OUTPUT stats.avg_wait_time
-OUTPUT stats.stress_score           // bar chart 0-100 possible
+OUTPUT p_stats->occupancy_rate         // bar chart 0-100 possible
+OUTPUT p_stats->cars_waiting
+OUTPUT p_stats->first_car_wait_time
+OUTPUT p_stats->avg_wait_time
+OUTPUT p_stats->stress_score           // bar chart 0-100 possible
 return 0
 
 */
