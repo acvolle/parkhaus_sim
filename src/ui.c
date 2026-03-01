@@ -90,7 +90,7 @@ IF p_stats = NULL OR fp = NULL THEN
     OUTPUT error message
     return -1
 END IF
-write the 5 stats into txt file with fputs, seperated by commas, new line
+write the 5 stats into txt file with fputs(), seperated by commas, new line
 return 0
 */
 {
@@ -100,6 +100,16 @@ return 0
 
 void ui_print_stats(const Stats *p_stats)
 /* PSEUDOCODE
+IF p_stats = NULL THEN
+    OUTPUT error message
+    return -1
+END IF
+OUTPUT stats.occupancy_rate         // bar chart 0-100 possible
+OUTPUT stats.cars_waiting
+OUTPUT stats.first_car_wait_time
+OUTPUT stats.avg_wait_time
+OUTPUT stats.stress_score           // bar chart 0-100 possible
+return 0
 
 */
 {
@@ -109,7 +119,7 @@ void ui_print_stats(const Stats *p_stats)
 
 void ui_print_final_stats(int avg_parking_duration, int avg_waiting_duration, int avg_stress_score)
 /* PSEUDOCODE
-
+OUTPUT message to user icluding integers
 */
 {
 
