@@ -6,6 +6,10 @@
 #include "stats.h"
 #include "queue.h"
 
+/* This global variable saves 
+*/
+int CURRENT_TIMESTEP = 0;
+
 /* SIMULATION OPERATIONS HEADER FILE
    This module includes all the structs and functions that are needed to actually run the simulation step by 
    step. It includes the Config struct, which saves the parameters of the simulation (the number of spaces in 
@@ -14,6 +18,8 @@
    Because the Config struct is passed to a UI function to have the parameters set after being initialised, 
    its memory is dynamically allocated on the heap. Therefore Config structs are created with the new_config() 
    function and their memory freed with the free_config() function.
+   The current step of simulation time is saved in the global current_timestep integer, which is incremented every
+   time a timestep is run (by the for_loop in main)
    The Config parameters are used by the run_timestep() function which executes the actual simulation steps:
     - Updating the Parkhaus via update_parkhaus() in Parkhaus.h
     - Emptying the queue as much as possible
