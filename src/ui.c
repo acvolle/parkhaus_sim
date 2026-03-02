@@ -12,13 +12,18 @@
  * Something like ---------------------------
  */
 static void ui_print_border(void)
+/*  PSEUDOCODE
+OUTPUT visual border
+*/
 {
 
 }
 
 
 void ui_print_welcome(void)
-// No pseudocode needed
+/*  PSEUDOCODE
+OUTPUT welcome message
+*/
 {
 
 }
