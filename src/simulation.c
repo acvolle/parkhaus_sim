@@ -23,7 +23,14 @@ Config *new_config(){
 
 // Frees the memory allocated to the config struct
 int free_config(Config *p_config){
-
+/*
+    IF p_config != NULL THEN
+        free memory at p_config location
+        return 0
+    ELSE
+        return -1
+    END IF
+*/
 }
 
 
