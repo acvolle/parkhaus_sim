@@ -4,6 +4,19 @@
 
 //Initializes a new Config struct
 Config *new_config(){
+/*
+    Config pointer <- allocate memory for Config struct
+    IF config pointer == NULL THEN
+        return NULL
+    END IF
+    Config pointer->num_spaces <- 0
+    Config pointer->max_parking_time <- 0
+    Config pointer->simulation_duration <- 0
+    Config pointer->gen_probability <- 0
+    Config pointer->random_seed <- 0
+    return Config pointer
+
+*/
 
 }
 
