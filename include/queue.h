@@ -51,6 +51,14 @@ typedef struct {
 void queue_init(Queue *p_queue);
 
 /**
+ * @brief Checks if queue is empty
+ * @note "stdbool.h" has to be included
+ * 
+ * @return true for empty queue, else false
+ */
+bool queue_is_empty(const Queue *p_queue);
+
+/**
  * @brief Adds a car to queue
  * 
  * @note Dont forget to count up
@@ -72,6 +80,7 @@ int dequeue(Queue *p_queue, Car *p_dequeued_car);
 
 /**
  * @brief Checks if queue is empty
+ * @note "stdbool.h" has to be included
  * 
  * @return true for empty queue, else false
  */
