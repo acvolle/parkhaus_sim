@@ -56,9 +56,8 @@ int queue_init(Queue *p_queue);
 
 /**
  * @brief Checks if queue is empty
- * @note "stdbool.h" has to be included
  * 
- * @return 1 for empty queue, 0 for queue containing elements, -1 for error
+ * @return 1 for empty queue, 0 for queue containing elements or error
  */
 int queue_is_empty(const Queue *p_queue);
 
@@ -78,7 +77,7 @@ int enqueue(Queue *p_queue, Car *p_car);
  * @note Dont forget to count down
  * @param[in, out] p_queue queue to use 
  * @param[out] p_dequeued_car pointer to dequeued car
- * @return 0 for sucess, -1 for empty queue
+ * @return 0 for sucess, 1 for empty queue, -1 for error
  */
 int dequeue(Queue *p_queue, Car *p_dequeued_car);
 

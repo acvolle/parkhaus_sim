@@ -31,7 +31,7 @@ return 0
 int queue_is_empty(const Queue *p_queue)
 /* PSEUDOCODE
 IF p_queue = NULL THEN
-    return -1
+    return 0
 ELSE IF p_queue->count = 0 THEN
     return 1
 ELSE
@@ -72,8 +72,10 @@ return 0
 
 int dequeue(Queue *p_queue, Car *p_dequeued_car)
 /* PSEUDOCODE
-IF p_queue = NULL OR p_dequeued_car = NULL OR queue_is_empty THEN
+IF p_queue = NULL OR p_dequeued_car = NULL THEN
     return -1
+ELSE IF queue_is_empty THEN
+    return 1
 END IF
 
 p_dequeued_car <- p_queue->p_head->car
