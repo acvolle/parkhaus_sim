@@ -101,7 +101,7 @@ return 0
 
 }
 
-void queue_clear(Queue *p_queue)
+int queue_clear(Queue *p_queue)
 /* PSEUDOCODE
 IF p_queue = NULL THEN
     return -1

@@ -99,7 +99,9 @@ int queue_increase_wait_time(Queue *p_queue);
  * @brief Deletes every item from queue and the queue itself
  * 
  * To be used after the simulation to free memory
+ * 
+ * @return 0 for success, -1 for error
  */
-void queue_clear(Queue *p_queue);
+int queue_clear(Queue *p_queue);
 
 #endif
