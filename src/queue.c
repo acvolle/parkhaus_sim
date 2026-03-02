@@ -10,13 +10,15 @@
 #include "../include/queue.h"
 #include "../include/car.h"
 
-void queue_init(Queue *p_queue)
+int queue_init(Queue *p_queue)
 /* PSEUDOCODE
-IF p_queue != NULL THEN
-    p_queue <- allocate memory the size of a struct Queue
-ELSE
-    OUTPUT error message
+IF p_queue = NULL THEN
+    return -1
 END IF
+p_queue->p_head = NULL
+p_queue->p_tail = NULL
+p_queue->count = 0
+return 0
 */
 {
 
@@ -48,7 +50,7 @@ END IF
 new_node->car <- *p_car
 new_node->p_next <- NULL
 
-IF queue_is_empty THEN
+IF queue_is_empty(p_queue) THEN
     p_queue->p_head <- new_node
 ELSE
     p_queue->p_tail->p_next <- new_node
@@ -64,7 +66,7 @@ return 0
 
 int dequeue(Queue *p_queue, Car *p_dequeued_car)
 /* PSEUDOCODE
-IF p_queue = NULL OR p_car = NULL OR queue_is_empty THEN
+IF p_queue = NULL OR p_dequeued_car = NULL OR queue_is_empty THEN
     return -1
 END IF
 
@@ -108,16 +110,16 @@ IF p_queue = NULL THEN
 END IF
 IF p_queue->p_head != NULL
     Node *p_temp <- p_queue->p_head
+    Node *p_next_temp
     WHILE p_temp != NULL DO
-        p_queue->p_head <- p_queue->p_head->p_next
-        free memory allocated to p_temp->car
-        free memory allocated to p_temp
-        p_temp <- p_temp->p_next                    // go to next element
+        p_next_temp <- p_temp->next
+        free memory allocated to p_temp         // also deletes stored Car struct
+        p_temp <- p_next_temp                   // go to next element
     END WHILE
 END IF
 
 // queue now contains zero nodes
-free memory allocated to p_queue
+queue_init(p_queue)                             // sets pointers to NULL and count to 0
 return 0
 */
 {

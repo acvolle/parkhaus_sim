@@ -46,9 +46,14 @@ typedef struct {
 /**
  * @brief Initializes a new queue
  * 
- * @param[out] p_queue queue to initialize
+ * The queue should be declared in main.c and then
+ * passed to this function to work properly.
+ * Sets head and tail pointers to NULL and count to 0
+ * 
+ * @param[in,out] p_queue queue to initialize
+ * @return 0 for success, -1 for error
  */
-void queue_init(Queue *p_queue);
+int queue_init(Queue *p_queue);
 
 /**
  * @brief Checks if queue is empty
@@ -96,7 +101,7 @@ bool queue_is_empty(const Queue *p_queue);
 int queue_increase_wait_time(Queue *p_queue);
 
 /**
- * @brief Deletes every item from queue and the queue itself
+ * @brief Deletes every item from queue
  * 
  * To be used after the simulation to free memory
  * 
