@@ -64,9 +64,22 @@ return 0
 
 int dequeue(Queue *p_queue, Car *p_dequeued_car)
 /* PSEUDOCODE
-IF p_queue = NULL OR p_car = NULL THEN
+IF p_queue = NULL OR p_car = NULL OR queue_is_empty THEN
     return -1
 END IF
+
+p_dequeued_car <- p_queue->p_head->car
+Node *p_temp <- p_queue->p_head             // store pointer before deleting
+
+p_queue->p_head <- p_queue->p_head->p_next  // former second node is now the head of the queue
+
+IF p_head = NULL THEN                       // dequeued the last element, queue is now empty
+    p_tail <- NULL
+END IF
+
+free memory allocated to p_temp
+p_queue->count <- p_queue->count - 1        // count down
+return 0
 */
 {
 
@@ -74,13 +87,13 @@ END IF
 
 int queue_increase_wait_time(Queue *p_queue)
 /* PSEUDOCODE
-IF p_queue is NULL THEN
+IF p_queue = NULL THEN
     return -1
 END IF
-Node* current <- p_queue->p_head
-WHILE current != NULL DO
-    current->car.time_in_queue++
-    current <- current->p_next
+Node *p_temp <- p_queue->p_head
+WHILE p_temp != NULL DO
+    p_temp->car.time_in_queue++         // "car.h" needs to be included
+    p_temp <- p_temp->p_next            // go to next element
 END WHILE
 return 0
 */
@@ -90,6 +103,22 @@ return 0
 
 void queue_clear(Queue *p_queue)
 /* PSEUDOCODE
+IF p_queue = NULL THEN
+    return -1
+END IF
+IF p_queue->p_head != NULL
+    Node *p_temp <- p_queue->p_head
+    WHILE p_temp != NULL DO
+        p_queue->p_head <- p_queue->p_head->p_next
+        free memory allocated to p_temp->car
+        free memory allocated to p_temp
+        p_temp <- p_temp->p_next                    // go to next element
+    END WHILE
+END IF
+
+// queue now contains zero nodes
+free memory allocated to p_queue
+return 0
 */
 {
 
