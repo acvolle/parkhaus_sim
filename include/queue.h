@@ -7,8 +7,8 @@
  * 1. Node, which stores the car itself and a pointer to the next node
  * 2. Queue, which consists of pointers to the first and last element 
  *    as well as the count of cars currently queueing up.
- * Because the memory is allocated dynamically, the queue has to be initialized
- * with the ´queue_init´ function.
+ * To ensure the queue is seen as empty in the beginning of the simulation, 
+ * the queue has to be initialized with the ´queue_init´ function.
  * ´enqueue´ is used to add a new car to the end of the queue
  * and ´dequeue´ removes the first car of the queue.
  * Because the struct Queue includes pointers to the first AND last element
