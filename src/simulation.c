@@ -120,6 +120,13 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
  * @return integer value of the park_span number of timesteps
  */
 static int gen_park_duration(int max_time){
-
+/*
+    Generate random number
+    parking time <- random number % max_time
+    return parking time
+*/
 }
+/*Note: it is unnecessary to check for e.g. negative numbers etc. as ui_get_params 
+already has safeguards to ensure that the simulation cannot be started with erroneous
+parameters*/
 
