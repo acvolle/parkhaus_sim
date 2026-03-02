@@ -1,8 +1,14 @@
 /**
  * THIS FILE INCLUDES THE LOGIC FOR ALL QUEUE FUNCTIONS
  * 
- * This file includes two static help functions ´ui_print_border´ and ´ui_get_int´
- * as well as the functions from ui.h that are called by the ´main.c´.
+ * This file includes the basic function for a FIFO queue logic
+ * - queue_init
+ * - enqueue
+ * - dequeue
+ * - queue_clear
+ * as well as additional functions to simplify code
+ * - queue_is_empty
+ * - queue_increase_wait_time
  */
 
 #include <stdio.h>
