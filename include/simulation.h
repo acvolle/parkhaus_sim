@@ -39,7 +39,7 @@ int current_timestep = 0;
 typedef struct Config{
     int num_spaces; /**< Number of spaces to be initalised in the parking garage */
     int max_parking_time; /**< Maximum time a Car can spend in the parking garage */
-    int simulation_duration; /**< Pointer to an array of `Car` pointers (represent parking spots). */
+    int simulation_duration; /**< Number of timesteps the simulation will run for */
     int gen_probability; /**< Probability of a new Car being generated each time step */
     int random_seed; /**< Random seed for the randomization of incoming cars */
 }Config;
