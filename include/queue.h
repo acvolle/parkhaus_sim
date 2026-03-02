@@ -23,7 +23,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include <stdbool.h>
 #include "car.h"
 
 /**
@@ -59,9 +58,9 @@ int queue_init(Queue *p_queue);
  * @brief Checks if queue is empty
  * @note "stdbool.h" has to be included
  * 
- * @return true for empty queue, else false
+ * @return 1 for empty queue, 0 for queue containing elements, -1 for error
  */
-bool queue_is_empty(const Queue *p_queue);
+int queue_is_empty(const Queue *p_queue);
 
 /**
  * @brief Adds a car to queue

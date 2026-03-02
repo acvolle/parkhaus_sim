@@ -12,9 +12,7 @@
  */
 
 #include <stdio.h>
-#include <stdbool.h>
 #include "../include/queue.h"
-#include "../include/car.h"
 
 int queue_init(Queue *p_queue)
 /* PSEUDOCODE
@@ -30,12 +28,14 @@ return 0
 
 }
 
-bool queue_is_empty(const Queue *p_queue)
+int queue_is_empty(const Queue *p_queue)
 /* PSEUDOCODE
-IF p_queue->count = 0 THEN
-    return true
+IF p_queue = NULL THEN
+    return -1
+ELSE IF p_queue->count = 0 THEN
+    return 1
 ELSE
-    return false
+    return 0
 END IF
 */
 {
