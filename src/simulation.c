@@ -2,6 +2,8 @@
 
 // FOR DOCUMENTATION OF NON-STATIC FUNCTIONS, SEE SIMULATION.H
 
+int current_timestep;
+
 //Initializes a new Config struct
 Config *new_config(){
 /*
