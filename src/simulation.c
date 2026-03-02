@@ -97,8 +97,8 @@ static int car_gen_bool(const int probability){
 static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config){
 /*
     IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) THEN
-        Car pointer <- create new Car (current_timestep, current_timestep, gen_park_duration)
-        IF(park_car(p_parkhaus, p_car, current_timestep)) == 1 THEN
+        Car pointer <- create new Car (CURRENT_TIMESTEP, CURRENT_TIMESTEP, gen_park_duration)
+        IF(park_car(p_parkhaus, p_car, CURRENT_TIMESTEP)) == 1 THEN
             enqueue(p_queue, Car pointer)
         END IF
         return 0
@@ -108,5 +108,15 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
 */
 }
 
-
+/**
+ * @brief Randomly generates the duration a Car will spend in the Parkhaus
+ * 
+ * Generates the park_span time of a Car struct using rand() and the max_parking_time
+ * of the Config struct
+ * 
+ * @note The `srand()` function must be called in `main()` before using this function.
+ * 
+ * @param[in] p_config Pointer to the Config struct
+ * @return integer value of the park_span number of timesteps
+ */
 static int gen_park_duration(Config *p_config);
