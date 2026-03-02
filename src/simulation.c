@@ -134,7 +134,9 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
  * @brief Randomly generates the duration a Car will spend in the Parkhaus
  * 
  * Generates the park_span time of a Car struct using rand() and the max_parking_time
- * of the Config struct
+ * of the Config struct.
+ * The returned timespan is be at least one (no 0 timestep parking) and at most the 
+ * max_parking_time.
  * 
  * @note The `srand()` function must be called in `main()` before using this function.
  * 
@@ -145,6 +147,9 @@ static int gen_park_duration(int max_time){
 /*
     Generate random number
     parking time <- random number % max_time
+    IF parking_time == 0 THEN
+        parking_time <- 1
+    END IF
     return parking time
 */
 }
