@@ -1,6 +1,3 @@
-#ifndef CAR_H
-#define CAR_H
-
 /**## HEADER FILE FOR CARS 
  * - all functions include the word car
  * - defines struct car for use
@@ -8,15 +5,17 @@
  * - remove_car deletes car after parking span ends
  */
 
+#ifndef CAR_H
+#define CAR_H
 
- /**
-  * @brief Struct represents Cars that enter the garage
-  * 
-  * This struct represents the cars that park in the garage with
-  * their given ID, time of arrival, and the span of their stay
-  * created dynanically as once the car exits it has no further
-  * need to exist
-  */
+/**
+ * @brief Struct represents Cars that enter the garage
+ * 
+ * This struct represents the cars that park in the garage with
+ * their given ID, time of arrival, and the span of their stay
+ * created dynanically as once the car exits it has no further
+ * need to exist
+ */
 typedef struct Car 
 {
     int id_number;
@@ -24,6 +23,7 @@ typedef struct Car
     int park_span;
     int time_in_queue;
 } Car;
+
 /**
  * @brief Functions that creates car
  * 
@@ -35,8 +35,6 @@ typedef struct Car
  * @param[in] max_duration int,
  * @return CAR pointer
  */
-
- 
 Car* init_car(int  id_number, int current_time, int max_duration);
 
 /**
@@ -49,9 +47,7 @@ Car* init_car(int  id_number, int current_time, int max_duration);
  * @param[in] p_Cardelete 
  * @return int 
  */
-
 int delete_car(Car *p_Cardelete );
-
 
 
 #endif
