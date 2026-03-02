@@ -6,9 +6,7 @@
 #include "stats.h"
 #include "queue.h"
 
-/* This global variable saves 
-*/
-int CURRENT_TIMESTEP = 0;
+
 
 /* SIMULATION OPERATIONS HEADER FILE
    This module includes all the structs and functions that are needed to actually run the simulation step by 
@@ -30,6 +28,9 @@ int CURRENT_TIMESTEP = 0;
 
 */
 
+/* This global variable saves the timestep the simulation is currently at, and is incremented by 1 every timestep
+*/
+int CURRENT_TIMESTEP = 0;
 /**
  * @brief A struct to save simulation parameters
  * 
@@ -43,7 +44,7 @@ typedef struct Config{
     int random_seed; /**< Random seed for the randomization of incoming cars */
 }Config;
 /*The members of the Config struct are not constant, even though they are not changed during the simulation.
-  This is because a Config struct is initialized before the values are known, and then passed to a UI function
+  This is because a Config struct is zero-initialized before the values are known, and then passed to a UI function
   which fills in the values input by the user.*/
 
 /**
