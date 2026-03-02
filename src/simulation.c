@@ -42,7 +42,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
         new Car pointer <- NULL
         WHILE (!parkhaus_is_full && (!queue_is_empty)) DO
              Car pointer <- deqeue(p_queue)
-             park_car(p_parkhaus, Car pointer, CURRENT_TIME)
+             park_car(p_parkhaus, Car pointer, current_timestep)
         END WHILE
         queue_increase_wait_time(p_queue)
         IF car_gen_bool == 1 DO
@@ -117,8 +117,8 @@ static int car_gen_bool(const int probability){
 static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config){
 /*
     IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) THEN
-        Car pointer <- create new Car (CURRENT_TIMESTEP, CURRENT_TIMESTEP, gen_park_duration)
-        IF(park_car(p_parkhaus, p_car, CURRENT_TIMESTEP)) == 1 THEN
+        Car pointer <- create new Car (current_timestep, current_timestep, gen_park_duration)
+        IF(park_car(p_parkhaus, p_car, current_timestep)) == 1 THEN
             enqueue(p_queue, Car pointer)
         END IF
         return 0
