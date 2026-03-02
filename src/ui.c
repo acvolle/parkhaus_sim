@@ -3,8 +3,8 @@
  */
 
 #include <stdio.h>
-#include "ui.h"
-#include "simulation.h"
+#include "../include/ui.h"
+#include "../include/simulation.h"
 
 /**
  * @brief Print a visual border to separate elements on console.
