@@ -39,7 +39,7 @@ int free_config(Config *p_config){
 // Runs a single timestep of the simulation
 int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats){
 /*
-    IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) && (p_stats 1= NULL) THEN
+    IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) && (p_stats != NULL) THEN
         update_parkhaus(p_parkhaus)
         new Car pointer <- NULL
         WHILE (!parkhaus_is_full && (!queue_is_empty)) DO
