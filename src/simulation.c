@@ -42,12 +42,12 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
     IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) && (p_stats != NULL) THEN
         update_parkhaus(p_parkhaus)
         new Car pointer <- NULL
-        WHILE (!parkhaus_is_full && (!queue_is_empty)) DO
+        WHILE (!parkhaus_is_full(p_parkhaus) && (!queue_is_empty(p_queue))) DO
              Car pointer <- deqeue(p_queue)
              park_car(p_parkhaus, Car pointer, current_timestep)
         END WHILE
         queue_increase_wait_time(p_queue)
-        IF car_gen_bool == 1 DO
+        IF car_gen_bool(p_config->gen_probability) == 1 DO
             IF input_new_car == 1 (Error) DO
                 OUTPUT error message
                 return -1
