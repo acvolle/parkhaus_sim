@@ -24,6 +24,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
              Car pointer <- deqeue(p_queue)
              park_car(p_parkhaus, Car pointer, CURRENT_TIME)
         END WHILE
+        queue_increase_wait_time(p_queue)
         IF car_gen_bool == 1 DO
             IF input_new_car == 1 (Error) DO
                 OUTPUT error message
