@@ -116,7 +116,10 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
  * 
  * @note The `srand()` function must be called in `main()` before using this function.
  * 
- * @param[in] p_config Pointer to the Config struct
+ * @param[in] max_time Maximum number of timesteps a Car may spend in the struct
  * @return integer value of the park_span number of timesteps
  */
-static int gen_park_duration(Config *p_config);
+static int gen_park_duration(int max_time){
+
+}
+
