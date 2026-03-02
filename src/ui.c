@@ -90,7 +90,7 @@ IF p_stats = NULL OR fp = NULL THEN
     OUTPUT error message
     return -1
 END IF
-with fprintf(), write the 5 stats into txt file, seperated by commas, new line
+with fprintf(), write the current timestep and the 5 stats into txt file, seperated by commas, new line
 return 0
 */
 {
@@ -104,6 +104,7 @@ IF p_stats = NULL THEN
     OUTPUT error message
     return -1
 END IF
+OUTPUT current_timestep
 OUTPUT p_stats->occupancy_rate         // bar chart 0-100 possible
 OUTPUT p_stats->cars_waiting
 OUTPUT p_stats->first_car_wait_time
