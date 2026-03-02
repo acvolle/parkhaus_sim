@@ -77,20 +77,21 @@ int close_parkhaus(Parkhaus *p_parkhaus);
  * @brief Inserts new Car into the spaces array of a Parkhaus
  *
  * Inserts a pointer to a `Car` into the first free space of the `spaces` array of the specified struct
- * `Parkhaus` if there is space. Sets the `Car` structs time remaining and time of entry variables and 
- * reduces the empty_spaces count of the `Parkhaus` struct by one.
+ * `Parkhaus` if there is space. Sets the `Car` structs time of entry variable
+ * and reduces the empty_spaces count of the `Parkhaus` struct by one.
  * Returns `1` if there are no free spaces in the `Parkhaus` and then doesn't insert the car.
  * Call this function when a new `Car` has been generated. If necessary can be called even if
  * there are no free spaces.
  *
  * @param[out] p_parkhaus Pointer to Parkhaus in which the car should be parked (cannot be `NULL`)
  * @param[out] p_car Pointer to Car which will be parked
+ * @param[in] current_time Current time (time of entry)
  * @return int Status code:
  *            - `0` if the operation succeeded.
  *            - `1` if there are no free spaces
  *             - `-1` if an error occurred (e.g., pointer is `NULL`).
  */
-int park_car(Parkhaus *p_parkhaus, Car *p_car);
+int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time);
 /*Note: this function has three return values so that it can be called safely even if it is not possible to
   park a car. */
 
