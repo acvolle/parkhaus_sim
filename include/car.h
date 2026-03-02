@@ -22,7 +22,7 @@ typedef struct Car
     int id_number;
     int arrival_time;
     int park_span;
-    int used_span;
+    int time_in_queue;
 } Car;
 /**
  * @brief Functions that creates car

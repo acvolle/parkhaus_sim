@@ -53,6 +53,15 @@ int dequeue(Queue *p_queue, Car *p_dequeued_car);
 bool queue_is_empty(const Queue *p_queue);
 
 /**
+ * @brief Increases the wait time of every car in the queue by 1
+ * 
+ * p_car->time_in_queue is increased by 1
+ * 
+ * @return 0 for success, -1 for error
+ */
+int queue_increase_wait_time(Queue *p_queue);
+
+/**
  * @brief Deletes every item from queue and the queue itself
  * 
  * To be used after the simulation to free memory
