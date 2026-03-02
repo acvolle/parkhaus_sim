@@ -1,5 +1,8 @@
 /**
  * THIS FILE INCLUDES THE LOGIC FOR ALL UI FUNCTIONS
+ * 
+ * This file includes two static help functions ´ui_print_border´ and ´ui_get_int´
+ * as well as the functions from ui.h that are called by the ´main.c´.
  */
 
 #include <stdio.h>
@@ -9,7 +12,7 @@
 /**
  * @brief Print a visual border to separate elements on console.
  *
- * Something like ---------------------------
+ * Something like ´---------------------------´
  */
 static void ui_print_border(void)
 /*  PSEUDOCODE
@@ -45,7 +48,7 @@ static int ui_get_int(const char *prompt, int min, int max)
 WHILE true DO
     OUTPUT propmt
     INPUT value
-    IF min <= value <= max THEN
+    IF min <= value <= max AND input is an ´int´ THEN
         return value
     ELSE
         OUTPUT error message
@@ -109,12 +112,12 @@ IF p_stats = NULL THEN
     OUTPUT error message
     return -1
 END IF
-OUTPUT current_timestep
-OUTPUT p_stats->occupancy_rate         // bar chart 0-100 possible
+OUTPUT current_timestep                 // global variable
+OUTPUT p_stats->occupancy_rate   
 OUTPUT p_stats->cars_waiting
 OUTPUT p_stats->first_car_wait_time
 OUTPUT p_stats->avg_wait_time
-OUTPUT p_stats->stress_score           // bar chart 0-100 possible
+OUTPUT p_stats->stress_score            // new line
 return 0
 
 */
