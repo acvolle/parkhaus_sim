@@ -82,14 +82,6 @@ int enqueue(Queue *p_queue, Car *p_car);
 int dequeue(Queue *p_queue, Car *p_dequeued_car);
 
 /**
- * @brief Checks if queue is empty
- * @note "stdbool.h" has to be included
- * 
- * @return true for empty queue, else false
- */
-bool queue_is_empty(const Queue *p_queue);
-
-/**
  * @brief Increases the wait time of every car in the queue by 1
  * 
  * p_car->time_in_queue is increased by 1
