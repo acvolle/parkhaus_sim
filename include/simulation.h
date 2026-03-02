@@ -16,7 +16,7 @@
    Because the Config struct is passed to a UI function to have the parameters set after being initialised, 
    its memory is dynamically allocated on the heap. Therefore Config structs are created with the new_config() 
    function and their memory freed with the free_config() function.
-   The current step of simulation time is saved in the global current_timestep integer, which is incremented every
+   The current step of simulation time is saved in the global sstep integer, which is incremented every
    time a timestep is run (by the for_loop in main)
    The Config parameters are used by the run_timestep() function which executes the actual simulation steps:
     - Updating the Parkhaus via update_parkhaus() in Parkhaus.h
@@ -30,7 +30,7 @@
 
 /* This global variable saves the timestep the simulation is currently at, and is incremented by 1 every timestep
 */
-int CURRENT_TIMESTEP = 0;
+int current_timestep = 0;
 /**
  * @brief A struct to save simulation parameters
  * 
