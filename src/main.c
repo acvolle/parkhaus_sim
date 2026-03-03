@@ -27,6 +27,15 @@ FOR i <- 0 TO Config pointer->simulation_duration-1 DO
         OUTPUT error message
         break for loop //shuts down the simulation, doesn't return as allocated memory must still be freed
     END IF
+    IF ui_print_stats(Stats pointer)) == -1 THEN  
+        OUTPUT error message
+        break for loop //shuts down the simulation, doesn't return as allocated memory must still be freed
+    END IF
+    IF ui_write_stats(Stats pointer, text file) == -1 THEN 
+        OUTPUT error message
+        break for loop //shuts down the simulation, doesn't return as allocated memory must still be freed
+    END IF
+
     current_timestep++
 END FOR
 
