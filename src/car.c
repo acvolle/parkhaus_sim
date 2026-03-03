@@ -8,8 +8,13 @@ Car* init_car(int  id_number, int current_time, int max_duration)
      * IF car pointer == NULL 
      *  print "ERRROR, memory allocation for car has failed"
      *  return NULL
-     *  return car pointer
+     * ELSE car id_number = id_number
+     *      car arrival_time = current_time
+     *      car park_span = max duration
+     *      car time_in_queue = 0
      * ENDIF
+     *  return car pointer
+     * 
      */
 }
 int delete_car(Car *p_Cardelete )
