@@ -119,7 +119,7 @@ static int car_gen_bool(const int probability){
 static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config){
 /*
     IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) THEN
-        Car pointer <- create new Car (current_timestep, current_timestep, gen_park_duration)
+        Car pointer <- init_car(current_timestep, current_timestep, gen_park_duration)
         IF(park_car(p_parkhaus, p_car, current_timestep)) == 1 THEN
             enqueue(p_queue, Car pointer)
         END IF
