@@ -14,7 +14,8 @@ IF Write header in text file (ui_write_head) == -1 THEN
     return 1
 END IF
 Stats pointer <- stats_create()
-Queue pointer <- queue_init()
+New Queue
+queue_init(pointer to Queue)
 Parkhaus pointer <- init_parkhaus(Config pointer->num_spaces)
 
 
