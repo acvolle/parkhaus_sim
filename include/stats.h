@@ -31,9 +31,10 @@ typedef struct {
 } Stats;
 
 /**
- * @brief Reserve memory for new struct Stats
+ * @brief Allocate and initialize a new struct Stats
  * 
- * @return Pointer to struct or NULL for alloc error
+ * @warning return might be NULL if allocation fails, has to be checked!
+ * @return Pointer to struct or NULL
  */
 Stats* stats_create(void);
 
