@@ -36,13 +36,16 @@ END IF
 IF Delete Config stuct (free_config) == -1 THEN
     return 1
 END IF
+Config pointer <- NULL
 IF Delete Stats struct (stats_delete) == -1 THEN
     return 1
 END IF
+Stats pointer <- NULL
 Clear Queue (clear_queue)
 IF Close Parkhaus (close_parkhaus) == -1 THEN
     return 1
 END IF
+Parkhaus pointer <- NULL
 
 
 return 0
