@@ -92,7 +92,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
 static int car_gen_bool(const int probability){
 /*
     Generate random number
-    value <- random number % 100
+    value <- (random number % 100) +1 //to allow probability of 100 
     IF value <= probability THEN
         return 1
     ELSE
