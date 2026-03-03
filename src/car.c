@@ -23,8 +23,7 @@ int delete_car(Car *p_Cardelete )
  * IF p_Cardelete pointer != NULL
  *  free(p_Cardelete)
  *  return 0 in case of success
- *  return -1 in case of failure
  * ENDIF
- * 
+ * return -1 in case of failure
  */
 };
