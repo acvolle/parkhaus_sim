@@ -8,9 +8,11 @@ Open new text file
 OUTPUT welcome message (ui_get_welcome())
 Config pointer <- new_config()
 IF Get Simulation parameters (ui_get_params) == -1 THEN
+    free_config(Config pointer)
     return 1
 END IF
 IF Write header in text file (ui_write_head) == -1 THEN
+free_config(Config pointer)
     return 1
 END IF
 Stats pointer <- stats_create()
@@ -23,7 +25,7 @@ Parkhaus pointer <- init_parkhaus(Config pointer->num_spaces)
 FOR i <- 0 TO Config pointer->simulation_duration-1 DO
     IF run_timestep == -1 THEN  //function from simulation.c that runs all operational steps
         OUTPUT error message
-        return 1
+        break for loop //shuts down the simulation, doesn't return as allocated memory must still be freed
     END IF
     current_timestep++
 END FOR
