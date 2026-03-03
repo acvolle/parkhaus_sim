@@ -73,7 +73,7 @@ via pointer to ui_get_params which sets the real values for the Config elements*
 *            - `0` if the operation succeeded.
 *            - `-1` if an error occurred (e.g., `p_config` is `NULL`).
 */
-extern int free_config(Config *p_config);
+int free_config(Config *p_config);
 
 /**
 * @brief Runs a single timestep of the simulation

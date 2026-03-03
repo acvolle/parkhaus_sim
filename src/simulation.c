@@ -146,10 +146,8 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
 static int gen_park_duration(int max_time){
 /*
     Generate random number
-    parking time <- random number % max_time
-    IF parking_time == 0 THEN
-        parking_time <- 1
-    END IF
+    parking time <- (random number % max_time)+1 //values between 1 and 100
+
     return parking time
 */
 }
