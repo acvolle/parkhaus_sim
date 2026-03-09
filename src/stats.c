@@ -8,6 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAX_QUEUESIZE_RATIO
+#define MAX_WAITING_DURATION
+
 Stats* stats_create(void)
 /* PSEUDOCODE
 p_stats <- allocate memory the size of a Stats struct
@@ -79,7 +82,12 @@ p_stats->occupancy_rate <- (car_count / spaces_count) * 100
 return 0
 */
 {
-    
+    if(p_stats == NULL || spaces_count <= 0)
+    {
+        return -1;
+    }
+    p_stats->occupancy_rate = ( (float)car_count / (float)spaces_count ) * 100;
+    return 0;
 }
 
 int stats_queue_stats(const Queue *p_queue, Stats *p_stats)
@@ -117,12 +125,43 @@ return 0
 
 int stats_stress_score(Stats *p_stats)
 /* PSEUDOCODE
-IF p_stats = NULL THEN 
+IF p_stats = NULL OR parkhaus_size THEN 
     return -1
 END IF
-calculate score (to be decided)
-p_stats->stress_score <- calculated score
+
+p_stats->calculated score
+IF p_stats->stress_score > 100.0 THEN 
+   p_stats->stress_score <- 100.0
+END IF
+
 return 0
+*/
+
+/*
+// First 50 points depending on occupancy rate
+
+float occupancy_part <- 50 * (p_stats->occupancy_rate / 100.0) * (p_stats->occupancy_rate / 100.0)
+
+// Another 50 points depending on a queue
+   
+   // A: Anzahl-Stress (max 25 Pkt)
+   // 20% der Größe gilt als "voll"
+   float count_ratio <- (float)p_stats->cars_waiting / (parkhaus_size * 0.2)
+   float count_part <- count_ratio * 25.0
+   IF count_part > 25.0 THEN count_part <- 25.0
+
+   // B: Zeit-Stress (max 25 Pkt)
+   // Wir definieren 20 Zeitschritte als "maximalen Zeitstress"
+   float time_ratio <- p_stats->avg_wait_time / 20.0
+   float time_part <- time_ratio * 25.0
+   IF time_part > 25.0 THEN time_part <- 25.0
+
+p_stats->stress_score <- occupancy_part + count_part + time_part
+
+// Limit score at 100.0
+IF p_stats->stress_score > 100.0 THEN 
+   p_stats->stress_score <- 100.0
+END IF
 */
 {
     
