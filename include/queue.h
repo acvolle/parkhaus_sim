@@ -29,7 +29,7 @@
  * @brief Node for the linked list
  */
 typedef struct Node {
-    Car car;
+    Car *p_car;
     struct Node* p_next;
 } Node;
 
