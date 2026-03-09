@@ -124,7 +124,7 @@ return 0
 }
 
 
-int stats_stress_score(Stats *p_stats)
+int stats_stress_score(Stats *p_stats, int spaces_count)
 /*  STRESS SCORE EXPLANATION:
 This score is a value between 0 and 100, representing how critical
 the situation at the parking garage is at the moment.
@@ -161,33 +161,34 @@ END IF
 
 return 0
 */
-
-/*
-// First 50 points depending on occupancy rate
-
-float occupancy_part <- 50 * (p_stats->occupancy_rate / 100.0) * (p_stats->occupancy_rate / 100.0)
-
-// Another 50 points depending on a queue
-   
-   // A: Anzahl-Stress (max 25 Pkt)
-   // 20% der Größe gilt als "voll"
-   float count_ratio <- (float)p_stats->cars_waiting / (parkhaus_size * 0.2)
-   float count_part <- count_ratio * 25.0
-   IF count_part > 25.0 THEN count_part <- 25.0
-
-   // B: Zeit-Stress (max 25 Pkt)
-   // Wir definieren 20 Zeitschritte als "maximalen Zeitstress"
-   float time_ratio <- p_stats->avg_wait_time / 20.0
-   float time_part <- time_ratio * 25.0
-   IF time_part > 25.0 THEN time_part <- 25.0
-
-p_stats->stress_score <- occupancy_part + count_part + time_part
-
-// Limit score at 100.0
-IF p_stats->stress_score > 100.0 THEN 
-   p_stats->stress_score <- 100.0
-END IF
-*/
 {
+    if(p_stats == NULL )
+    {
+        return -1;
+    }
+    // Calculate the max. 50 points for occupancy
+    float occ_ratio = p_stats->occupancy_rate / 100.0;
+    float occ_part = 50.0 * occ_part * occ_part;
+
+    // Calculate the max. 25 points for queue
+    float queue_part = 25.0 * (float)p_stats->cars_waiting / (spaces_count * RATIO_QUEUE_TO_SPACES);
+    if (queue_part > 25.0) 
+    {
+        queue_part = 25.0;
+    }
     
+    // Calculate the max. 25 points for waiting time
+    float time_part = 25.0 * (p_stats->avg_wait_time / 20.0);
+    if(time_part > 25.0)
+    {
+        time_part <- 25.0;
+    }
+
+    p_stats->stress_score = occ_part + queue_part + time_part;
+    // Limit score at 100
+    if(p_stats->stress_score > 100.0)
+    {
+        p_stats->stress_score = 100.0;
+    }
+
 }
