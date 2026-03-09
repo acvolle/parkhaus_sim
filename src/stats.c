@@ -5,6 +5,8 @@
  */
 
 #include "stats.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 Stats* stats_create(void)
 /* PSEUDOCODE
@@ -15,7 +17,12 @@ END IF
 return p_stats      // might be NULL if allocation fails
 */
 {
-
+    Stats* p_stats = malloc(sizeof(Stats));
+    if(p_stats != NULL)
+    {
+        stats_clear(p_stats);
+    }
+    return p_stats;
 }
 
 int stats_clear(Stats *p_stats)
@@ -31,7 +38,16 @@ p_stats->stress_score <- 0
 return 0
 */
 {
-    
+    if(p_stats == NULL)
+    {
+        return -1;
+    }
+    p_stats->occupancy_rate = 0;
+    p_stats->cars_waiting = 0;
+    p_stats->first_car_wait_time = 0;
+    p_stats->avg_wait_time = 0;
+    p_stats->stress_score = 0;
+    return 0;
 }
 
 int stats_delete(Stats *p_stats)
