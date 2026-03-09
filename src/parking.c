@@ -82,7 +82,7 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time)
     IF p_parkhaus != NULL && (p_car != NULL) THEN
         return -1
     END IF
-    IF parkhaus_is_full THEN
+    IF parkhaus_is_full(p_parkhaus) == 1 THEN
         return 1
     END IF
     FOR i<-0 TO p_parkhaus->size DO
@@ -101,7 +101,7 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time)
         printf("park_car failed: pointer is NULL.\n");
         return -1;
     }
-    if(parkhaus_is_full(p_parkhaus))
+    if(parkhaus_is_full(p_parkhaus) == 1)
     {
         return 1;
     }
@@ -162,7 +162,7 @@ int update_parkhaus(Parkhaus *p_parkhaus)
 }
 
 
-int parkhaus_is_full(Parkhaus *p_parkhaus){
+int parkhaus_is_full(Parkhaus *p_parkhaus)
 /*
     IF p_parkhaus != NULL THEN
         IF p_parkhaus->occupied spaces < p_parkhaus->size THEN
@@ -176,5 +176,20 @@ int parkhaus_is_full(Parkhaus *p_parkhaus){
         return -1
     END IF
 */
-
+{
+    if(p_parkhaus == NULL)
+    {
+        return -1;
+    }
+    if(p_parkhaus->occupied_spaces < p_parkhaus->size)
+    {
+        // Parkhaus is not full
+        return 0;
+    }
+    if(p_parkhaus->occupied_spaces == p_parkhaus->size)
+    {
+        // Parkhaus is full
+        return 1;
+    }
+    return -1;
 }
