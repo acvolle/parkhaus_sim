@@ -25,6 +25,7 @@ p_queue->count = 0
 return 0
 */
 {
+   
 
 }
 
@@ -39,7 +40,14 @@ ELSE
 END IF
 */
 {
-
+    if(p_queue == NULL){
+        printf("queue_is_empty: null pointer\n");
+        return 0;
+    } else if(p_queue->count == 0){
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 int enqueue(Queue *p_queue, Car *p_car)
@@ -67,6 +75,7 @@ p_queue->count <- p_queue->count + 1        // count up
 return 0
 */
 {
+
 
 }
 
