@@ -212,5 +212,25 @@ queue_init(p_queue)                             // sets pointers to NULL and cou
 return 0
 */
 {
+    if(p_queue == NULL){
+        printf("queue_clear: null pointer");
+        return -1;
+    }
+    int status_code = 0;
+
+    Car *p_temp = NULL;
+    while(status_code == 0){
+        status_code = dequeue(p_queue, &p_temp);
+        if(status_code == -1){
+            printf("queue_clear: dequeue error");
+            return -1;
+        }
+        free(p_temp);
+        p_temp = NULL;
+
+    }
+    queue_init(p_queue);
+    return 0;
 
 }
+// function changed to reduce redundancy by calling dequeue
