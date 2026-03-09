@@ -109,7 +109,7 @@ return 0
 
 }
 
-int dequeue(Queue *p_queue, Car **p_dequeued_car)
+int dequeue(Queue *p_queue, Car **pp_dequeued_car)
 /* PSEUDOCODE
 IF p_queue = NULL OR p_dequeued_car = NULL THEN
     return -1
@@ -131,7 +131,7 @@ p_queue->count <- p_queue->count - 1        // count down
 return 0
 */
 {
-    if(p_queue == NULL || (p_dequeued_car == NULL)){
+    if(p_queue == NULL || (pp_dequeued_car == NULL)){
         printf("dequeue: null pointer");
         return -1;
     } else if(queue_is_empty(p_queue)){
@@ -141,7 +141,7 @@ return 0
             printf("dequeue: incomplete node");
             return -1;
         }
-        *p_dequeued_car = p_queue->p_head->p_car;
+        *pp_dequeued_car = p_queue->p_head->p_car;
         Node *p_temp = p_queue->p_head;
 
         p_queue->p_head = p_queue->p_head->p_next;

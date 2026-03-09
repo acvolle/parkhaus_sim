@@ -75,12 +75,16 @@ int enqueue(Queue *p_queue, Car *p_car);
 /**
  * @brief removes the oldest car from queue (FIFO)
  * 
+ * This function recieves a pointer to a Car pointer as an input. This
+ * allows the ar pointer to be set to the address of the dequeued Car in the
+ * function.
+ * 
  * @note Dont forget to count down
  * @param[in, out] p_queue queue to use 
- * @param[out] p_dequeued_car pointer to dequeued car
+ * @param[out] pp_dequeued_car pointer to a pointer to the dequeued car
  * @return 0 for sucess, 1 for empty queue, -1 for error
  */
-int dequeue(Queue *p_queue, Car *p_dequeued_car);
+int dequeue(Queue *p_queue, Car **pp_dequeued_car);
 
 /**
  * @brief Increases the wait time of every car in the queue by 1
