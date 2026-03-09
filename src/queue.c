@@ -25,8 +25,16 @@ p_queue->count = 0
 return 0
 */
 {
-   
+    if(p_queue == NULL){
+        printf("queue_init: null pointer");
+        return -1;
+    }
 
+    p_queue->p_head = NULL;
+    p_queue->p_tail = NULL;
+    p_queue->count = 0;
+
+    return 0;
 }
 
 int queue_is_empty(const Queue *p_queue)
