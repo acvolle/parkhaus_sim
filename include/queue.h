@@ -4,7 +4,7 @@
  * which stores Car structs representing the Cars queueing up in front of 
  * the parking lot entrance.
  * Therefore two structures are defined:
- * 1. Node, which stores the car itself and a pointer to the next node
+ * 1. Node, which stores thea pointer to the car and a pointer to the next node
  * 2. Queue, which consists of pointers to the first and last element 
  *    as well as the count of cars currently queueing up.
  * To ensure the queue is seen as empty in the beginning of the simulation, 
@@ -24,6 +24,7 @@
 #define QUEUE_H
 
 #include "car.h"
+#include <stdio.h>
 
 /**
  * @brief Node for the linked list
