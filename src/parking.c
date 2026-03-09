@@ -1,7 +1,9 @@
 #include "../include/parking.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 // Initialize new Parkhaus
-Parkhaus *init_parkhaus(unsigned int spaces_count){
+Parkhaus *init_parkhaus(unsigned int spaces_count)
 /*
     Parkhaus pointer <- allocate space for Parkhaus struct
     IF Parkhaus pointer == NULL THEN
@@ -18,6 +20,25 @@ Parkhaus *init_parkhaus(unsigned int spaces_count){
     Parkhaus pointer->occupied_spaces = 0
     return Parkhaus pointer
 */
+{
+    Parkhaus *p_parkhaus = malloc(sizeof(Parkhaus));
+    if(p_parkhaus == NULL)
+    {
+        printf("init_parkhaus: Memory allocation for Parkhaus failed.\n");
+        return NULL;
+    }
+
+    Car **p_spaces = malloc(spaces_count * sizeof(*p_spaces));
+    if(p_spaces == NULL)
+    {
+        free(p_parkhaus);
+        printf("init_parkhaus: Memory allocation for Spaces Array failed.\n");
+        return NULL;
+    }
+
+    p_parkhaus->size = spaces_count;
+    p_parkhaus->occupied_spaces = 0;
+    return p_parkhaus;
 }
 
 
