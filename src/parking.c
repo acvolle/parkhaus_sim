@@ -47,7 +47,7 @@ int close_parkhaus(Parkhaus *p_parkhaus)
         OURPUT error message
         return -1
     END IF
-    FOR i <- 0 TO p_parkhaus_size-1 DO
+    FOR i <- 0 TO p_parkhaus_size DO
         IF spaces array[i] != NULL THEN
             free memory allocated to Car pointer in spaces_array[i]
             spaces_array[i] <- NULL
@@ -63,7 +63,7 @@ int close_parkhaus(Parkhaus *p_parkhaus)
         printf("close_parkhaus failed: pointer is NULL.\n");
         return -1;
     }
-    for(int i = 0; i < p_parkhaus->size - 1; i++)
+    for(int i = 0; i < p_parkhaus->size; i++)
     {
         if(p_parkhaus->p_spaces[i] != NULL)
         {
@@ -85,7 +85,7 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time)
     IF parkhaus_is_full THEN
         return 1
     END IF
-    FOR i<-0 TO p_parkhaus->size-1 DO
+    FOR i<-0 TO p_parkhaus->size DO
         IF spaces array[i] == NULL THEN
             spaces array[i] <- p_car
             p_car->arrival_time <- current_time
@@ -105,7 +105,7 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time)
     {
         return 1;
     }
-    for(int i = 0; i < p_parkhaus->size - 1; i++)
+    for(int i = 0; i < p_parkhaus->size; i++)
     {
         // free spot found
         if(p_parkhaus->p_spaces[i] == NULL)
@@ -121,24 +121,37 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time)
 }
 
 
-int update_parkhaus(Parkhaus *p_parkhaus){
+int update_parkhaus(Parkhaus *p_parkhaus)
 /*
     IF p_parkhaus != NULL THEN
-        FOR i<-0 TO p_parkhaus->size-1 DO
-            IF Car pointer in spaces array[i] != NULL THEN
-                Car pointer->remaining time --;
-                IF remaining time == 0 THEN
-                    free memory of Car
-                    delete pointer to Car from array
-                    p_parkhaus->occupied_spaces - 1
-                END IF
-            END IF
-        END FOR
-        return 0
-    ELSE
         return -1
     END IF
+    FOR i<-0 TO p_parkhaus->size DO
+        IF Car pointer in spaces array[i] != NULL THEN
+            Car pointer->remaining time --;
+            IF remaining time == 0 THEN
+                free memory of Car
+                delete pointer to Car from array
+                p_parkhaus->occupied_spaces - 1
+            END IF
+        END IF
+    END FOR
+    return 0
 */
+{
+    if(p_parkhaus == NULL || p_parkhaus->p_spaces == NULL)
+    {
+        printf("update_parkhaus failed: pointer is NULL.\n");
+        return -1;
+    }
+    for(int i = 0; i < p_parkhaus->size; i++)
+    {
+        if(p_parkhaus->p_spaces[i] != NULL)
+        {
+            
+        }
+    }
+    return 0;
 }
 
 
