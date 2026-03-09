@@ -75,7 +75,29 @@ p_queue->count <- p_queue->count + 1        // count up
 return 0
 */
 {
+    if(p_queue == NULL || (p_car == NULL)){
+        printf("enqueue: null pointer");
+        return -1;
+    }
 
+    Node *p_new_node = malloc(sizeof *p_new_node);
+    if(p_new_node == NULL){
+        printf("enqueue: memory allocation error");
+        return -1;
+    }
+
+    p_new_node->p_car = p_car;
+    p_new_node->p_next = NULL;
+
+    if(queue_is_empty(p_queue)){
+        p_queue->p_head = p_new_node;
+    } else {
+        p_queue->p_tail->p_next = p_new_node;
+    }
+
+    p_queue->p_tail = p_new_node;
+    p_queue->count ++;
+    return 0;
 
 }
 
