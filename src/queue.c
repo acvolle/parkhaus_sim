@@ -123,6 +123,7 @@ p_queue->count <- p_queue->count - 1        // count down
 return 0
 */
 {
+    
 
 }
 
@@ -139,7 +140,21 @@ END WHILE
 return 0
 */
 {
+    if(p_queue == NULL){
+        printf("queue_increase_wait_time: null pointer");
+        return -1;
+    }
 
+    Node *p_temp =p_queue->p_head;
+
+    while(p_temp != NULL){
+        if(p_temp->p_car != NULL){
+            p_temp->p_car->time_in_queue++;
+        }
+        p_temp = p_temp->p_next;
+    }
+    
+    return 0;
 }
 
 int queue_clear(Queue *p_queue)
