@@ -27,8 +27,8 @@ Parkhaus *init_parkhaus(const unsigned int spaces_count)
         return NULL;
     }
 
-    Car **p_spaces = malloc(spaces_count * sizeof(*p_spaces));
-    if(p_spaces == NULL)
+    p_parkhaus->p_spaces = calloc(spaces_count, sizeof(Car*));
+    if(p_parkhaus->p_spaces == NULL)
     {
         free(p_parkhaus);
         printf("init_parkhaus: Memory allocation for Spaces Array failed.\n");
