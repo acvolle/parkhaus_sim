@@ -43,41 +43,37 @@ Parkhaus *init_parkhaus(const unsigned int spaces_count)
 
 int close_parkhaus(Parkhaus *p_parkhaus)
 /*
-    IF p_parkhaus != NULL THEN 
-        FOR i <- 0 TO p_parkhaus_size-1 DO
-            IF spaces array[i] != NULL THEN
-                free memory allocated to Car pointer in spaces_array[i]
-                IF free Car memory failed THEN
-                    return -1
-                END IF
-                spaces_array[i] <- NULL
-            END IF
-        free memory allocated to spaces array
-        IF free memory failed THEN
-            return -1
-        END IF
-        free memory allocated to Parkhaus struct
-        IF free memory failed THEN
-            return -1
-        END IF
-        return 0
-    ELSE 
+    IF p_parkhaus == NULL OR spaces array == NULL THEN
+        OURPUT error message
         return -1
     END IF
+    FOR i <- 0 TO p_parkhaus_size-1 DO
+        IF spaces array[i] != NULL THEN
+            free memory allocated to Car pointer in spaces_array[i]
+            spaces_array[i] <- NULL
+        END IF
+    END FOR
+    free memory allocated to spaces array
+    free memory allocated to Parkhaus struct
+    return 0
 */
 {
-    if(p_parkhaus == NULL)
+    if(p_parkhaus == NULL || p_parkhaus->p_spaces == NULL)
     {
-        printf("close_parkhaus: pointer is NULL.\n");
-        return 0;
+        printf("close_parkhaus failed: pointer is NULL.\n");
+        return -1;
     }
     for(int i = 0; i < p_parkhaus->size - 1; i++)
     {
         if(p_parkhaus->p_spaces[i] != NULL)
         {
-
+            free(p_parkhaus->p_spaces[i]);
+            p_parkhaus->p_spaces[i] = NULL;
         }
     }
+    free(p_parkhaus->p_spaces);
+    free(p_parkhaus);
+    return 0;
 }
 
 
