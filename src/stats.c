@@ -60,7 +60,13 @@ free memory allocated to p_stats
 return 0
 */
 {
-    
+    if(p_stats == NULL)
+    {
+        return -1;
+    }
+    stats_clear(p_stats);
+    free(p_stats);
+    return 0;
 }
 
 int stats_occupancy_rate(int car_count, int spaces_count, Stats *p_stats)
