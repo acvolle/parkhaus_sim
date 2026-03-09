@@ -172,6 +172,10 @@ Example: In a parking garage with 100 spaces, 15 waiting cars would correspond t
 2. The ratio of the average waiting time in the queue to the time defined under “MAX_WAIT_TIME” (15 time steps).
 Example: An average waiting time of 6 Minutes would correspond to 10 points.
 
+Note: These partial scores are capped at 25, although they can reach higher values mathematically.
+Example: When the average waiting time is 21 time steps, the partial time score is maxed out at 25.
+(Although the mathematical score would be 35)
+
 In summary, the stress score consists of:
 - 50 points for occupancy
 - 25 points for queue
@@ -197,7 +201,7 @@ return 0
     }
     // Calculate the max. 50 points for occupancy
     float occ_ratio = p_stats->occupancy_rate / 100.0;
-    float occ_part = 50.0 * occ_part * occ_part;
+    float occ_part = 50.0 * occ_ratio * occ_ratio;
 
     // Calculate the max. 25 points for queue
     float queue_part = 25.0 * (float)p_stats->cars_waiting / (spaces_count * RATIO_QUEUE_TO_SPACES);
@@ -207,17 +211,19 @@ return 0
     }
     
     // Calculate the max. 25 points for waiting time
-    float time_part = 25.0 * (p_stats->avg_wait_time / 20.0);
+    float time_part = 25.0 * (p_stats->avg_wait_time / MAX_WAIT_TIME);
     if(time_part > 25.0)
     {
-        time_part <- 25.0;
+        time_part = 25.0;
     }
 
+    // Calculate sum of partial scores
     p_stats->stress_score = occ_part + queue_part + time_part;
+
     // Limit score at 100
     if(p_stats->stress_score > 100.0)
     {
         p_stats->stress_score = 100.0;
     }
-
+    return 0;
 }
