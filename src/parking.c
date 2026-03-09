@@ -77,26 +77,47 @@ int close_parkhaus(Parkhaus *p_parkhaus)
 }
 
 
-int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time){
+int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time)
 /*
     IF p_parkhaus != NULL && (p_car != NULL) THEN
-        IF parkhaus_is_full THEN
-            return 1
-        ELSE
-            FOR i<-0 TO p_parkhaus->size-1 DO
-                IF spaces array[i] == NULL THEN
-                   spaces array[i] <- p_car
-                   p_car->arrival_time <- current_time
-                   p_parkhaus->occupied_spaces + 1
-                   return 0
-                END IF
-            END FOR
-            return -1 (this can only be reaches if is_full is false but there isn't actually space --> error!)
-        END IF
-    ELSE
         return -1
     END IF
+    IF parkhaus_is_full THEN
+        return 1
+    END IF
+    FOR i<-0 TO p_parkhaus->size-1 DO
+        IF spaces array[i] == NULL THEN
+            spaces array[i] <- p_car
+            p_car->arrival_time <- current_time
+            p_parkhaus->occupied_spaces + 1
+            return 0
+        END IF
+    END FOR
+    return -1 (this can only be reaches if is_full is false but there isn't actually space --> error!)
 */
+{
+    if(p_parkhaus == NULL || p_parkhaus->p_spaces == NULL || p_car == NULL)
+    {
+        printf("park_car failed: pointer is NULL.\n");
+        return -1;
+    }
+    if(parkhaus_is_full(p_parkhaus))
+    {
+        return 1;
+    }
+    for(int i = 0; i < p_parkhaus->size - 1; i++)
+    {
+        // free spot found
+        if(p_parkhaus->p_spaces[i] == NULL)
+        {
+            p_car->arrival_time = current_time;
+            p_parkhaus->p_spaces[i] = p_car;
+            p_parkhaus->occupied_spaces = p_parkhaus->occupied_spaces + 1;
+            // car parked successfully
+            return 0;
+        }
+    }
+    return -1;
 }
 
 
@@ -121,8 +142,6 @@ int update_parkhaus(Parkhaus *p_parkhaus){
 }
 
 
-
-//Checks if a Parkhaus is full
 int parkhaus_is_full(Parkhaus *p_parkhaus){
 /*
     IF p_parkhaus != NULL THEN
