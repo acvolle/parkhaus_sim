@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Initialize new Parkhaus
-Parkhaus *init_parkhaus(unsigned int spaces_count)
+Parkhaus *init_parkhaus(const unsigned int spaces_count)
 /*
     Parkhaus pointer <- allocate space for Parkhaus struct
     IF Parkhaus pointer == NULL THEN
@@ -42,9 +41,7 @@ Parkhaus *init_parkhaus(unsigned int spaces_count)
 }
 
 
-
-//Delete Parkhaus and free allocated memory
-int close_parkhaus(Parkhaus *p_parkhaus){
+int close_parkhaus(Parkhaus *p_parkhaus)
 /*
     IF p_parkhaus != NULL THEN 
         FOR i <- 0 TO p_parkhaus_size-1 DO
@@ -68,11 +65,22 @@ int close_parkhaus(Parkhaus *p_parkhaus){
         return -1
     END IF
 */
+{
+    if(p_parkhaus == NULL)
+    {
+        printf("close_parkhaus: pointer is NULL.\n");
+        return 0;
+    }
+    for(int i = 0; i < p_parkhaus->size - 1; i++)
+    {
+        if(p_parkhaus->p_spaces[i] != NULL)
+        {
+
+        }
+    }
 }
 
 
-
-// Inserts new Car into the spaces array of a Parkhaus
 int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time){
 /*
     IF p_parkhaus != NULL && (p_car != NULL) THEN
@@ -96,8 +104,6 @@ int park_car(Parkhaus *p_parkhaus, Car *p_car, int current_time){
 }
 
 
-
-//Updates all Car structs in a Parkhaus struct
 int update_parkhaus(Parkhaus *p_parkhaus){
 /*
     IF p_parkhaus != NULL THEN
