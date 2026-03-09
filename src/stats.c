@@ -8,8 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_QUEUESIZE_RATIO
-#define MAX_WAITING_DURATION
+#define RATIO_QUEUE_TO_SPACES 0.15
+#define MAX_WAIT_TIME 15
 
 Stats* stats_create(void)
 /* PSEUDOCODE
@@ -123,8 +123,33 @@ return 0
     
 }
 
+
 int stats_stress_score(Stats *p_stats)
-/* PSEUDOCODE
+/*  STRESS SCORE EXPLANATION:
+This score is a value between 0 and 100, representing how critical
+the situation at the parking garage is at the moment.
+
+Half the points can be achieved by the current occupancy without any cars queuing up.
+To ensure that low occupancy has less of an impact and to specifically overweight the last 20%, 
+these 50 points are calculated proportionally to the square
+of the occupancy rate.
+
+The other half of the points can only be collected at 100% occupancy
+and consists of two components:
+
+1. The ratio of waiting cars to 15% of the number of parking spaces (defined under “RATIO_QUEUE_TO_SPACES”)
+Example: In a parking garage with 100 spaces, 15 waiting cars would correspond to the full 25 points.
+
+2. The ratio of the average waiting time in the queue to the time defined under “MAX_WAIT_TIME” (15 time steps).
+Example: An average waiting time of 6 Minutes would correspond to 10 points.
+
+In summary, the stress score consists of:
+- 50 points for occupancy
+- 25 points for queue
+- 25 points for waiting time
+This allows the user to assess the current parking situation at a glance.
+
+    PSEUDOCODE
 IF p_stats = NULL OR parkhaus_size THEN 
     return -1
 END IF
