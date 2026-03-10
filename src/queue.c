@@ -225,7 +225,7 @@ return 0
             printf("queue_clear: dequeue error");
             return -1;
         }
-        free(p_temp);
+        delete_car(p_temp);
         p_temp = NULL;
 
     }
