@@ -152,7 +152,7 @@ int update_parkhaus(Parkhaus *p_parkhaus)
             p_parkhaus->p_spaces[i]->park_span = p_parkhaus->p_spaces[i]->park_span - 1;
             if(p_parkhaus->p_spaces[i]->park_span == 0)
             {
-                free(p_parkhaus->p_spaces[i]);
+                delete_car(p_parkhaus->p_spaces[i]);
                 p_parkhaus->p_spaces[i] = NULL;
                 p_parkhaus->occupied_spaces = p_parkhaus->occupied_spaces - 1;
             }
