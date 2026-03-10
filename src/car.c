@@ -8,6 +8,8 @@
  */
 
 #include "../include/car.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 Car* init_car(int  id_number, int current_time, int max_duration)
 {
@@ -24,6 +26,17 @@ Car* init_car(int  id_number, int current_time, int max_duration)
      *  return car pointer
      * 
      */
+    Car *pNew_Car = malloc(sizeof(*pNew_Car));
+    if(pNew_Car == NULL)
+    {
+        return -1;
+    }
+    pNew_Car->id_number = id_number;
+    pNew_Car->arrival_time = current_time;
+    pNew_Car->park_span = max_duration;
+    pNew_Car->time_in_queue = 0;
+    return pNew_Car;
+
 }
 
 int delete_car(Car *p_Cardelete )
@@ -35,4 +48,10 @@ int delete_car(Car *p_Cardelete )
  * ENDIF
  * return -1 in case of failure
  */
+if(p_Cardelete == NULL)
+{
+    return -1;
+}
+free(p_Cardelete);
+return 0;
 }
