@@ -1,6 +1,6 @@
 /**
  * THIS FILE INCLUDES THE LOGIC FOR ALL QUEUE FUNCTIONS
- * 
+ *
  * This file includes the basic function for a FIFO queue logic
  * - queue_init
  * - enqueue
@@ -25,7 +25,8 @@ p_queue->count = 0
 return 0
 */
 {
-    if(p_queue == NULL){
+    if (p_queue == NULL)
+    {
         printf("queue_init: null pointer");
         return -1;
     }
@@ -48,12 +49,17 @@ ELSE
 END IF
 */
 {
-    if(p_queue == NULL){
+    if (p_queue == NULL)
+    {
         printf("queue_is_empty: null pointer\n");
         return 0;
-    } else if(p_queue->count == 0){
+    }
+    else if (p_queue->count == 0)
+    {
         return 1;
-    } else {
+    }
+    else
+    {
         return 0;
     }
 }
@@ -65,7 +71,7 @@ IF p_queue = NULL OR p_car = NULL THEN
 END IF
 
 new_node <- allocate memory the size of a Node
-IF new_node = NULL THEN 
+IF new_node = NULL THEN
     return -1 (Memory Error)
 END IF
 
@@ -83,13 +89,15 @@ p_queue->count <- p_queue->count + 1        // count up
 return 0
 */
 {
-    if(p_queue == NULL || (p_car == NULL)){
+    if (p_queue == NULL || (p_car == NULL))
+    {
         printf("enqueue: null pointer");
         return -1;
     }
 
     Node *p_new_node = malloc(sizeof *p_new_node);
-    if(p_new_node == NULL){
+    if (p_new_node == NULL)
+    {
         printf("enqueue: memory allocation error");
         return -1;
     }
@@ -97,16 +105,18 @@ return 0
     p_new_node->p_car = p_car;
     p_new_node->p_next = NULL;
 
-    if(queue_is_empty(p_queue)){
+    if (queue_is_empty(p_queue))
+    {
         p_queue->p_head = p_new_node;
-    } else {
+    }
+    else
+    {
         p_queue->p_tail->p_next = p_new_node;
     }
 
     p_queue->p_tail = p_new_node;
-    p_queue->count ++;
+    p_queue->count++;
     return 0;
-
 }
 
 int dequeue(Queue *p_queue, Car **pp_dequeued_car)
@@ -131,35 +141,40 @@ p_queue->count <- p_queue->count - 1        // count down
 return 0
 */
 {
-    if(p_queue == NULL || (pp_dequeued_car == NULL)){
+    if (p_queue == NULL || (pp_dequeued_car == NULL))
+    {
         printf("dequeue: null pointer");
         return -1;
-    } else if(queue_is_empty(p_queue)){
-        return 1;
-    } else{
-        if(p_queue->p_head->p_car == NULL){
-            printf("dequeue: incomplete node");
-            return -1;
-        }
-        *pp_dequeued_car = p_queue->p_head->p_car;
-        Node *p_temp = p_queue->p_head;
-
-        p_queue->p_head = p_queue->p_head->p_next;
-
-        if(p_queue->p_head == NULL){
-            p_queue->p_tail = NULL;
-        }
-        free(p_temp);
-        p_queue->count --;
-
-        if(p_queue->count < 0){
-            printf("dequeue: arithmetic error");
-            return -1;
-        }
-
-        return 0;
-
     }
+    if (queue_is_empty(p_queue))
+    {
+        return 1;
+    }
+
+    if (p_queue->p_head->p_car == NULL)
+    {
+        printf("dequeue: incomplete node");
+        return -1;
+    }
+    *pp_dequeued_car = p_queue->p_head->p_car;
+    Node *p_temp = p_queue->p_head;
+
+    p_queue->p_head = p_queue->p_head->p_next;
+
+    if (p_queue->p_head == NULL)
+    {
+        p_queue->p_tail = NULL;
+    }
+    free(p_temp);
+    p_queue->count--;
+
+    if (p_queue->count < 0)
+    {
+        printf("dequeue: arithmetic error");
+        return -1;
+    }
+
+    return 0;
 }
 
 int queue_increase_wait_time(Queue *p_queue)
@@ -175,20 +190,23 @@ END WHILE
 return 0
 */
 {
-    if(p_queue == NULL){
+    if (p_queue == NULL)
+    {
         printf("queue_increase_wait_time: null pointer");
         return -1;
     }
 
-    Node *p_temp =p_queue->p_head;
+    Node *p_temp = p_queue->p_head;
 
-    while(p_temp != NULL){
-        if(p_temp->p_car != NULL){
+    while (p_temp != NULL)
+    {
+        if (p_temp->p_car != NULL)
+        {
             p_temp->p_car->time_in_queue++;
         }
         p_temp = p_temp->p_next;
     }
-    
+
     return 0;
 }
 
@@ -212,25 +230,26 @@ queue_init(p_queue)                             // sets pointers to NULL and cou
 return 0
 */
 {
-    if(p_queue == NULL){
+    if (p_queue == NULL)
+    {
         printf("queue_clear: null pointer");
         return -1;
     }
     int status_code = 0;
 
     Car *p_temp = NULL;
-    while(status_code == 0){
+    while (status_code == 0)
+    {
         status_code = dequeue(p_queue, &p_temp);
-        if(status_code == -1){
+        if (status_code == -1)
+        {
             printf("queue_clear: dequeue error");
             return -1;
         }
         delete_car(p_temp);
         p_temp = NULL;
-
     }
     queue_init(p_queue);
     return 0;
-
 }
 // function changed to reduce redundancy by calling dequeue
