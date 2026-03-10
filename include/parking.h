@@ -35,7 +35,7 @@ The following functions are defined to manage the Parkhaus struct during the sim
  */
 typedef struct Parkhaus
 {
-    const int size; /**< Size of the spaces array */
+    int size; /**< Size of the spaces array */
     int occupied_spaces; /**< Number of occupied spaces in the spaces array */
     Car **p_spaces; /**< Pointer to an array of `Car` pointers (represent parking spots). */
 } Parkhaus;
