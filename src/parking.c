@@ -67,7 +67,7 @@ int close_parkhaus(Parkhaus *p_parkhaus)
     {
         if(p_parkhaus->p_spaces[i] != NULL)
         {
-            free(p_parkhaus->p_spaces[i]);
+            delete_car(p_parkhaus->p_spaces[i]);
             p_parkhaus->p_spaces[i] = NULL;
         }
     }
