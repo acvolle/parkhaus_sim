@@ -56,6 +56,32 @@ WHILE true DO
 END WHILE
 */
 {
+    int value;
+    char input[10];
+    char *end_of_value; 
+    while(1){
+        printf("%s", prompt);
+        if(fgets(input, sizeof input, stdin) == NULL){
+            printf("Error reading input: Try again!\n");
+            
+        }
+
+        long input_val = strtol(input, end_of_value, 10);
+
+        if(end_of_value == input || (*end_of_value != '\n')){
+            printf("Not an integer! Try again!\n");
+            continue;
+        }
+
+        value = (int)input_val; //must be within int range because fgets only accepts 10 chars
+
+        if(value < min || (value > max)){
+            printf("Not in bounds! Enter a value between %d and %d!\n", min, max);
+            continue;
+        }
+
+        return value;
+    }
 
 }
 
