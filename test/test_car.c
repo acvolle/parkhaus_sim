@@ -2,16 +2,6 @@
 #include <assert.h>
 #include "car.h"
 
-int main(){
-    //unit test init_car function
-    test_init_car();
-    //unit test delete_car function
-    test_delete_car();
-
-    return 0;
-    
-}
-
 void test_init_car(){
     
     Car *p_car = init_car(1, 1, 1);
@@ -49,3 +39,15 @@ void test_delete_car(){
     assert(delete_car(p_car) == -1);
 
 }
+
+
+int main(){
+    //unit test init_car function
+    test_init_car();
+    //unit test delete_car function
+    test_delete_car();
+
+    return 0;
+    
+}
+
