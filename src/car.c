@@ -29,7 +29,7 @@ Car* init_car(int  id_number, int current_time, int max_duration)
     Car *pNew_Car = malloc(sizeof(*pNew_Car));
     if(pNew_Car == NULL)
     {
-        return -1;
+        return NULL;
     }
     pNew_Car->id_number = id_number;
     pNew_Car->arrival_time = current_time;
