@@ -92,6 +92,6 @@ int stats_queue_stats(const Queue *p_queue, Stats *p_stats);
  * @param[in,out] p_stats reference to struct Stats
  * @return 0 for success, -1 for error
  */
-int stats_stress_score(Stats *p_stats);
+int stats_stress_score(Stats *p_stats, int spaces_count);
 
 #endif

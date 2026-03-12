@@ -89,7 +89,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
     END IF
 */
 {
-    if(p_parkhaus == NULL || p_queue != NULL || p_config != NULL || p_stats == NULL)
+    if(p_parkhaus == NULL || p_queue == NULL || p_config == NULL || p_stats == NULL)
     {
         return -1;
     }
@@ -144,7 +144,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
         return 4;
     }
 
-    if(stats_stress_score(p_stats))
+    if(stats_stress_score(p_stats, p_config->num_spaces))
     {
         return 4;
     }
@@ -219,8 +219,11 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
     {
         return -1;
     }
-    int max_duration;
-    Car *p_new_car = init_car(current_timestep, current_timestep);
+
+    int max_duration = gen_park_duration(p_config->max_parking_time);
+
+    Car *p_new_car = init_car(current_timestep, current_timestep, max_duration);
+
     if(p_new_car == NULL)
     {
         return -1;
