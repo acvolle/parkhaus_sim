@@ -235,4 +235,12 @@ void ui_print_final_stats(int avg_parking_duration, int avg_waiting_duration, in
 OUTPUT message to user icluding integers
 */
 {
+    ui_print_border();
+    printf("End of simulation\n");
+    printf("Overall statistics:\n");
+    printf("Average time in Parkhaus: %d\n", avg_parking_duration);
+    printf("Average wait time in Queue: %d\n", avg_waiting_duration);
+    printf("Average stress score: %d\n", avg_stress_score);
+    ui_print_border();
+    printf("(c) Rolls-Royce Power Solutions\n");
 }
