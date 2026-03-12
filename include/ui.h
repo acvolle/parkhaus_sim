@@ -78,8 +78,9 @@ int ui_write_stats(const Stats *p_stats, FILE *fp);
  * For the percentage
  *
  * @param[in] p_stats reference to struct Stats
+ * @return statsus code: 0 for success, -1 for error
  */
-void ui_print_stats(const Stats *p_stats);
+int ui_print_stats(const Stats *p_stats);
 
 /**
  * @brief Print out all the final stats to console.

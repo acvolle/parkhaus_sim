@@ -191,7 +191,7 @@ return 0
     return 0;
 }
 
-void ui_print_stats(const Stats *p_stats)
+int ui_print_stats(const Stats *p_stats)
 /* PSEUDOCODE
 IF p_stats = NULL THEN
     OUTPUT error message
