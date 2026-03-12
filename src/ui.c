@@ -147,12 +147,12 @@ return 0
         p_config->simulation_duration,
         p_config->gen_probability,
         p_config->random_seed
-    ) != 0){
+    ) < 0){
         printf("ui_write_head: failed to write in file\n");
         fclose(fp);
         return -1;
     }
-    if(fprintf(fp, "Occupancy rate, Cars waiting, Max wait time, Avg wait time, Stress score\n") != 0){
+    if(fprintf(fp, "Occupancy rate, Cars waiting, Max wait time, Avg wait time, Stress score\n") < 0){
         printf("ui_write_head: failed to write in file\n");
         fclose(fp);
         return -1;
@@ -182,7 +182,7 @@ return 0
         p_stats->first_car_wait_time,
         p_stats->avg_wait_time,
         p_stats->stress_score
-    ) != 0){
+    ) < 0){
         printf("ui_write_stats: failed to write in file\n");
         fclose(fp);
         return -1;
