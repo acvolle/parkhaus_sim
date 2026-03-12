@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <assert.h>
+#include <stdio.h>
 #include "car.h"
 
 void test_init_car(){
