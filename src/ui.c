@@ -149,7 +149,7 @@ return 0
 */
 {
     if(p_stats == NULL || (fp == NULL)){
-        printf("ui_write_stats: null pointer");
+        printf("ui_write_stats: null pointer\n");
         return -1;
     }
 
@@ -180,6 +180,19 @@ return 0
 
 */
 {
+    if(p_stats == NULL){
+        printf("ui_print_stats: null pointer\n");
+        return -1;
+    }
+
+    printf("Timestep: %04d ", current_timestep);
+    printf("Occ. Rate (%%): %05.2f ", p_stats->occupancy_rate);
+    printf("Cars waiting: %04d ", p_stats->cars_waiting);
+    printf("Max. wait time: %04d ", p_stats->first_car_wait_time);
+    printf("Avg. wait time: %04d ", p_stats->avg_wait_time);
+    printf("Score: %05.2f\n", p_stats->stress_score);
+
+    return 0;
 }
 
 void ui_print_final_stats(int avg_parking_duration, int avg_waiting_duration, int avg_stress_score)
