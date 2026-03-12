@@ -31,6 +31,11 @@ void ui_print_welcome(void)
 OUTPUT welcome message
 */
 {
+    printf("Welcome to the Parkhaus P4 Rauenegg simultion tool!\n");
+    printf("- You will be asked to input simulation parameters\n");
+    printf("- The simulation will run, and statistics for each timeste pwill be printed\n");
+    printf("- Final statistics will be printed at the end\n");
+    printf("- The simulation will end and all stats will be readable in a stats.txt file\n\n");
 }
 
 /**
