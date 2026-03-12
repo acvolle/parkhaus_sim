@@ -163,7 +163,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
  * @param[in] probability The probability (0-100) of generating a new car.
  * @return int `1` if a car should be generated, `0` otherwise.
  */
-static int car_gen_bool(const int probability){
+static int car_gen_bool(const int probability)
 /*
     Generate random number
     value <- (random number % 100) +1 //to allow probability of 100 
@@ -173,6 +173,15 @@ static int car_gen_bool(const int probability){
         return 0
     ENDIF
 */
+{
+    // random number from 1 through 100
+    int value = rand() % 100 + 1;
+    if(value <= probability)
+    {
+        // new car should be generated
+        return 1;
+    }
+    return 0;
 }
 
 
@@ -190,7 +199,7 @@ static int car_gen_bool(const int probability){
 *            - `0` if the operation succeeded.
 *            - `-1` if an error occurred (e.g., pointer is `NULL`).
 */
-static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config){
+static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
 /*
     IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) THEN
         Car pointer <- init_car(current_timestep, current_timestep, gen_park_duration)
@@ -202,6 +211,8 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
         return -1
     END IF
 */
+{
+    
 }
 
 /**
