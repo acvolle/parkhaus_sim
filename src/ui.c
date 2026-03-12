@@ -118,14 +118,15 @@ p_config->random_seed          <- ui_get_int("Enter your seed (random number): "
 return 0
 */
 {
-    if(p_config == NULL){
+    if (p_config == NULL)
+    {
         printf("ui_get_pasams: null pointer");
         return -1;
     }
 
     p_config->num_spaces = ui_get_int("Enter number of spaces: ", MIN_INPUT, MAX_INPUT);
-    p_config-> max_parking_time = ui_get_int("Enter max. parking duration in timesteps: ", MIN_INPUT, MAX_INPUT);
-    p_config-> simulation_duration = ui_get_int("Enter how many timesteps should be simulated: ", MIN_INPUT, MAX_INPUT);
+    p_config->max_parking_time = ui_get_int("Enter max. parking duration in timesteps: ", MIN_INPUT, MAX_INPUT);
+    p_config->simulation_duration = ui_get_int("Enter how many timesteps should be simulated: ", MIN_INPUT, MAX_INPUT);
     p_config->gen_probability = ui_get_int("Enter probability for new cars to arrive per timestep (%%): ", MIN_INPUT, 100);
     p_config->random_seed = ui_get_int("Enter your seed (random number): ", 0, 32767);
 
@@ -144,23 +145,25 @@ fputs(stats_names, fp)              //new line
 return 0
 */
 {
-    if(p_config == NULL || (fp == NULL)){
+    if (p_config == NULL || (fp == NULL))
+    {
         printf("ui_write_head: null pointer\n");
         return -1;
     }
 
-    if(fprintf(fp, "Number of spaces: %d, Max. parking time: %d, Duration: %d, Gen. probability: %d, Seed: %d\n",
-        p_config->num_spaces,
-        p_config->max_parking_time,
-        p_config->simulation_duration,
-        p_config->gen_probability,
-        p_config->random_seed
-    ) < 0){
+    if (fprintf(fp, "Number of spaces: %d, Max. parking time: %d, Duration: %d, Gen. probability: %d, Seed: %d\n",
+                p_config->num_spaces,
+                p_config->max_parking_time,
+                p_config->simulation_duration,
+                p_config->gen_probability,
+                p_config->random_seed) < 0)
+    {
         printf("ui_write_head: failed to write in file\n");
         fclose(fp);
         return -1;
     }
-    if(fprintf(fp, "Occupancy rate, Cars waiting, Max wait time, Avg wait time, Stress score\n") < 0){
+    if (fprintf(fp, "Occupancy rate, Cars waiting, Max wait time, Avg wait time, Stress score\n") < 0)
+    {
         printf("ui_write_head: failed to write in file\n");
         fclose(fp);
         return -1;
@@ -179,18 +182,19 @@ with fprintf(), write the current timestep and the 5 stats into txt file, sepera
 return 0
 */
 {
-    if(p_stats == NULL || (fp == NULL)){
+    if (p_stats == NULL || (fp == NULL))
+    {
         printf("ui_write_stats: null pointer\n");
         return -1;
     }
 
-    if(fprintf(fp, "%.2f, %d, %d, %.2f, %.2f\n", 
-        p_stats->occupancy_rate,
-        p_stats->cars_waiting,
-        p_stats->first_car_wait_time,
-        p_stats->avg_wait_time,
-        p_stats->stress_score
-    ) < 0){
+    if (fprintf(fp, "%.2f, %d, %d, %.2f, %.2f\n",
+                p_stats->occupancy_rate,
+                p_stats->cars_waiting,
+                p_stats->first_car_wait_time,
+                p_stats->avg_wait_time,
+                p_stats->stress_score) < 0)
+    {
         printf("ui_write_stats: failed to write in file\n");
         fclose(fp);
         return -1;
@@ -215,7 +219,8 @@ return 0
 
 */
 {
-    if(p_stats == NULL){
+    if (p_stats == NULL)
+    {
         printf("ui_print_stats: null pointer\n");
         return -1;
     }
