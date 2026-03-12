@@ -9,6 +9,11 @@
 #include "../include/ui.h"
 #include "../include/simulation.h"
 
+// maximal input value for some simualtion parameters, limits the user from creating too large simulations
+static int MAX_INPUT = 9999;
+// minimal input for some simualtion parameters, values smaller than 1 don't make sense
+static int MIN_INPUT = 1;
+
 /**
  * @brief Print a visual border to separate elements on console.
  *
@@ -61,14 +66,15 @@ END WHILE
         printf("%s", prompt);
         if (fgets(input, sizeof input, stdin) == NULL)
         {
+            clearerr(stdin);
             printf("Error reading input: Try again!\n");
+            continue;
         }
 
         long input_val = strtol(input, end_of_value, 10);
 
         if (end_of_value == input || (*end_of_value != '\n'))
         {
-            clearerr(stdin);
             printf("Not an integer! Try again!\n");
             continue;
         }
@@ -104,6 +110,18 @@ p_config->random_seed          <- ui_get_int("Enter your seed (random number): "
 return 0
 */
 {
+    if(p_config == NULL){
+        printf("ui_get_pasams: null pointer");
+        return -1;
+    }
+
+    p_config->num_spaces = ui_get_int("Enter number of spaces: ", MIN_INPUT, MAX_INPUT);
+    p_config-> max_parking_time = ui_get_int("Enter max. parking duration in timesteps: ", MIN_INPUT, MAX_INPUT);
+    p_config-> simulation_duration = ui_get_int("Enter how many timesteps should be simulated: ", MIN_INPUT, MAX_INPUT);
+    p_config->gen_probability = ui_get_int("Enter probability for new cars to arrive per timestep (%%): ", MIN_INPUT, 100);
+    p_config->random_seed = ui_get_int("Enter your seed (random number): ", 0, 32767);
+
+    return 0;
 }
 
 int ui_write_head(const Config *p_config, const char *stats_names, FILE *fp)
