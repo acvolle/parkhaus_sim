@@ -212,7 +212,25 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
     END IF
 */
 {
+    if(p_parkhaus == NULL || p_queue == NULL || p_config == NULL)
+    {
+        return -1;
+    }
+
+    Car *p_new_car = init_car(current_timestep, current_timestep, gen_park_duration);
+    if(p_new_car == NULL)
+    {
+        return -1;
+    }
+
+    // park car into the parkhaus if there is a space available
+    if(park_car(p_parkhaus, p_new_car, current_timestep) == 1)
+    {
+        // no spaces available
+        enqueue(p_queue, p_new_car);
+    }
     
+    return 0;
 }
 
 /**
