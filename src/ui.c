@@ -148,6 +148,20 @@ with fprintf(), write the current timestep and the 5 stats into txt file, sepera
 return 0
 */
 {
+    if(p_stats == NULL || (fp == NULL)){
+        printf("ui_write_stats: null pointer");
+        return -1;
+    }
+
+    fprintf(fp, "%.2f, %d, %d, %.2f, %d\n", 
+        p_stats->occupancy_rate,
+        p_stats->cars_waiting,
+        p_stats->first_car_wait_time,
+        p_stats->avg_wait_time,
+        p_stats->stress_score
+    );
+
+    return 0;
 }
 
 void ui_print_stats(const Stats *p_stats)
