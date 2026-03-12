@@ -5,7 +5,7 @@
 int current_timestep;
 
 //Initializes a new Config struct
-Config *new_config(){
+Config *new_config()
 /*
     Config pointer <- allocate memory for Config struct
     IF config pointer == NULL THEN
@@ -19,25 +19,39 @@ Config *new_config(){
     return Config pointer
 
 */
+{
+    Config *p_config = malloc(sizeof(Config));
+    if(p_config == NULL)
+    {
+        return NULL;
+    }
+    p_config->num_spaces = 0;
+    p_config->max_parking_time = 0;
+    p_config->simulation_duration = 0;
+    p_config->gen_probability = 0;
+    p_config->random_seed = 0;
 
+    return p_config;
 }
 
-
-// Frees the memory allocated to the config struct
-int free_config(Config *p_config){
+int free_config(Config *p_config)
 /*
     IF p_config != NULL THEN
         free memory at p_config location
         return 0
-    ELSE
-        return -1
     END IF
+    return -1
 */
+{
+    if(p_config == NULL)
+    {
+        return -1;
+    }
+    free(p_config);
 }
 
 
-// Runs a single timestep of the simulation
-int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats){
+int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats)
 /*
     IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) && (p_stats != NULL) THEN
         update_parkhaus(p_parkhaus)
@@ -72,7 +86,43 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
         return -1
     END IF
 */
+{
+    if(p_parkhaus == NULL || p_queue != NULL || p_config != NULL || p_stats == NULL)
+    {
+        return -1;
+    }
+    // remove cars with 0 remaining parking duration
+    if(update_parkhaus(p_parkhaus) != 0)
+    {
+        return 2;
+    }
 
+    Car* p_temp_car = NULL;
+
+    // put cars from queue into free spaces
+    while (!parkhaus_is_full(p_parkhaus) && !queue_is_empty(p_queue))
+    {
+        if(dequeue(p_queue, p_temp_car) != 0)
+        {
+            return 3;
+        }
+        if(park_car(p_parkhaus, p_temp_car, current_timestep) != 0)
+        {
+            return 2;
+        }
+    }
+    // update the waiting time of all cars in the queue
+    if(queue_increase_wait_time(p_queue) != 0)
+    {
+        return 3;
+    }
+
+    // new car should be generated
+    if(car_gen_bool(p_config->gen_probability) == 1)
+    {
+        
+    }
+    
 }
 
 
