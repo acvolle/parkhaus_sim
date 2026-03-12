@@ -24,6 +24,7 @@ static void ui_print_border(void)
 OUTPUT visual border
 */
 {
+    printf("-----------------------------------------------\n");
 }
 
 void ui_print_welcome(void)
