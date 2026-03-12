@@ -62,7 +62,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
         END WHILE
         queue_increase_wait_time(p_queue)
         IF car_gen_bool(p_config->gen_probability) == 1 DO
-            IF input_new_car == 1 (Error) DO
+            IF input_new_car (Error) DO
                 OUTPUT error message
                 return 1
             END IF
@@ -70,15 +70,14 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
             OUTPUT error message
             return 4
         END IF
-        IF write stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats) THEN
+        IF stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats) THEN
             OUTPUT error message
             return 4
         END IF
-        IF write stats_queue_stats(p_queue, p_stats) THEN
-            OUTPUT error message
-            return 4
+        IF stats_queue_stats(p_queue, p_stats) THEN
+             return 4
         END IF
-        IF write stats_stress_score(p_stats) THEN
+        IF stats_stress_score(p_stats) THEN
             OUTPUT error message
             return 4
         END IF
@@ -92,7 +91,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
         return -1;
     }
     // remove cars with 0 remaining parking duration
-    if(update_parkhaus(p_parkhaus) != 0)
+    if(update_parkhaus(p_parkhaus))
     {
         return 2;
     }
@@ -102,17 +101,17 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
     // put cars from queue into free spaces
     while (!parkhaus_is_full(p_parkhaus) && !queue_is_empty(p_queue))
     {
-        if(dequeue(p_queue, p_temp_car) != 0)
+        if(dequeue(p_queue, p_temp_car))
         {
             return 3;
         }
-        if(park_car(p_parkhaus, p_temp_car, current_timestep) != 0)
+        if(park_car(p_parkhaus, p_temp_car, current_timestep))
         {
             return 2;
         }
     }
     // update the waiting time of all cars in the queue
-    if(queue_increase_wait_time(p_queue) != 0)
+    if(queue_increase_wait_time(p_queue))
     {
         return 3;
     }
@@ -120,15 +119,34 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
     // new car should be generated
     if(car_gen_bool(p_config->gen_probability) == 1)
     {
-        if(input_new_car(p_parkhaus, p_queue, p_config) != 0)
+        if(input_new_car(p_parkhaus, p_queue, p_config))
         {
             return 1;
         }
     }
 
     // +++ STATISTICS +++
-    
-    
+    if(stats_clear(p_stats))
+    {
+        return 4;
+    }
+
+    if(stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats))
+    {
+        return 4;
+    }
+
+    if(stats_queue_stats(p_queue, p_stats))
+    {
+        return 4;
+    }
+
+    if(stats_stress_score(p_stats))
+    {
+        return 4;
+    }
+
+    return 0;
 }
 
 
