@@ -136,6 +136,29 @@ fputs(stats_names, fp)              //new line
 return 0
 */
 {
+    if(p_config == NULL || (fp == NULL)){
+        printf("ui_write_head: null pointer\n");
+        return -1;
+    }
+
+    if(fprintf(fp, "Number of spaces: %d, Max. parking time: %d, Duration: %d, Gen. probability: %d, Seed: %d\n",
+        p_config->num_spaces,
+        p_config->max_parking_time,
+        p_config->simulation_duration,
+        p_config->gen_probability,
+        p_config->random_seed
+    ) != 0){
+        printf("ui_write_head: failed to write in file\n");
+        fclose(fp);
+        return -1;
+    }
+    if(fprintf(fp, "Occupancy rate, Cars waiting, Max wait time, Avg wait time, Stress score\n") != 0){
+        printf("ui_write_head: failed to write in file\n");
+        fclose(fp);
+        return -1;
+    }
+
+    return 0;
 }
 
 int ui_write_stats(const Stats *p_stats, FILE *fp)
