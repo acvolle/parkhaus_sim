@@ -2,6 +2,9 @@
 
 // FOR DOCUMENTATION OF NON-STATIC FUNCTIONS, SEE SIMULATION.H
 
+// minimum parking duration timesteps
+#define MIN_PARKING_DURATION 5 
+
 int current_timestep;
 
 //Initializes a new Config struct
@@ -101,7 +104,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
     // put cars from queue into free spaces
     while (!parkhaus_is_full(p_parkhaus) && !queue_is_empty(p_queue))
     {
-        if(dequeue(p_queue, p_temp_car))
+        if(dequeue(p_queue, &p_temp_car))
         {
             return 3;
         }
@@ -216,8 +219,8 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
     {
         return -1;
     }
-
-    Car *p_new_car = init_car(current_timestep, current_timestep, gen_park_duration);
+    int max_duration;
+    Car *p_new_car = init_car(current_timestep, current_timestep);
     if(p_new_car == NULL)
     {
         return -1;
@@ -238,23 +241,33 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
  * 
  * Generates the park_span time of a Car struct using rand() and the max_parking_time
  * of the Config struct.
- * The returned timespan is be at least one (no 0 timestep parking) and at most the 
- * max_parking_time.
+ * The returned timespan is be at least the defined MIN_PARKING_DURATION 
+ * and at most the max_parking_time.
  * 
  * @note The `srand()` function must be called in `main()` before using this function.
  * 
  * @param[in] max_time Maximum number of timesteps a Car may spend in the struct
  * @return integer value of the park_span number of timesteps
  */
-static int gen_park_duration(int max_time){
+static int gen_park_duration(int max_time)
 /*
     Generate random number
-    parking time <- (random number % max_time)+1 //values between 1 and 100
+    parking time <- (random number % max_time)+1
 
     return parking time
-*/
-}
-/*Note: it is unnecessary to check for e.g. negative numbers etc. as ui_get_params 
+Note: it is unnecessary to check for e.g. negative numbers etc. as ui_get_params 
 already has safeguards to ensure that the simulation cannot be started with erroneous
-parameters*/
+parameters
+*/
+{
+    // generate a random value from 1  through max_time;
+    int duration = (rand() % max_time) + 1;
 
+    if (duration < MIN_PARKING_DURATION)
+    {
+        duration = MIN_PARKING_DURATION;
+    }
+
+    // return a random value from MIN_PARKING_DURATION through max_time;
+    return duration;
+}
