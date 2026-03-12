@@ -153,13 +153,17 @@ return 0
         return -1;
     }
 
-    fprintf(fp, "%.2f, %d, %d, %.2f, %.2f\n", 
+    if(fprintf(fp, "%.2f, %d, %d, %.2f, %.2f\n", 
         p_stats->occupancy_rate,
         p_stats->cars_waiting,
         p_stats->first_car_wait_time,
         p_stats->avg_wait_time,
         p_stats->stress_score
-    );
+    ) != 0){
+        printf("ui_write_stats: failed to write in file\n");
+        fclose(fp);
+        return -1;
+    }
 
     return 0;
 }
