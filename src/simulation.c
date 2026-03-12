@@ -64,23 +64,23 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
         IF car_gen_bool(p_config->gen_probability) == 1 DO
             IF input_new_car == 1 (Error) DO
                 OUTPUT error message
-                return -1
+                return 1
             END IF
         IF stats_clear(p_stats) THEN
             OUTPUT error message
-            return -1
+            return 4
         END IF
         IF write stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats) THEN
             OUTPUT error message
-            return -1
+            return 4
         END IF
         IF write stats_queue_stats(p_queue, p_stats) THEN
             OUTPUT error message
-            return -1
+            return 4
         END IF
         IF write stats_stress_score(p_stats) THEN
             OUTPUT error message
-            return -1
+            return 4
         END IF
     ELSE 
         return -1
@@ -120,8 +120,14 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
     // new car should be generated
     if(car_gen_bool(p_config->gen_probability) == 1)
     {
-        
+        if(input_new_car(p_parkhaus, p_queue, p_config) != 0)
+        {
+            return 1;
+        }
     }
+
+    // +++ STATISTICS +++
+    
     
 }
 
