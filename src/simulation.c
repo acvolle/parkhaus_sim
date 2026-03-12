@@ -205,7 +205,7 @@ static int car_gen_bool(const int probability)
 static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
 /*
     IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) THEN
-        Car pointer <- init_car(current_timestep, current_timestep, gen_park_duration)
+        Car pointer <- init_car(current_car_id, current_timestep, gen_park_duration)
         IF(park_car(p_parkhaus, p_car, current_timestep)) == 1 THEN
             enqueue(p_queue, Car pointer)
         END IF
@@ -215,6 +215,8 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
     END IF
 */
 {
+    // static integer -> is only initialized once
+    static int current_car_id = 1;
     if(p_parkhaus == NULL || p_queue == NULL || p_config == NULL)
     {
         return -1;
@@ -222,7 +224,8 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
 
     int max_duration = gen_park_duration(p_config->max_parking_time);
 
-    Car *p_new_car = init_car(current_timestep, current_timestep, max_duration);
+    Car *p_new_car = init_car(current_car_id, current_timestep, max_duration);
+    current_car_id ++;
 
     if(p_new_car == NULL)
     {
