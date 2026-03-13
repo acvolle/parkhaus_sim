@@ -17,7 +17,7 @@ void test_stats_create(void)
     free(p_s);
 }
 
-void test_clear_stats(void)
+void test_stats_clear(void)
 {
     Stats *p_s = stats_create();
 
@@ -157,4 +157,16 @@ void test_stats_stress_score(void)
     assert(p_s->stress_score == 80.0);
 
     stats_delete(p_s);
+}
+
+int main()
+{
+    test_stats_create();
+    test_stats_clear();
+    test_stats_delete();
+    test_stats_occupancy_rate();
+    test_stats_queue_stats();
+    test_stats_stress_score();
+
+    return 0;
 }
