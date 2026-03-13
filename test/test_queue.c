@@ -20,7 +20,30 @@ void test_init_queue(){
 
 }
 
+void test_enqueue(){
+    Queue q;
+    queue_init(&q);
 
+    Car *p_car = init_car(1, 1, 5);
+    
+    //test that p_car was enqueued into the empty queue
+    assert(enqueue(&q, p_car) == 0);
+    //test that the enqueued car is now the header
+    assert(q.p_head == p_car);
+
+    Car *p_second_car = init_car(2, 2, 8);
+    
+    //test that a second car could be enqueued
+    assert(enqueue(&q, p_second_car) == 0);
+    //test that the first car is still at front
+    assert(q.p_head == p_car);
+    //test that the second car is now at the tail
+    assert(q.p_tail == p_second_car);
+    //test that count has been upped to 2 (2 cars in queue!)
+    assert(q.count == 2);
+
+    return 0;
+}
 
 
 int main(){
