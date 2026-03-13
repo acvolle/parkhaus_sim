@@ -2,10 +2,13 @@
 
 // FOR DOCUMENTATION OF NON-STATIC FUNCTIONS, SEE SIMULATION.H
 
+// minimum parking duration timesteps
+#define MIN_PARKING_DURATION 5 
+
 int current_timestep;
 
 //Initializes a new Config struct
-Config *new_config(){
+Config *new_config()
 /*
     Config pointer <- allocate memory for Config struct
     IF config pointer == NULL THEN
@@ -19,25 +22,40 @@ Config *new_config(){
     return Config pointer
 
 */
+{
+    Config *p_config = malloc(sizeof(Config));
+    if(p_config == NULL)
+    {
+        return NULL;
+    }
+    p_config->num_spaces = 0;
+    p_config->max_parking_time = 0;
+    p_config->simulation_duration = 0;
+    p_config->gen_probability = 0;
+    p_config->random_seed = 0;
 
+    return p_config;
 }
 
-
-// Frees the memory allocated to the config struct
-int free_config(Config *p_config){
+int free_config(Config *p_config)
 /*
     IF p_config != NULL THEN
         free memory at p_config location
         return 0
-    ELSE
-        return -1
     END IF
+    return -1
 */
+{
+    if(p_config == NULL)
+    {
+        return -1;
+    }
+    free(p_config);
+    return 0;
 }
 
 
-// Runs a single timestep of the simulation
-int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats){
+int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats)
 /*
     IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) && (p_stats != NULL) THEN
         update_parkhaus(p_parkhaus)
@@ -48,31 +66,91 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
         END WHILE
         queue_increase_wait_time(p_queue)
         IF car_gen_bool(p_config->gen_probability) == 1 DO
-            IF input_new_car == 1 (Error) DO
+            IF input_new_car (Error) DO
                 OUTPUT error message
-                return -1
+                return 1
             END IF
         IF stats_clear(p_stats) THEN
             OUTPUT error message
-            return -1
+            return 4
         END IF
-        IF write stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats) THEN
+        IF stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats) THEN
             OUTPUT error message
-            return -1
+            return 4
         END IF
-        IF write stats_queue_stats(p_queue, p_stats) THEN
-            OUTPUT error message
-            return -1
+        IF stats_queue_stats(p_queue, p_stats) THEN
+             return 4
         END IF
-        IF write stats_stress_score(p_stats) THEN
+        IF stats_stress_score(p_stats) THEN
             OUTPUT error message
-            return -1
+            return 4
         END IF
     ELSE 
         return -1
     END IF
 */
+{
+    if(p_parkhaus == NULL || p_queue == NULL || p_config == NULL || p_stats == NULL)
+    {
+        return -1;
+    }
+    // remove cars with 0 remaining parking duration
+    if(update_parkhaus(p_parkhaus))
+    {
+        return 2;
+    }
 
+    Car* p_temp_car = NULL;
+
+    // put cars from queue into free spaces
+    while (!parkhaus_is_full(p_parkhaus) && !queue_is_empty(p_queue))
+    {
+        if(dequeue(p_queue, &p_temp_car))
+        {
+            return 3;
+        }
+        if(park_car(p_parkhaus, p_temp_car, current_timestep))
+        {
+            return 2;
+        }
+    }
+    // update the waiting time of all cars in the queue
+    if(queue_increase_wait_time(p_queue))
+    {
+        return 3;
+    }
+
+    // new car should be generated
+    if(car_gen_bool(p_config->gen_probability) == 1)
+    {
+        if(input_new_car(p_parkhaus, p_queue, p_config))
+        {
+            return 1;
+        }
+    }
+
+    // +++ STATISTICS +++
+    if(stats_clear(p_stats))
+    {
+        return 4;
+    }
+
+    if(stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats))
+    {
+        return 4;
+    }
+
+    if(stats_queue_stats(p_queue, p_stats))
+    {
+        return 4;
+    }
+
+    if(stats_stress_score(p_stats, p_config->num_spaces))
+    {
+        return 4;
+    }
+
+    return 0;
 }
 
 
@@ -89,7 +167,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
  * @param[in] probability The probability (0-100) of generating a new car.
  * @return int `1` if a car should be generated, `0` otherwise.
  */
-static int car_gen_bool(const int probability){
+static int car_gen_bool(const int probability)
 /*
     Generate random number
     value <- (random number % 100) +1 //to allow probability of 100 
@@ -99,6 +177,15 @@ static int car_gen_bool(const int probability){
         return 0
     ENDIF
 */
+{
+    // random number from 1 through 100
+    int value = rand() % 100 + 1;
+    if(value <= probability)
+    {
+        // new car should be generated
+        return 1;
+    }
+    return 0;
 }
 
 
@@ -116,10 +203,10 @@ static int car_gen_bool(const int probability){
 *            - `0` if the operation succeeded.
 *            - `-1` if an error occurred (e.g., pointer is `NULL`).
 */
-static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config){
+static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
 /*
     IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) THEN
-        Car pointer <- init_car(current_timestep, current_timestep, gen_park_duration)
+        Car pointer <- init_car(current_car_id, current_timestep, gen_park_duration)
         IF(park_car(p_parkhaus, p_car, current_timestep)) == 1 THEN
             enqueue(p_queue, Car pointer)
         END IF
@@ -128,6 +215,32 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
         return -1
     END IF
 */
+{
+    // static integer -> is only initialized once
+    static int current_car_id = 1;
+    if(p_parkhaus == NULL || p_queue == NULL || p_config == NULL)
+    {
+        return -1;
+    }
+
+    int max_duration = gen_park_duration(p_config->max_parking_time);
+
+    Car *p_new_car = init_car(current_car_id, current_timestep, max_duration);
+    current_car_id ++;
+
+    if(p_new_car == NULL)
+    {
+        return -1;
+    }
+
+    // park car into the parkhaus if there is a space available
+    if(park_car(p_parkhaus, p_new_car, current_timestep) == 1)
+    {
+        // no spaces available
+        enqueue(p_queue, p_new_car);
+    }
+    
+    return 0;
 }
 
 /**
@@ -135,23 +248,33 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
  * 
  * Generates the park_span time of a Car struct using rand() and the max_parking_time
  * of the Config struct.
- * The returned timespan is be at least one (no 0 timestep parking) and at most the 
- * max_parking_time.
+ * The returned timespan is be at least the defined MIN_PARKING_DURATION 
+ * and at most the max_parking_time.
  * 
  * @note The `srand()` function must be called in `main()` before using this function.
  * 
  * @param[in] max_time Maximum number of timesteps a Car may spend in the struct
  * @return integer value of the park_span number of timesteps
  */
-static int gen_park_duration(int max_time){
+static int gen_park_duration(int max_time)
 /*
     Generate random number
-    parking time <- (random number % max_time)+1 //values between 1 and 100
+    parking time <- (random number % max_time)+1
 
     return parking time
-*/
-}
-/*Note: it is unnecessary to check for e.g. negative numbers etc. as ui_get_params 
+Note: it is unnecessary to check for e.g. negative numbers etc. as ui_get_params 
 already has safeguards to ensure that the simulation cannot be started with erroneous
-parameters*/
+parameters
+*/
+{
+    // generate a random value from 1  through max_time;
+    int duration = (rand() % max_time) + 1;
 
+    if (duration < MIN_PARKING_DURATION)
+    {
+        duration = MIN_PARKING_DURATION;
+    }
+
+    // return a random value from MIN_PARKING_DURATION through max_time;
+    return duration;
+}

@@ -86,12 +86,11 @@ int stats_queue_stats(const Queue *p_queue, Stats *p_stats);
  *
  * This function reads the gathered stats,
  * calculates the stress score
- * (exact formula tbd!!!!!!!!!!)
- * and writes the new score into the struct Stats
+ * and writes the new score into the struct Stats.
  * 
  * @param[in,out] p_stats reference to struct Stats
  * @return 0 for success, -1 for error
  */
-int stats_stress_score(Stats *p_stats);
+int stats_stress_score(Stats *p_stats, int spaces_count);
 
 #endif

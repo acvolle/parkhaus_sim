@@ -134,7 +134,7 @@ return 0
         return 0;
     }
 
-    p_stats->first_car_wait_time = p_queue->p_head->car.time_in_queue;
+    p_stats->first_car_wait_time = p_queue->p_head->p_car->time_in_queue;
 
     float total_wait = 0;
     Node *p_temp_node = p_queue->p_head;
@@ -142,7 +142,7 @@ return 0
     // iterate through the queue and sum up all the car's waiting times
     while (p_temp_node != NULL)
     {
-        total_wait += p_temp_node->car.time_in_queue;
+        total_wait += p_temp_node->p_car->time_in_queue;
         p_temp_node = p_temp_node->p_next;
     }
 
