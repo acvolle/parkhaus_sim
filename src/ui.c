@@ -196,8 +196,7 @@ return 0
                 p_stats->stress_score) < 0)
     {
         printf("ui_write_stats: failed to write in file\n");
-        fclose(fp);
-        return -1;
+        return 1;
     }
 
     return 0;

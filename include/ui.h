@@ -64,10 +64,12 @@ int ui_write_head(const Config *p_config, const char *stats_names, FILE *fp);
  *
  * To be called each cycle.
  * The statistic values are seperated by commas.
+ * 
+ * @note close file fp if the function returns 1
  *
  * @param[in] p_stats reference to struct Stats
  * @param[out] fp reference to the txt file
- * @return 0 for success, -1 for error
+ * @return 0 for success, -1 for error, 1 for file error
  */
 int ui_write_stats(const Stats *p_stats, FILE *fp);
 
