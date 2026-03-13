@@ -106,3 +106,55 @@ void test_stats_queue_stats(void)
     stats_delete(p_s);
 }
 
+void test_stats_stress_score(void)
+{
+    Stats* p_s = stats_create();
+    int size = 100;
+
+    // Test null pointer handling
+    assert(stats_stress_score(NULL, 0) == -1);
+
+    // Test score for 50% occupancy
+    p_s->occupancy_rate = 50.0;
+    stats_stress_score(p_s, size);
+    assert(p_s->stress_score == 12.5); // 50 * (0.5 * 0.5) = 12.5
+
+    // Test max queue score
+    p_s->occupancy_rate = 0.0;
+    p_s->cars_waiting = 20; 
+    stats_stress_score(p_s, size);
+
+    // 20 cars in queue (over 15% of total available spaces) 
+    // should lead to the maximum score of 25 for queue
+    assert(p_s->stress_score == 25.0);
+
+    // Test queue score
+    p_s->occupancy_rate = 100.0;
+    p_s->cars_waiting = 9; 
+    stats_stress_score(p_s, size);
+
+    // 9 cars in queue (equal to 3/5 of the max queue length of 15 cars) 
+    // should lead to the score of 25 * (3/5) = 15 for queue
+    // and thus to a total score of 50 + 15 = 65
+    assert(p_s->stress_score == 65.0); 
+
+    // Test max wait time score
+    p_s->occupancy_rate = 0; 
+    p_s->cars_waiting = 0;
+    p_s->avg_wait_time = 17.0;
+
+    // a waiting time >= 15 should lead to the max score of 25
+    stats_stress_score(p_s, size);
+    assert(p_s->stress_score == 25.0);
+
+    // Test total score
+    p_s->occupancy_rate = 100.0; 
+    p_s->cars_waiting = 12;
+    p_s->avg_wait_time = 6;
+
+    // total score should be 50 (occupancy) + 20 (queue) + 10 (time) = 80 (total)
+    stats_stress_score(p_s, size);
+    assert(p_s->stress_score == 80.0);
+
+    stats_delete(p_s);
+}
