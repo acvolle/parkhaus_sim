@@ -51,6 +51,7 @@ int free_config(Config *p_config)
         return -1;
     }
     free(p_config);
+    return 0;
 }
 
 
