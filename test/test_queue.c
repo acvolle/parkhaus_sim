@@ -48,6 +48,28 @@ void test_enqueue(){
     return 0;
 }
 
+void test_dequeue(){
+    Queue q;
+    queue_init(&q);
+    Car *p_car = init_car(1, 1, 5);
+
+    enqueue(&q, p_car);
+
+    Car *p_dequeued_car = NULL;
+    //test if dequeue works
+    assert(dequeue(&q, &p_dequeued_car) == 0);
+    //test if the dequeued pointer is the same as what was enqueued
+    assert(p_dequeued_car == p_car);
+    p_dequeued_car = NULL;
+    //test if dequeue works when the queue is empty
+    assert(dequeue(&q, &p_dequeued_car) == 1);
+    //test that dequeue on an empty queue doesn't change the Car pointer
+    assert(p_dequeued_car == NULL);
+
+    free(p_car);
+
+    return 0;
+}
 
 int main(){
 
