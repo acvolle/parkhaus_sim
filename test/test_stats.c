@@ -177,5 +177,6 @@ int main()
     test_stats_queue_stats();
     test_stats_stress_score();
 
+    printf("All stats.c unit tests passed!\n");
     return 0;
 }

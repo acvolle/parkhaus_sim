@@ -51,5 +51,6 @@ int main()
     // unit test delete_car function
     test_delete_car();
 
+    printf("All car.c unit tests passed!\n");
     return 0;
 }
