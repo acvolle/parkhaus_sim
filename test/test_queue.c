@@ -42,6 +42,9 @@ void test_enqueue(){
     //test that count has been upped to 2 (2 cars in queue!)
     assert(q.count == 2);
 
+    free(p_car);
+    free(p_second_car);
+
     return 0;
 }
 
