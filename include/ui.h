@@ -52,10 +52,12 @@ int ui_get_params(Config *p_config);
  * - first line stating all simulation parameters
  * - second line stating all the stats seperated by commas
  * 
+ * @note close file fp if the function retruns 1
+ * 
  * @param[in] p_config reference to struct Config
  * @param[in] stats_names string containing all the stats names seperated by commas
  * @param[out] fp reference to the txt file
- * @return 0 for success, -1 for error
+ * @return 0 for success, -1 for error, 1 for file error
  */
 int ui_write_head(const Config *p_config, const char *stats_names, FILE *fp);
 

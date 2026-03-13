@@ -159,14 +159,14 @@ return 0
                 p_config->random_seed) < 0)
     {
         printf("ui_write_head: failed to write in file\n");
-        fclose(fp);
-        return -1;
+        
+        return 1;
     }
     if (fprintf(fp, "Occupancy rate, Cars waiting, Max wait time, Avg wait time, Stress score\n") < 0)
     {
         printf("ui_write_head: failed to write in file\n");
-        fclose(fp);
-        return -1;
+        
+        return 1;
     }
 
     return 0;
