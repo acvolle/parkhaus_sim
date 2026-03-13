@@ -156,6 +156,15 @@ void test_stats_stress_score(void)
     stats_stress_score(p_s, size);
     assert(p_s->stress_score == 80.0);
 
+    // Test max total score
+    p_s->occupancy_rate = 100.0; 
+    p_s->cars_waiting = 80;
+    p_s->avg_wait_time = 90;
+
+    // total score should be capped at 100
+    stats_stress_score(p_s, size);
+    assert(p_s->stress_score == 100.0);
+
     stats_delete(p_s);
 }
 
