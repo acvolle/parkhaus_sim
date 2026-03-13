@@ -228,7 +228,7 @@ return 0
     printf("Occ. Rate (%%): %05.2f ", p_stats->occupancy_rate);
     printf("Cars waiting: %04d ", p_stats->cars_waiting);
     printf("Max. wait time: %04d ", p_stats->first_car_wait_time);
-    printf("Avg. wait time: %04d ", p_stats->avg_wait_time);
+    printf("Avg. wait time: %05.2f ", p_stats->avg_wait_time);
     printf("Score: %05.2f\n", p_stats->stress_score);
 
     return 0;
