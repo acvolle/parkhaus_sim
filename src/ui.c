@@ -162,7 +162,7 @@ return 0
         
         return 1;
     }
-    if (fprintf(fp, "Occupancy rate, Cars waiting, Max wait time, Avg wait time, Stress score\n") < 0)
+    if (fprintf(fp, "Timestamp,Occupancy rate,Cars waiting,Max wait time,Avg wait time,Stress score\n") < 0)
     {
         printf("ui_write_head: failed to write in file\n");
         
@@ -188,7 +188,8 @@ return 0
         return -1;
     }
 
-    if (fprintf(fp, "%.2f, %d, %d, %.2f, %.2f\n",
+    if (fprintf(fp, "%d,%.2f,%d,%d,%.2f,%.2f\n",
+                current_timestep,
                 p_stats->occupancy_rate,
                 p_stats->cars_waiting,
                 p_stats->first_car_wait_time,
