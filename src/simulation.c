@@ -2,9 +2,6 @@
 
 // FOR DOCUMENTATION OF NON-STATIC FUNCTIONS, SEE SIMULATION.H
 
-// minimum parking duration timesteps
-#define MIN_PARKING_DURATION 5 
-
 int current_timestep;
 
 //Initializes a new Config struct
