@@ -227,11 +227,11 @@ return 0
         return -1;
     }
 
-    printf("Timestep: %04d ", current_timestep);
-    printf("Occ. Rate (%%): %05.2f ", p_stats->occupancy_rate);
-    printf("Cars waiting: %04d ", p_stats->cars_waiting);
-    printf("Max. wait time: %04d ", p_stats->first_car_wait_time);
-    printf("Avg. wait time: %05.2f ", p_stats->avg_wait_time);
+    printf("Timestep: %04d | ", current_timestep);
+    printf("Occ. Rate (%%): %05.2f | ", p_stats->occupancy_rate);
+    printf("Cars waiting: %04d | ", p_stats->cars_waiting);
+    printf("Max. wait time: %04d | ", p_stats->first_car_wait_time);
+    printf("Avg. wait time: %05.2f | ", p_stats->avg_wait_time);
     printf("Score: %05.2f\n", p_stats->stress_score);
 
     return 0;
@@ -315,8 +315,8 @@ static void ui_print_final_stats(float avg_occupancy, float avg_waiting_duration
     printf("End of P4 Rauenegg simulation\n\n");
     printf("Overall statistics:\n");
     printf("Average occupancy rate:     %.2f %%\n", avg_occupancy);
-    printf("Average wait time in Queue: %03d timesteps\n", avg_waiting_duration);
-    printf("Average stress score:       %03d out of 100\n", avg_stress_score);
+    printf("Average wait time in Queue: %.2f timesteps\n", avg_waiting_duration);
+    printf("Average stress score:       %.2f out of 100\n", avg_stress_score);
     ui_print_border();
     printf("(c) Rolls-Royce Power Solutions\n");
 }
