@@ -234,15 +234,32 @@ return 0
     return 0;
 }
 
-void ui_print_final_stats(int avg_parking_duration, int avg_waiting_duration, int avg_stress_score)
+
+int ui_process_final_stats(FILE *fp)
+{
+
+}
+
+
+/**
+ * @brief Print out all the final stats to console.
+ *
+ * To be called by the ui_process_final_stats
+ * This function is optional and not necessary to complete the simulation.
+ *
+ * @param[in] avg_parking_duration Message shown to user
+ * @param[in] avg_waiting_duration Minimum defined value
+ * @param[in] avg_waiting_count Maximum defined value
+ */
+static void ui_print_final_stats(int avg_parking_duration, int avg_waiting_duration, int avg_stress_score)
 /* PSEUDOCODE
 OUTPUT message to user icluding integers
 */
 {
     ui_print_border();
-    printf("End of simulation\n\n");
+    printf("End of P4 Rauenegg simulation\n\n");
     printf("Overall statistics:\n");
-    printf("Average time in Parkhaus:   %03d\n", avg_parking_duration);
+    printf("Average parking duration:   %03d\n", avg_parking_duration);
     printf("Average wait time in Queue: %03d\n", avg_waiting_duration);
     printf("Average stress score:       %03d\n", avg_stress_score);
     ui_print_border();

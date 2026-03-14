@@ -86,20 +86,4 @@ int ui_write_stats(const Stats *p_stats, FILE *fp);
  */
 int ui_print_stats(const Stats *p_stats);
 
-/**
- * @brief Print out all the final stats to console.
- *
- * To be called after sucessful simulation.
- * The integers should be calculated by functions in the stats.h
- * and then passed to the ui.
- * This function is optional and not necessary to complete the simulation.
- *
- * @param[in] avg_parking_duration Message shown to user
- * @param[in] avg_waiting_duration Minimum defined value
- * @param[in] avg_waiting_count Maximum defined value
- */
-void ui_print_final_stats(int avg_parking_duration, int avg_waiting_duration, int avg_stress_score);
-
-
-
 #endif
