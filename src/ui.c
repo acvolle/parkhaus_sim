@@ -251,6 +251,7 @@ int ui_process_final_stats(FILE *fp)
     float sum_occ = 0.0f;
     float sum_wait = 0.0f;
     float sum_stress = 0.0f;
+    int line_counter = 0;
     // variables for temporary data extraction
     int timestamp = 0;
     int waiting = 0;
@@ -281,20 +282,22 @@ int ui_process_final_stats(FILE *fp)
             sum_occ += occ;
             sum_wait += (float)max_wait;
             sum_stress += stress;
+            // count every line which was read from
+            line_counter++;
         }
     }
 
     // no data was logged
-    if (timestamp == 0)
+    if (line_counter == 0)
     {
         return -1;
     }
 
     // calculate averages to be printed
     ui_print_final_stats(
-        sum_occ / (float)timestamp,
-        sum_wait / (float)timestamp,
-        sum_stress / (float)timestamp
+        sum_occ / (float)line_counter,
+        sum_wait / (float)line_counter,
+        sum_stress / (float)line_counter
     );
 
     return 0;
