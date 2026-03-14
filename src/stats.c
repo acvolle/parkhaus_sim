@@ -127,14 +127,22 @@ return 0
 
     p_stats->cars_waiting = p_queue->count;
 
+    // empty queue
     if(p_queue->count == 0)
     {
         p_stats->first_car_wait_time = 0;
-        p_stats->avg_wait_time = 0;
+        p_stats->avg_wait_time = 0.0;
         return 0;
     }
 
-    p_stats->first_car_wait_time = p_queue->p_head->p_car->time_in_queue;
+    if (p_queue->p_head->p_car != NULL)
+    {
+        p_stats->first_car_wait_time = p_queue->p_head->p_car->time_in_queue;
+    }
+    else
+    {
+        p_stats->first_car_wait_time = 0;
+    }
 
     float total_wait = 0;
     Node *p_temp_node = p_queue->p_head;
@@ -142,12 +150,15 @@ return 0
     // iterate through the queue and sum up all the car's waiting times
     while (p_temp_node != NULL)
     {
-        total_wait += p_temp_node->p_car->time_in_queue;
+        if(p_temp_node->p_car != NULL)
+        {
+            total_wait += (float)p_temp_node->p_car->time_in_queue;
+        }
         p_temp_node = p_temp_node->p_next;
     }
 
     // calculate average
-    p_stats->avg_wait_time = total_wait / p_queue->count;
+    p_stats->avg_wait_time = total_wait / (float)p_queue->count;
 
     return 0;
 }
