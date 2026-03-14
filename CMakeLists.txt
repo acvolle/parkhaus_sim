@@ -74,7 +74,7 @@ add_custom_target(run_tests
 # --------------------------------------------------
 
 add_executable(parkhaus_sim
-    main.c
+    src/main.c
 )
 
 # Link library to main app
