@@ -59,6 +59,7 @@ void test_stats_delete(void)
 void test_stats_occupancy_rate(void)
 {
     Stats* p_s = stats_create();
+    assert(p_s != NULL);
     
     // Test inputs that lead to error
     assert(stats_occupancy_rate(5, 0, p_s) == -1);
@@ -79,8 +80,9 @@ void test_stats_occupancy_rate(void)
 void test_stats_queue_stats(void)
 {
     Stats* p_s = stats_create();
+    assert(p_s != NULL);
     Queue q;
-    queue_init(&q);
+    assert(queue_init(&q) == 0);
 
     // Test empty queue
     assert(stats_queue_stats(&q, p_s) == 0);
@@ -89,12 +91,14 @@ void test_stats_queue_stats(void)
 
     // Enqueue two cars
     Car *c1 = init_car(1, 0, 10);
-    c1->time_in_queue = 20;
     Car *c2 = init_car(2, 0, 10);
+    assert(c1 != NULL);
+    assert(c2 != NULL);
+    c1->time_in_queue = 20;
     c2->time_in_queue = 10;
 
-    enqueue(&q, c1);
-    enqueue(&q, c2);
+    assert(enqueue(&q, c1) == 0);
+    assert(enqueue(&q, c2) == 0);
 
     // Test for correct stats 
     assert(stats_queue_stats(&q, p_s) == 0);
