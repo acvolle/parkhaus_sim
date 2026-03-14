@@ -52,7 +52,7 @@ int ui_get_params(Config *p_config);
  * - first line stating all simulation parameters
  * - second line stating all the stats seperated by commas
  * 
- * @note close file fp if the function retruns 1
+ * @note File has to be opened already, close the file if the function returns -1
  * 
  * @param[in] p_config reference to struct Config
  * @param[in] stats_names string containing all the stats names seperated by commas
@@ -67,7 +67,7 @@ int ui_write_head(const Config *p_config, const char *stats_names, FILE *fp);
  * To be called each cycle.
  * The statistic values are seperated by commas.
  * 
- * @note close file fp if the function returns 1
+ * @note File has to be opened already, close the file if the function returns -1
  *
  * @param[in] p_stats reference to struct Stats
  * @param[out] fp reference to the txt file
@@ -85,5 +85,18 @@ int ui_write_stats(const Stats *p_stats, FILE *fp);
  * @return statsus code: 0 for success, -1 for error
  */
 int ui_print_stats(const Stats *p_stats);
+
+/**
+ * @brief Calculate averages from the log file and print them on the console
+ *
+ * To be called after successful simulation
+ *
+ * @note File has to be opened already, close the file if the function returns -1
+ * @warning This function does not close the file
+ * 
+ * @param[in] fp reference to the txt file
+ * @return 0 for success, -1 for error
+ */
+int ui_process_final_stats(FILE *fp);
 
 #endif
