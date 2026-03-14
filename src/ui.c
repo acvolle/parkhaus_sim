@@ -9,6 +9,8 @@
 #include "../include/ui.h"
 #include "../include/simulation.h"
 
+// number of lines in the beginning of the txt file that do not contain data
+#define TXT_FILE_HEADER_LINES 2
 // maximal input value for some simualtion parameters, limits the user from creating too large simulations
 static int MAX_INPUT = 9999;
 // minimal input for some simualtion parameters, values smaller than 1 don't make sense
@@ -159,13 +161,13 @@ return 0
                 p_config->random_seed) < 0)
     {
         printf("ui_write_head: failed to write in file\n");
-        
+
         return 1;
     }
     if (fprintf(fp, "Timestamp,Occupancy rate,Cars waiting,Max wait time,Avg wait time,Stress score\n") < 0)
     {
         printf("ui_write_head: failed to write in file\n");
-        
+
         return 1;
     }
 
@@ -235,34 +237,86 @@ return 0
     return 0;
 }
 
-
 int ui_process_final_stats(FILE *fp)
 {
+    if (fp == NULL)
+    {
+        return -1;
+    }
 
+    // buffer for characters per line
+    char buffer[256];
+
+    // variables to be added up for each line
+    float sum_occ = 0.0f;
+    float sum_wait = 0.0f;
+    float sum_stress = 0.0f;
+    // variables for temporary data extraction
+    int timestamp = 0;
+    int waiting = 0;
+    float occ = 0;
+    float avg_wait = 0;
+    float stress = 0;
+    float max_wait_f = 0;
+    int max_wait = 0;
+
+    // Skip the header of txt file
+    for (int i = 0; i < TXT_FILE_HEADER_LINES; i++)
+    {
+        if (fgets(buffer, sizeof(buffer), fp) == NULL)
+        {
+            // file is shorter than TXT_FILE_HEADER_LINES
+            fclose(fp);
+            return -1;
+        }
+    }
+
+    // Read data from every line
+    while (fgets(buffer, sizeof(buffer), fp))
+    {
+        // extract data
+        if (sscanf(buffer, "%d, %f, %d, %d, %f, %f",
+                   &timestamp, &occ, &waiting, &max_wait, &avg_wait, &stress) == 6)
+        {
+            sum_occ += occ;
+            sum_wait += (float)max_wait;
+            sum_stress += stress;
+        }
+    }
+
+    // no data was logged
+    if (timestamp == 0)
+    {
+        return -1;
+    }
+
+    // calculate averages to be printed
+    ui_print_final_stats(
+        sum_occ / (float)timestamp,
+        sum_wait / (float)timestamp,
+        sum_stress / (float)timestamp
+    );
+
+    return 0;
 }
-
 
 /**
  * @brief Print out all the final stats to console.
  *
  * To be called by the ui_process_final_stats
- * This function is optional and not necessary to complete the simulation.
  *
- * @param[in] avg_parking_duration Message shown to user
- * @param[in] avg_waiting_duration Minimum defined value
- * @param[in] avg_waiting_count Maximum defined value
+ * @param[in] avg_occupancy
+ * @param[in] avg_waiting_duration
+ * @param[in] avg_waiting_count
  */
-static void ui_print_final_stats(int avg_parking_duration, int avg_waiting_duration, int avg_stress_score)
-/* PSEUDOCODE
-OUTPUT message to user icluding integers
-*/
+static void ui_print_final_stats(float avg_occupancy, float avg_waiting_duration, float avg_stress_score)
 {
     ui_print_border();
     printf("End of P4 Rauenegg simulation\n\n");
     printf("Overall statistics:\n");
-    printf("Average parking duration:   %03d\n", avg_parking_duration);
-    printf("Average wait time in Queue: %03d\n", avg_waiting_duration);
-    printf("Average stress score:       %03d\n", avg_stress_score);
+    printf("Average occupancy rate:     %.2f %%\n", avg_occupancy);
+    printf("Average wait time in Queue: %03d timesteps\n", avg_waiting_duration);
+    printf("Average stress score:       %03d out of 100\n", avg_stress_score);
     ui_print_border();
     printf("(c) Rolls-Royce Power Solutions\n");
 }
