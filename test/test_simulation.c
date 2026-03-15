@@ -54,6 +54,13 @@ void test_car_gen_bool(){
 }
 
 void test_gen_park_duration(){
+    
+    for(int i = 0; i < 100; i++){
+        //tests that over 100 attempts gen_park_duration never returns anything higher than the input maximum
+        assert(tw_gen_park_duration(30) <= 31);
+        //tests that over 100 attempts gen_park_duration never returns anything lower than the predefined min of 5
+        assert(tw_gen_park_duration(30) >= 5);
+    }
 
 }
 
