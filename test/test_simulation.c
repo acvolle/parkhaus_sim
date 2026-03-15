@@ -38,11 +38,37 @@ void test_free_config(){
     
 }
 
+
+void test_car_gen_bool(){
+
+    for(int i = 0; i < 100; i++){
+        //tests that over 100 attempts a zero probability means car_gen_bool always returns 0
+        assert(tw_car_gen_bool(0) == 0);
+        //tests that over 100 attempts a 100% probability means car_gen_bool always return 1
+        assert(tw_car_gen_bool(100) == 1);
+        //tests that over 100 attempts car_gen_bool doesn't return anything except 1 or 0
+        assert(tw_car_gen_bool(50) == (0 || 1));
+        
+    }
+    
+}
+
+void test_gen_park_duration(){
+
+}
+
+void test_input_new_car(){
+
+}
+
+
 void test_run_timestep(){
 
 }
 
 
 int main(){
+
+    srand(5);
 
 }
