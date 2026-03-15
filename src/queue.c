@@ -249,7 +249,7 @@ return 0
         delete_car(p_temp);
         p_temp = NULL;
     }
-    queue_init(p_queue);
+    queue_init(p_queue); //resets all queue values
     return 0;
 }
 // function changed to reduce redundancy by calling dequeue
