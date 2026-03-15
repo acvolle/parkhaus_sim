@@ -127,10 +127,20 @@ void test_queue_increase_wait_time(){
     //tests that p_car's time in queue has been incremented
     assert(p_second_car->time_in_queue == 11);
 
-    queue_clear();
+    queue_clear(&q);
 
 }
 
 int main(){
+    
+    /*TESTS EACH FUNCTION IN THE QUEUE MODULE WITH AT LEAST TWO ASSERTS
+    Each unit test only calls the tested function and other functions that have been 
+    tested previously */
+    test_init_queue();
+    test_enqueue();
+    test_dequeue();
+    test_queue_is_empty();
+    test_queue_clear();
+    test_queue_increase_wait_time();
 
 }
