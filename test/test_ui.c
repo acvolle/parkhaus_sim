@@ -85,3 +85,14 @@ void test_ui_process_final_stats()
     fclose(invalid_fp);
     remove("short_test_log_file.txt");
 }
+
+int main()
+{
+    test_ui_get_params();
+    test_ui_write_functions();
+    test_ui_print_stats();
+    test_ui_process_final_stats();
+
+    printf("All ui unit tests passed successfully!\n");
+    return 0;
+}
