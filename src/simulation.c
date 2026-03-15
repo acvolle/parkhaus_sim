@@ -88,6 +88,42 @@ static int car_gen_bool(const int probability)
     return 0;
 }
 
+/**
+ * @brief Randomly generates the duration a Car will spend in the Parkhaus
+ * 
+ * Generates the park_span time of a Car struct using rand() and the max_parking_time
+ * of the Config struct.
+ * The returned timespan is be at least the defined MIN_PARKING_DURATION 
+ * and at most the max_parking_time.
+ * 
+ * @note The `srand()` function must be called in `main()` before using this function.
+ * 
+ * @param[in] max_time Maximum number of timesteps a Car may spend in the struct
+ * @return integer value of the park_span number of timesteps
+ */
+static int gen_park_duration(int max_time)
+/*
+    Generate random number
+    parking time <- (random number % max_time)+1
+
+    return parking time
+Note: it is unnecessary to check for e.g. negative numbers etc. as ui_get_params 
+already has safeguards to ensure that the simulation cannot be started with erroneous
+parameters
+*/
+{
+    // generate a random value from 1  through max_time;
+    int duration = (rand() % max_time) + 1;
+
+    if (duration < MIN_PARKING_DURATION)
+    {
+        duration = MIN_PARKING_DURATION;
+    }
+
+    // return a random value from MIN_PARKING_DURATION through max_time;
+    return duration;
+}
+
 
 /**
 * @brief Initializes new Car struct and either parks or enqueues it
@@ -143,41 +179,7 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
     return 0;
 }
 
-/**
- * @brief Randomly generates the duration a Car will spend in the Parkhaus
- * 
- * Generates the park_span time of a Car struct using rand() and the max_parking_time
- * of the Config struct.
- * The returned timespan is be at least the defined MIN_PARKING_DURATION 
- * and at most the max_parking_time.
- * 
- * @note The `srand()` function must be called in `main()` before using this function.
- * 
- * @param[in] max_time Maximum number of timesteps a Car may spend in the struct
- * @return integer value of the park_span number of timesteps
- */
-static int gen_park_duration(int max_time)
-/*
-    Generate random number
-    parking time <- (random number % max_time)+1
 
-    return parking time
-Note: it is unnecessary to check for e.g. negative numbers etc. as ui_get_params 
-already has safeguards to ensure that the simulation cannot be started with erroneous
-parameters
-*/
-{
-    // generate a random value from 1  through max_time;
-    int duration = (rand() % max_time) + 1;
-
-    if (duration < MIN_PARKING_DURATION)
-    {
-        duration = MIN_PARKING_DURATION;
-    }
-
-    // return a random value from MIN_PARKING_DURATION through max_time;
-    return duration;
-}
 
 
 int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats)
