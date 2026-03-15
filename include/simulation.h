@@ -30,7 +30,7 @@
 
 /* This global variable saves the timestep the simulation is currently at, and is incremented by 1 every timestep
 */
-extern int current_timestep = 0;
+extern int current_timestep;
 /**
  * @brief A struct to save simulation parameters
  * 

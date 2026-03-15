@@ -5,7 +5,7 @@
 // minimum parking duration timesteps
 #define MIN_PARKING_DURATION 5 
 
-int current_timestep;
+int current_timestep = 0;
 
 //Initializes a new Config struct
 Config *new_config()
