@@ -54,106 +54,6 @@ int free_config(Config *p_config)
     return 0;
 }
 
-
-int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats)
-/*
-    IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) && (p_stats != NULL) THEN
-        update_parkhaus(p_parkhaus)
-        new Car pointer <- NULL
-        WHILE (!parkhaus_is_full(p_parkhaus) && (!queue_is_empty(p_queue))) DO
-             Car pointer <- deqeue(p_queue)
-             park_car(p_parkhaus, Car pointer, current_timestep)
-        END WHILE
-        queue_increase_wait_time(p_queue)
-        IF car_gen_bool(p_config->gen_probability) == 1 DO
-            IF input_new_car (Error) DO
-                OUTPUT error message
-                return 1
-            END IF
-        IF stats_clear(p_stats) THEN
-            OUTPUT error message
-            return 4
-        END IF
-        IF stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats) THEN
-            OUTPUT error message
-            return 4
-        END IF
-        IF stats_queue_stats(p_queue, p_stats) THEN
-             return 4
-        END IF
-        IF stats_stress_score(p_stats) THEN
-            OUTPUT error message
-            return 4
-        END IF
-    ELSE 
-        return -1
-    END IF
-*/
-{
-    if(p_parkhaus == NULL || p_queue == NULL || p_config == NULL || p_stats == NULL)
-    {
-        return -1;
-    }
-    // remove cars with 0 remaining parking duration
-    if(update_parkhaus(p_parkhaus))
-    {
-        return 2;
-    }
-
-    Car* p_temp_car = NULL;
-
-    // put cars from queue into free spaces
-    while (!parkhaus_is_full(p_parkhaus) && !queue_is_empty(p_queue))
-    {
-        if(dequeue(p_queue, &p_temp_car))
-        {
-            return 3;
-        }
-        if(park_car(p_parkhaus, p_temp_car, current_timestep))
-        {
-            return 2;
-        }
-    }
-    // update the waiting time of all cars in the queue
-    if(queue_increase_wait_time(p_queue))
-    {
-        return 3;
-    }
-
-    // new car should be generated
-    if(car_gen_bool(p_config->gen_probability) == 1)
-    {
-        if(input_new_car(p_parkhaus, p_queue, p_config))
-        {
-            return 1;
-        }
-    }
-
-    // +++ STATISTICS +++
-    if(stats_clear(p_stats))
-    {
-        return 4;
-    }
-
-    if(stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats))
-    {
-        return 4;
-    }
-
-    if(stats_queue_stats(p_queue, p_stats))
-    {
-        return 4;
-    }
-
-    if(stats_stress_score(p_stats, p_config->num_spaces))
-    {
-        return 4;
-    }
-
-    return 0;
-}
-
-
 /**
  * @brief Randomly determines if a new car should be generated.
  *
@@ -278,6 +178,108 @@ parameters
     // return a random value from MIN_PARKING_DURATION through max_time;
     return duration;
 }
+
+
+int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats)
+/*
+    IF p_parkhaus != NULL && (p_queue != NULL) && (p_config != NULL) && (p_stats != NULL) THEN
+        update_parkhaus(p_parkhaus)
+        new Car pointer <- NULL
+        WHILE (!parkhaus_is_full(p_parkhaus) && (!queue_is_empty(p_queue))) DO
+             Car pointer <- deqeue(p_queue)
+             park_car(p_parkhaus, Car pointer, current_timestep)
+        END WHILE
+        queue_increase_wait_time(p_queue)
+        IF car_gen_bool(p_config->gen_probability) == 1 DO
+            IF input_new_car (Error) DO
+                OUTPUT error message
+                return 1
+            END IF
+        IF stats_clear(p_stats) THEN
+            OUTPUT error message
+            return 4
+        END IF
+        IF stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats) THEN
+            OUTPUT error message
+            return 4
+        END IF
+        IF stats_queue_stats(p_queue, p_stats) THEN
+             return 4
+        END IF
+        IF stats_stress_score(p_stats) THEN
+            OUTPUT error message
+            return 4
+        END IF
+    ELSE 
+        return -1
+    END IF
+*/
+{
+    if(p_parkhaus == NULL || p_queue == NULL || p_config == NULL || p_stats == NULL)
+    {
+        return -1;
+    }
+    // remove cars with 0 remaining parking duration
+    if(update_parkhaus(p_parkhaus))
+    {
+        return 2;
+    }
+
+    Car* p_temp_car = NULL;
+
+    // put cars from queue into free spaces
+    while (!parkhaus_is_full(p_parkhaus) && !queue_is_empty(p_queue))
+    {
+        if(dequeue(p_queue, &p_temp_car))
+        {
+            return 3;
+        }
+        if(park_car(p_parkhaus, p_temp_car, current_timestep))
+        {
+            return 2;
+        }
+    }
+    // update the waiting time of all cars in the queue
+    if(queue_increase_wait_time(p_queue))
+    {
+        return 3;
+    }
+
+    // new car should be generated
+    if(car_gen_bool(p_config->gen_probability) == 1)
+    {
+        if(input_new_car(p_parkhaus, p_queue, p_config))
+        {
+            return 1;
+        }
+    }
+
+    // +++ STATISTICS +++
+    if(stats_clear(p_stats))
+    {
+        return 4;
+    }
+
+    if(stats_occupancy_rate(p_parkhaus->occupied_spaces, p_parkhaus->size, p_stats))
+    {
+        return 4;
+    }
+
+    if(stats_queue_stats(p_queue, p_stats))
+    {
+        return 4;
+    }
+
+    if(stats_stress_score(p_stats, p_config->num_spaces))
+    {
+        return 4;
+    }
+
+    return 0;
+}
+
+
+
 
 
 int tw_gen_park_duration(int max_time){
