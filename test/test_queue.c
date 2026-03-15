@@ -127,6 +127,8 @@ void test_queue_increase_wait_time(){
     //tests that p_car's time in queue has been incremented
     assert(p_second_car->time_in_queue == 11);
 
+    queue_clear();
+
 }
 
 int main(){
