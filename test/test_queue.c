@@ -16,8 +16,6 @@ void test_init_queue(){
     //test if the queue elements count was set to 0
     assert(q.count == 0);
 
-    return 0;
-
 }
 
 void test_enqueue(){
@@ -45,7 +43,6 @@ void test_enqueue(){
     free(p_car);
     free(p_second_car);
 
-    return 0;
 }
 
 void test_dequeue(){
@@ -68,7 +65,6 @@ void test_dequeue(){
 
     free(p_car);
 
-    return 0;
 }
 
 int main(){
