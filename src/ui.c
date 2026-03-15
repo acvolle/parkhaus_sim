@@ -230,6 +230,27 @@ return 0
     return 0;
 }
 
+/**
+ * @brief Print out all the final stats to console.
+ *
+ * To be called by the ui_process_final_stats
+ *
+ * @param[in] avg_occupancy
+ * @param[in] avg_waiting_duration
+ * @param[in] avg_waiting_count
+ */
+static void ui_print_final_stats(float avg_occupancy, float avg_waiting_duration, float avg_stress_score)
+{
+    ui_print_border();
+    printf("End of P4 Rauenegg simulation\n\n");
+    printf("Overall statistics:\n");
+    printf("Average occupancy rate:     %.2f %%\n", avg_occupancy);
+    printf("Average wait time in Queue: %.2f timesteps\n", avg_waiting_duration);
+    printf("Average stress score:       %.2f out of 100\n", avg_stress_score);
+    ui_print_border();
+    printf("(c) Rolls-Royce Power Solutions\n");
+}
+
 int ui_process_final_stats(FILE *fp)
 {
     if (fp == NULL)
@@ -293,25 +314,4 @@ int ui_process_final_stats(FILE *fp)
     );
 
     return 0;
-}
-
-/**
- * @brief Print out all the final stats to console.
- *
- * To be called by the ui_process_final_stats
- *
- * @param[in] avg_occupancy
- * @param[in] avg_waiting_duration
- * @param[in] avg_waiting_count
- */
-static void ui_print_final_stats(float avg_occupancy, float avg_waiting_duration, float avg_stress_score)
-{
-    ui_print_border();
-    printf("End of P4 Rauenegg simulation\n\n");
-    printf("Overall statistics:\n");
-    printf("Average occupancy rate:     %.2f %%\n", avg_occupancy);
-    printf("Average wait time in Queue: %.2f timesteps\n", avg_waiting_duration);
-    printf("Average stress score:       %.2f out of 100\n", avg_stress_score);
-    ui_print_border();
-    printf("(c) Rolls-Royce Power Solutions\n");
 }

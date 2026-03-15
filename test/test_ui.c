@@ -1,5 +1,6 @@
 
 #include "../include/ui.h"
+#include "assert.h"
 
 void test_ui_get_params()
 {
