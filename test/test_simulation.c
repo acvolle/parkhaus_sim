@@ -17,7 +17,9 @@ void test_new_config(){
     assert(p_config->num_spaces == 0);
     assert(p_config->random_seed == 0);
     assert(p_config->simulation_duration == 0);
-    
+
+    free(p_config);
+
 }
 
 void test_free_config(){
