@@ -29,6 +29,17 @@ void test_ui_write_functions()
     remove("test_output.txt");
 }
 
+void test_ui_print_stats() 
+{
+    Stats test_stats = {12.3, 4, 5, 6.7, 8.9};
+    
+    // test successful execution
+    assert(ui_print_stats(&test_stats) == 0);
+
+    // test null pointer handling
+    assert(ui_print_stats(NULL) == -1);
+}
+
 // Function creates a txt file which can be tested, valid == 0 leads to an invalid file
 void create_test_file(const char *filename, int valid)
 {
