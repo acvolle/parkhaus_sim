@@ -74,11 +74,14 @@ void test_input_new_car(){
     Queue q;
     if(queue_init(&q) == -1){
         printf("queue init error\n");
+        close_parkhaus(p_parkhaus);
         return;
     }
     Config *p_config = new_config();
     if(p_config == NULL){
         printf("config error\n");
+        close_parkhaus(p_parkhaus);
+        queue_clear(&q);
         return;
     }
     //fill Config with random values for test purposes, usually this would be done by the user via the UI
@@ -118,15 +121,22 @@ void test_run_timestep(){
     Queue q;
     if(queue_init(&q) == -1){
         printf("queue init error\n");
+        close_parkhaus(p_parkhaus);
         return;
     }
     Stats *p_stats = stats_create();
     if(p_stats == NULL){
+        close_parkhaus(p_parkhaus);
+        queue_clear(&q);
+
         return;
     }
     Config *p_config = new_config();
     if(p_config == NULL){
         printf("config error\n");
+        close_parkhaus(p_parkhaus);
+        queue_clear(&q);
+        stats_delete(p_stats);
         return;
     }
     //fill Config with random values for test purposes, usually this would be done by the user via the UI
