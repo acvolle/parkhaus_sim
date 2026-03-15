@@ -128,5 +128,20 @@ They are named the name of the static function preceded by tw_ (for test wrapper
 int tw_gen_park_duration(int max_time);
 
 
-
+/**
+ * @brief Randomly determines if a new car should be generated.
+ *
+ * Uses `rand()` to generate a random number between 1 and 100.
+ * Returns `1` if a car should be generated (random number <= probability),
+ * otherwise returns `0`.
+ * Called by run_timestep()
+ *
+ * @note The `srand()` function must be called in `main()` before using this function.
+ * 
+ * @warning This is a wrapper for a static function that is only to be used for unit testing!
+ *
+ * @param[in] probability The probability (0-100) of generating a new car.
+ * @return int `1` if a car should be generated, `0` otherwise.
+ */
+int tw_car_gen_bool(const int probability);
 #endif

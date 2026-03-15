@@ -283,3 +283,9 @@ parameters
 int tw_gen_park_duration(int max_time){
     return gen_park_duration(max_time);
 }
+
+
+int tw_car_gen_bool(const int probability){
+    return car_gen_bool(probability);
+}
+
