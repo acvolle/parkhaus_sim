@@ -28,16 +28,16 @@ void test_enqueue(){
     //test that p_car was enqueued into the empty queue
     assert(enqueue(&q, p_car) == 0);
     //test that the enqueued car is now the header
-    assert(q.p_head == p_car);
+    assert(q.p_head->p_car == p_car);
 
     Car *p_second_car = init_car(2, 2, 8);
     
     //test that a second car could be enqueued
     assert(enqueue(&q, p_second_car) == 0);
     //test that the first car is still at front
-    assert(q.p_head == p_car);
+    assert(q.p_head->p_car == p_car);
     //test that the second car is now at the tail
-    assert(q.p_tail == p_second_car);
+    assert(q.p_tail->p_car == p_second_car);
     //test that count has been upped to 2 (2 cars in queue!)
     assert(q.count == 2);
 
@@ -122,11 +122,16 @@ void test_queue_increase_wait_time(){
     enqueue(&q, p_car);
     enqueue(&q, p_second_car);
 
+    //tests that the car's time in queue has been set to 0
+    assert(p_car->time_in_queue == 0);
+    //tests that the car's time in queue has been set to 0
+    assert(p_second_car->time_in_queue == 0);
+
     queue_increase_wait_time(&q);
     //tests that the car's time in queue has been incremented
-    assert(p_car->time_in_queue == 2);
-    //tests that p_car's time in queue has been incremented
-    assert(p_second_car->time_in_queue == 11);
+    assert(p_car->time_in_queue == 1);
+    //tests that the car's time in queue has been incremented
+    assert(p_second_car->time_in_queue == 1);
 
     queue_clear(&q);
 
