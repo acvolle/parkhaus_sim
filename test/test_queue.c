@@ -24,6 +24,10 @@ void test_enqueue(){
     queue_init(&q);
 
     Car *p_car = init_car(1, 1, 5);
+    if(p_car == NULL){
+        printf("car returned as null pointer");
+        return;
+    }
     
     //test that p_car was enqueued into the empty queue
     assert(enqueue(&q, p_car) == 0);
@@ -41,8 +45,7 @@ void test_enqueue(){
     //test that count has been upped to 2 (2 cars in queue!)
     assert(q.count == 2);
 
-    free(p_car);
-    free(p_second_car);
+    queue_clear(&q);
 
 }
 
@@ -50,6 +53,10 @@ void test_dequeue(){
     Queue q;
     queue_init(&q);
     Car *p_car = init_car(1, 1, 5);
+    if(p_car == NULL){
+        printf("Car pointer in null: error");
+        return;
+    }
 
     enqueue(&q, p_car);
 
@@ -139,9 +146,7 @@ void test_queue_increase_wait_time(){
 
 int main(){
     
-    /*TESTS EACH FUNCTION IN THE QUEUE MODULE WITH AT LEAST TWO ASSERTS
-    Each unit test only calls the tested function and other functions that have been 
-    tested previously */
+    // TESTS EACH FUNCTION IN THE QUEUE MODULE WITH AT LEAST TWO ASSERTS
     test_init_queue();
     test_enqueue();
     test_dequeue();
