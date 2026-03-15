@@ -23,7 +23,19 @@ void test_new_config(){
 }
 
 void test_free_config(){
+    Config *p_config = new_config();
 
+    if(p_config == NULL){
+        printf("test_free_config: null pointer");
+        return;
+    }
+    //tests that freeing a real Config pointer works
+    assert(free_config(p_config) == 0);
+
+    p_config = NULL;
+    //tests that freeing a null pointer returns a legitimate error message
+    assert(free_config(p_config) == -1);
+    
 }
 
 void test_run_timestep(){
