@@ -47,7 +47,7 @@ void create_test_file(const char *filename, int valid)
     if (valid)
     {
         // print header lines
-        for (int i; i < TXT_FILE_HEADER_LINES; i++)
+        for (int i = 0; i < TXT_FILE_HEADER_LINES; i++)
         {
             fprintf(fp, "Header line\n");
         }
@@ -78,7 +78,7 @@ void test_ui_process_final_stats()
     remove("valid_test_log_file.txt");
 
     // test handling of invalid file
-    create_test_file("short_test_log_file.txt", 1);
+    create_test_file("short_test_log_file.txt", 0);
     FILE *invalid_fp = fopen("short_test_log_file.txt", "r");
     assert(invalid_fp != NULL);
     assert(ui_process_final_stats(invalid_fp) == -1);
