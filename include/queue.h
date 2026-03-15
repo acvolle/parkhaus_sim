@@ -25,6 +25,7 @@
 
 #include "car.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * @brief Node for the linked list
