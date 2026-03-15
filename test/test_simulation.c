@@ -65,6 +65,45 @@ void test_gen_park_duration(){
 }
 
 void test_input_new_car(){
+    //SETUP
+    Parkhaus *p_parkhaus = init_parkhaus(1);
+    if(p_parkhaus == NULL){
+        printf("parkhaus error\n");
+        return;
+    }
+    Queue q;
+    if(queue_init(&q) == -1){
+        printf("queue init error\n");
+        return;
+    }
+    Config *p_config = new_config();
+    if(p_config == NULL){
+        printf("config error\n");
+        return;
+    }
+    //fill Config with random values for test purposes, usually this would be done by the user via the UI
+    p_config->gen_probability = 50;
+    p_config->max_parking_time = 50;
+    p_config->num_spaces = 1;
+    p_config->random_seed = 5;
+    p_config->simulation_duration = 5;
+
+    //TEST
+    //tests that inputting a new car was successful
+    assert(tw_input_new_car(p_parkhaus, &q, p_config) == 0);
+    //tests that after calling input_new_car there is now 1 Car in the Parkhaus (now full!) but none in the queue
+    assert(p_parkhaus->occupied_spaces == 1);
+    assert(q.count == 0);
+    //tests that inputting a new car was successful
+    assert(tw_input_new_car(p_parkhaus, &q, p_config) == 0);
+    //tests that, since the parkhaus was full, calling input_new_car didn't change the number of cars in the parkhaus
+    // but added a new car to the queue
+    assert(p_parkhaus->occupied_spaces == 1);
+    assert(q.count == 1);
+
+    //END
+    queue_clear(&q);
+    close_parkhaus(p_parkhaus);
 
 }
 
