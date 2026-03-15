@@ -28,3 +28,49 @@ void test_ui_write_functions()
     fclose(fp);
     remove("test_output.txt");
 }
+
+// Function creates a txt file which can be tested, valid == 0 leads to an invalid file
+void create_test_file(const char *filename, int valid)
+{
+    FILE *fp = fopen(filename, "w");
+    if (valid)
+    {
+        // print header lines
+        for (int i; i < TXT_FILE_HEADER_LINES; i++)
+        {
+            fprintf(fp, "Header line\n");
+        }
+
+        // Data for test: Timestamp, Occ Rate, Cars Waiting, Max Wait, Avg Wait, Stress score
+        fprintf(fp, "1, 80.00, 0, 0, 0.00, 0.00\n");
+        fprintf(fp, "2, 100.00, 10, 20, 12.50, 75.00\n");
+    }
+    else // invalid file should be printed
+    {
+        fprintf(fp, "File contains only a single line\n");
+    }
+    fclose(fp);
+}
+
+void test_ui_process_final_stats()
+{
+
+        // test null pointer handling
+    assert(ui_process_final_stats(NULL) == -1);
+    
+    // test with valid file
+    create_test_file("valid_test_log_file.txt", 1);
+    FILE *valid_fp = fopen("valid_test_log_file.txt", "r");
+    assert(valid_fp != NULL);
+    assert(ui_process_final_stats(valid_fp) == 0);
+    fclose(valid_fp);
+    remove("valid_test_log_file.txt");
+
+    // test handling of invalid file
+    create_test_file("short_test_log_file.txt", 1);
+    FILE *invalid_fp = fopen("short_test_log_file.txt", "r");
+    assert(invalid_fp != NULL);
+    assert(ui_process_final_stats(invalid_fp) == -1);
+    fclose(invalid_fp);
+    remove("short_test_log_file.txt");
+}
