@@ -278,3 +278,8 @@ parameters
     // return a random value from MIN_PARKING_DURATION through max_time;
     return duration;
 }
+
+
+int tw_gen_park_duration(int max_time){
+    return gen_park_duration(max_time);
+}
