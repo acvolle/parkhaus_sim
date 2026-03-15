@@ -5,9 +5,7 @@
  * as well as the functions from ui.h that are called by the ´main.c´.
  */
 
-#include <stdio.h>
 #include "../include/ui.h"
-#include "../include/simulation.h"
 
 /**
  * @brief Print a visual border to separate elements on console.
