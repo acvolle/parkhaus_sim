@@ -41,13 +41,16 @@ void test_free_config(){
 
 void test_car_gen_bool(){
 
+    int result = 0;
     for(int i = 0; i < 100; i++){
         //tests that over 100 attempts a zero probability means car_gen_bool always returns 0
         assert(tw_car_gen_bool(0) == 0);
         //tests that over 100 attempts a 100% probability means car_gen_bool always return 1
         assert(tw_car_gen_bool(100) == 1);
         //tests that over 100 attempts car_gen_bool doesn't return anything except 1 or 0
-        assert(tw_car_gen_bool(50) == (0 || 1));
+        result = tw_car_gen_bool(50);
+        assert(result == 0 || (result == 1));
+        
         
     }
     
