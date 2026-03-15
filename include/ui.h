@@ -26,6 +26,13 @@
 #include <stdio.h>
 #include "simulation.h"
 
+// number of lines in the beginning of the txt file that do not contain data
+#define TXT_FILE_HEADER_LINES 2
+// maximal input value for some simualtion parameters, limits the user from creating too large simulations
+#define MAX_INPUT 9999
+// minimal input for some simualtion parameters, values smaller than 1 don't make sense
+#define MIN_INPUT 1
+
 /**
  * @brief Print welcome message to user in the beginning.
  *
