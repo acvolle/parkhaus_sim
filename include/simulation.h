@@ -127,21 +127,6 @@ They are named the name of the static function preceded by tw_ (for test wrapper
  */
 int tw_gen_park_duration(int max_time);
 
-/**
-* @brief Initializes new Car struct and either parks or enqueues it
-*
-* Creates a new `Car` struct, then attempts to park it using `park_car()` (see `parking.h`).
-* If parking fails, the `Car` (pointer) is enqueued into the provided `Queue`.
-* Called by run_timestep()
-*
-* @param[out] p_parkhaus Pointer to Parkhaus in which the Car structshould be parked
-* @param[out] p_queue Pointer to the Queue in which the Car struct can be enqueued
-* @param[in] p_config Pointer to the Config file, from which information is read
-* @return int Status code:
-*            - `0` if the operation succeeded.
-*            - `-1` if an error occurred (e.g., pointer is `NULL`).
-*/
-int tw_input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
 
 
 #endif
