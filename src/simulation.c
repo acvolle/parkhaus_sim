@@ -289,3 +289,7 @@ int tw_car_gen_bool(const int probability){
     return car_gen_bool(probability);
 }
 
+
+int tw_input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config){
+    return input_new_car(p_parkhaus, p_queue, p_config);
+}
