@@ -109,6 +109,80 @@ void test_input_new_car(){
 
 
 void test_run_timestep(){
+        //SETUP
+    Parkhaus *p_parkhaus = init_parkhaus(1);
+    if(p_parkhaus == NULL){
+        printf("parkhaus error\n");
+        return;
+    }
+    Queue q;
+    if(queue_init(&q) == -1){
+        printf("queue init error\n");
+        return;
+    }
+    Stats *p_stats = stats_create();
+    if(p_stats == NULL){
+        return;
+    }
+    Config *p_config = new_config();
+    if(p_config == NULL){
+        printf("config error\n");
+        return;
+    }
+    //fill Config with random values for test purposes, usually this would be done by the user via the UI
+    p_config->gen_probability = 100;
+    p_config->max_parking_time = 50;
+    p_config->num_spaces = 1;
+    p_config->random_seed = 5;
+    p_config->simulation_duration = 5;
+
+    //TEST
+    /*note: with a gen_prbability of 100% an only three timesteps (min parking duration is 5)
+    the first three timesteps are entirely predictable, therefore they used as a test case
+    */
+   
+    //test that the function was called without errors
+    assert(run_timestep(p_parkhaus, &q, p_config, p_stats)== 0);
+    //test if the parkhaus is full (has 1 Car in it) and save its current parking duration for further reference
+    assert(p_parkhaus->occupied_spaces == 1);
+    int compare = p_parkhaus->p_spaces[0]->park_span;
+    //test that the function was called without errors
+    assert(run_timestep(p_parkhaus, &q, p_config, p_stats)== 0);
+    //test that the function was called without errors
+    assert(run_timestep(p_parkhaus, &q, p_config, p_stats)== 0);
+   
+
+    //tests of there a 2 Cars in the Queue, and if the wait time of the first one is 1
+    assert(q.count == 2);
+    assert(q.p_head->p_car->time_in_queue == 1);
+    //test if the parkhaus is full (has 1 Car in it) and that its park_span has been decreased by 2
+    assert(p_parkhaus->occupied_spaces == 1);
+    assert(p_parkhaus->p_spaces[0]->park_span == compare -2);
+
+    //tests if the stats are acurately transcribed
+    assert(p_stats->avg_wait_time == 0.5);
+    assert(p_stats->cars_waiting == 2);
+    assert(p_stats->first_car_wait_time == 1);
+    assert(p_stats->occupancy_rate == 100.0);
+
+    //change car-gen probability to 0
+    p_config->gen_probability = 0;
+    
+    //test that the function was called without errors
+    assert(run_timestep(p_parkhaus, &q, p_config, p_stats)== 0);
+    //test that now no car is generated but the updating of the queue wait time and park_span still worked
+    assert(q.count == 2);
+    assert(q.p_head->p_car->time_in_queue == 2);
+
+    assert(p_parkhaus->occupied_spaces == 1);
+    assert(p_parkhaus->p_spaces[0]->park_span == compare -3);
+
+    //END
+    close_parkhaus(p_parkhaus);
+    queue_clear(&q);
+    free_config(p_config);
+    stats_delete(p_stats);
+
 
 }
 
@@ -116,5 +190,12 @@ void test_run_timestep(){
 int main(){
 
     srand(5);
+
+    test_new_config();
+    test_free_config();
+    test_car_gen_bool();
+    test_gen_park_duration();
+    test_input_new_car();
+    test_run_timestep();
 
 }
