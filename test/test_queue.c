@@ -112,7 +112,22 @@ void test_queue_clear(){
 
 }
 
+void test_queue_increase_wait_time(){
+    Queue q;
+    queue_init(&q);
+    Car *p_car = init_car(1, 1, 5);
+    Car *p_second_car = init_car(2, 2, 10);
 
+    enqueue(&q, p_car);
+    enqueue(&q, p_second_car);
+
+    queue_increase_wait_time(&q);
+    //tests that the car's time in queue has been incremented
+    assert(p_car->time_in_queue == 2);
+    //tests that p_car's time in queue has been incremented
+    assert(p_second_car->time_in_queue == 11);
+
+}
 
 int main(){
 
