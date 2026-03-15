@@ -67,6 +67,53 @@ void test_dequeue(){
 
 }
 
+void test_queue_is_empty(){
+    Queue q;
+    queue_init(&q);
+    Car *p_car = init_car(1, 1, 5);
+    Car *p_dequeued_car = NULL;
+    
+    //test that a newly initialized queue is seen as empty
+    assert(queue_is_empty(&q) == 1);
+
+    enqueue(&q, p_car);
+    //test that is_empty return 0 when something has been enqueued
+    assert(queue_is_empty(&q) == 0);
+
+    dequeue(&q, &p_dequeued_car);
+    //test that is empty return 1 again when the car has been dequeued
+    assert(queue_is_empty(&q) == 1);
+
+    free(p_car);
+
+}
+
+void test_queue_clear(){
+    Queue q;
+    queue_init(&q);
+    Car *p_car = init_car(1, 1, 5);
+    Car *p_second_car = init_car(2, 2, 10);
+
+    enqueue(&q, p_car);
+    enqueue(&q, p_second_car);
+    
+    queue_clear(&q);
+    
+    //checks that all cars have been removed
+    assert(q.count == 0);
+    //checks that the head is set to NULL (all nodes removed)
+    assert(q.p_head == NULL);
+    //checks that tail has also been set to NULL (all nodes removed)
+    assert(q.p_tail == NULL);
+    
+    //cars have been freed by queue_clear
+    p_car = NULL;
+    p_second_car = NULL;
+
+}
+
+
+
 int main(){
 
 }
