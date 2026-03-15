@@ -260,7 +260,6 @@ int ui_process_final_stats(FILE *fp)
         if (fgets(buffer, sizeof(buffer), fp) == NULL)
         {
             // file is shorter than TXT_FILE_HEADER_LINES
-            fclose(fp);
             return -1;
         }
     }
