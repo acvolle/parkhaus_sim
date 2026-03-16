@@ -144,10 +144,36 @@ return 0
     // Run loop for the amount of times input by the user
     for (int i = 0; i < p_config->simulation_duration; i++)
     {
-        // Simulation
-        if (run_timestep(p_parkhaus, &q, p_config, p_stats) == -1)
+
+        // Status code for execution of run_timestep function
+        int run_timestep_status_code = run_timestep(p_parkhaus, &q, p_config, p_stats);
+        switch (run_timestep_status_code)
         {
+        case 0:
+            break;
+        case 1:
+            printf("Error at run_timestep: A simulation function failed at timestep %d!\n", current_timestep);
+            break;
+        case 2:
+            printf("Error at run_timestep: A parkhaus function failed at timestep %d!\n", current_timestep);
+            break;
+        case 3:
+            printf("Error at run_timestep: A queue function failed at timestep %d!\n", current_timestep);
+            break;
+        case 4:
+            printf("Error at run_timestep: A stats function failed at timestep %d!\n", current_timestep);
+            break;
+        case -1:
+            printf("\nError: running timestep no. %d failed!\n", current_timestep, current_timestep);
+            break;
+        default:
             printf("\nError: running timestep no. %d failed!\n", current_timestep);
+            break;
+        }
+
+        // Break the for loop if any error occured at running timestep
+        if(run_timestep_status_code)
+        {
             break;
         }
 
@@ -168,6 +194,4 @@ return 0
         current_timestep++;
     }
 
-
-    return 0;
 }
