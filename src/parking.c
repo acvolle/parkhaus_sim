@@ -38,9 +38,7 @@ Parkhaus *init_parkhaus(const unsigned int spaces_count)
     p_parkhaus->size = spaces_count;
     p_parkhaus->occupied_spaces = 0;
     return p_parkhaus;
-}
-
-
+} 
 int close_parkhaus(Parkhaus *p_parkhaus)
 /*
     IF p_parkhaus == NULL OR spaces array == NULL THEN
