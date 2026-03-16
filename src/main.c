@@ -119,7 +119,23 @@ return 0
         return 1;
     } 
     
+    // Initialize queue
+    Queue q;
+    queue_init(&q);
 
+    // Initialize Parkhaus
+    Parkhaus *p_parkhaus = init_parkhaus(p_config->num_spaces);
+    if(p_parkhaus == NULL)
+    {
+        printf("Error: Parkhaus creation failed.\n");
+        free_config(p_config);
+        free(p_stats);
+        fclose(fp_log);
+        return 1;
+    } 
 
+    // Set seet for rand() function
+    srand((unsigned int)p_config->random_seed);
+    
     return 0;
 }
