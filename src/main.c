@@ -71,5 +71,16 @@ return 0
 
 */
 {
+////// SETUP //////
 
+    // Open new text file
+    FILE *fp_log = fopen("parkhaus_sim_log.txt", "w");
+    if (fp_log == NULL) {
+        printf("Error: Could not create txt file\n");
+        return 1;
+    }
+
+    ui_print_welcome();
+
+    return 0;
 }
