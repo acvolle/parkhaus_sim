@@ -1,8 +1,11 @@
 #include "../include/simulation.h"
 #include "../include/ui.h"
 
-int main(){
-/*
+// initialize global variable
+int current_timestep = 0;
+
+int main()
+/* PSEUDOCODE
 //////SETUP//////
 Open new text file
 OUTPUT welcome message (ui_get_welcome())
@@ -67,4 +70,6 @@ return 0
 
 
 */
+{
+
 }

@@ -1,8 +1,6 @@
-#include "../include/simulation.h"
-
 // FOR DOCUMENTATION OF NON-STATIC FUNCTIONS, SEE SIMULATION.H
 
-int current_timestep = 0;
+#include "../include/simulation.h"
 
 //Initializes a new Config struct
 Config *new_config()
