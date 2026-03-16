@@ -35,23 +35,35 @@ void test_close_parking()
 
 void test_park_car()
 {
+    //setup parkhaus and two new cars
     Parkhaus *p_parkhaus = init_parkhaus(1);
+    if(p_parkhaus == NULL){
+        return;
+    }
     Car *p_newcar = init_car(1,1,1);
-    Car *p_newcar2 = init_car(2,2,2);
+    if(p_newcar == NULL){
+        close_parkhaus(p_parkhaus);
+        return;
+    }
+    Car *p_newcar2 = init_car(2,2,2)
+    if(p_newcar2 == NULL){
+        close_parkhaus(p_parkhaus);
+        delete_car(p_newcar);
+        return;
+    }
     
-    if(p_parkhaus!= NULL&&p_newcar!= NULL&&p_newcar2 != NULL)
-    {
-        assert(park_car(p_parkhaus,p_newcar,1)==0);
-        park_car(p_parkhaus,p_newcar,1);
-        assert(park_car(p_parkhaus,p_newcar2,1)== 1);
-        assert(park_car(p_parkhaus,NULL,1)==-1);
-    }
-    else
-    {
-        printf("Error, park car has failed ");
-    }
+    //test that adding the first car works
+    assert(park_car(p_parkhaus,p_newcar,1)==0);
+    //tests that now the parkhaus is full and paking the car doesn't work
+    assert(park_car(p_parkhaus,p_newcar2,1)== 1);
+    //assert that attempting to park a null pointer doesn't work
+    assert(park_car(p_parkhaus,NULL,1)==-1);
+    
+    //free the not-parked newcar2 and close the parkhaus
     delete_car(p_newcar2);
     close_parkhaus(p_parkhaus);
+    p_newcar == NULL;
+    p_newcar2 == NULL;
 }
 
 void test_update_parkhaus()
