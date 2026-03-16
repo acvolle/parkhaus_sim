@@ -72,9 +72,9 @@ END WHILE
             continue;
         }
 
-        long input_val = strtol(input, end_of_value, 10);
+        long input_val = strtol(input, &end_of_value, 10);
 
-        if (end_of_value == input || (*end_of_value != '\n'))
+        if (end_of_value == input || (*end_of_value != '\n' && *end_of_value != '\0'))
         {
             printf("Not an integer! Try again!\n");
             continue;
@@ -126,7 +126,7 @@ return 0
     return 0;
 }
 
-int ui_write_head(const Config *p_config, const char *stats_names, FILE *fp)
+int ui_write_head(const Config *p_config, FILE *fp)
 /* PSEUDOCODE
 // file should be opened in main.c and passed
 IF p_config = NULL OR fp = NULL THEN
@@ -219,11 +219,11 @@ return 0
     }
 
     printf("Timestep: %04d | ", current_timestep);
-    printf("Occ. Rate (%%): %05.2f | ", p_stats->occupancy_rate);
+    printf("Occ. Rate (%%): %06.2f | ", p_stats->occupancy_rate);
     printf("Cars waiting: %04d | ", p_stats->cars_waiting);
     printf("Max. wait time: %04d | ", p_stats->first_car_wait_time);
     printf("Avg. wait time: %05.2f | ", p_stats->avg_wait_time);
-    printf("Score: %05.2f\n", p_stats->stress_score);
+    printf("Stress score: %05.2f\n", p_stats->stress_score);
 
     return 0;
 }
