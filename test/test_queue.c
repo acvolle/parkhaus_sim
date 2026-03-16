@@ -35,6 +35,10 @@ void test_enqueue(){
     //test that the enqueued car is now the header
     assert(q.p_head->p_car == p_car);
 
+    //test for null pointers
+    assert(enqueue(NULL, p_car) == -1);
+    assert(enqueue(&q, NULL) == -1);
+
     Car *p_second_car = init_car(2, 2, 8);
     
     //test that a second car could be enqueued
