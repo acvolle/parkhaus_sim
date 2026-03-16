@@ -19,11 +19,11 @@ void test_ui_write_functions()
     assert(fp != NULL);
 
     // test if execution was successfull
-    assert(ui_write_head(&test_config, "1, 2, 3", fp) == 0);
+    assert(ui_write_head(&test_config, fp) == 0);
     assert(ui_write_stats(&test_stats, fp) == 0);
 
     // test null pointer handling
-    assert(ui_write_head(NULL, NULL, fp) == -1);
+    assert(ui_write_head(NULL, fp) == -1);
     assert(ui_write_stats(NULL, fp) == -1);
 
     fclose(fp);
