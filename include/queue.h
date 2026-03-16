@@ -59,7 +59,7 @@ int queue_init(Queue *p_queue);
 /**
  * @brief Checks if queue is empty
  * 
- * @return 1 for empty queue, 0 for queue containing elements or error
+ * @return 1 for empty queue, 0 for queue containing elements, -1 for error
  */
 int queue_is_empty(const Queue *p_queue);
 

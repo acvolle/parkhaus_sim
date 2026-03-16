@@ -42,7 +42,7 @@ return 0
 int queue_is_empty(const Queue *p_queue)
 /* PSEUDOCODE
 IF p_queue = NULL THEN
-    return 0
+    return -1
 ELSE IF p_queue->count = 0 THEN
     return 1
 ELSE
@@ -53,7 +53,7 @@ END IF
     if (p_queue == NULL)
     {
         printf("queue_is_empty: null pointer\n");
-        return 0;
+        return -1;
     }
     if (p_queue->p_head == NULL || p_queue->count == 0)
     {
@@ -106,7 +106,7 @@ return 0
     p_new_node->p_car = p_car;
     p_new_node->p_next = NULL;
 
-    if (queue_is_empty(p_queue))
+    if (queue_is_empty(p_queue) == 1)
     {
         p_queue->p_head = p_new_node;
     }
@@ -147,7 +147,7 @@ return 0
         printf("dequeue: null pointer");
         return -1;
     }
-    if (queue_is_empty(p_queue))
+    if (queue_is_empty(p_queue) == 1)
     {
         return 1;
     }
