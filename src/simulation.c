@@ -2,7 +2,7 @@
 
 // FOR DOCUMENTATION OF NON-STATIC FUNCTIONS, SEE SIMULATION.H
 
-int current_timestep;
+int current_timestep = 0;
 
 //Initializes a new Config struct
 Config *new_config()
@@ -271,4 +271,22 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
     }
 
     return 0;
+}
+
+
+
+
+
+int tw_gen_park_duration(int max_time){
+    return gen_park_duration(max_time);
+}
+
+
+int tw_car_gen_bool(const int probability){
+    return car_gen_bool(probability);
+}
+
+
+int tw_input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config){
+    return input_new_car(p_parkhaus, p_queue, p_config);
 }

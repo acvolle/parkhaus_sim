@@ -102,4 +102,67 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
 primarily calls other functions from this and other modules. This reduces the number of function
 calls in main and increases modularity*/
 
+
+/* ############################################################################################
+The following functions are function wrappers for test purposes. Their sole purpose is to make
+static functions form simulation.c available for testing by test_simulaion.c. They each call the
+associated static function and return whatever it returns.
+They are named the name of the static function preceded by tw_ (for test wrapper)
+*/
+
+/**
+ * @brief Randomly generates the duration a Car will spend in the Parkhaus
+ * 
+ * Generates the park_span time of a Car struct using rand() and the max_parking_time
+ * of the Config struct.
+ * The returned timespan is be at least the defined MIN_PARKING_DURATION 
+ * and at most the max_parking_time.
+ * 
+ * @note The `srand()` function must be called in `main()` before using this function.
+ * 
+ * @param[in] max_time Maximum number of timesteps a Car may spend in the struct
+ * @return integer value of the park_span number of timesteps
+ * 
+ * @warning This is a wrapper for a static function that is only to be used for unit testing!
+ */
+int tw_gen_park_duration(int max_time);
+
+
+/**
+ * @brief Randomly determines if a new car should be generated.
+ *
+ * Uses `rand()` to generate a random number between 1 and 100.
+ * Returns `1` if a car should be generated (random number <= probability),
+ * otherwise returns `0`.
+ * Called by run_timestep()
+ *
+ * @note The `srand()` function must be called in `main()` before using this function.
+ * 
+ * @warning This is a wrapper for a static function that is only to be used for unit testing!
+ *
+ * @param[in] probability The probability (0-100) of generating a new car.
+ * @return int `1` if a car should be generated, `0` otherwise.
+ */
+int tw_car_gen_bool(const int probability);
+
+
+/**
+* @brief Initializes new Car struct and either parks or enqueues it
+*
+* Creates a new `Car` struct, then attempts to park it using `park_car()` (see `parking.h`).
+* If parking fails, the `Car` (pointer) is enqueued into the provided `Queue`.
+* Called by run_timestep()
+*
+* @warning This is a wrapper for a static function that is only to be used for unit testing!
+*
+* @param[out] p_parkhaus Pointer to Parkhaus in which the Car structshould be parked
+* @param[out] p_queue Pointer to the Queue in which the Car struct can be enqueued
+* @param[in] p_config Pointer to the Config file, from which information is read
+* @return int Status code:
+*            - `0` if the operation succeeded.
+*            - `-1` if an error occurred (e.g., pointer is `NULL`).
+*/
+int tw_input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config);
+
+
 #endif
