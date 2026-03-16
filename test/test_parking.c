@@ -68,23 +68,29 @@ void test_park_car()
 
 void test_update_parkhaus()
 {
+    //setup parkhaus
     Parkhaus *p_parkhaus = init_parkhaus(1);
-    Car *p_newcar = init_car(1,1,2);
-
-    if(p_parkhaus!=NULL&&p_newcar!=NULL)
-    {
-        park_car(p_parkhaus,p_newcar,1);
-        assert(update_parkhaus(p_parkhaus)==0);
-        p_newcar->park_span=0;
-        assert(update_parkhaus(p_parkhaus)==0);
-        assert(update_parkhaus(NULL)==-1);
+    if(p_parkhaus == NULL){
+        return;
     }
-    else
-    {
-        printf("Error, Test for update_car failed");
+    Car *p_newcar = init_car(1,1,5);
+    if(p_newcar == NULL){
+        close_parkhaus(p_parkhaus);
+        return;
     }
+    
+    //park new car in the parking garage
+    park_car(p_parkhaus,p_newcar,1);
+    //test that updating the parkhaus worked
+    assert(update_parkhaus(p_parkhaus)==0);
+    //test that the newcars parkspan was decreased by 1
+    assert(p_newcar->park_span == 4);
+    //test that updating a null pointer fails
+    assert(update_parkhaus(NULL)==-1);
+    
+    //close the parkhaus
     close_parkhaus(p_parkhaus);
-    delete_car(p_newcar);
+    
 }
 
 void test_parkhaus_is_full()
