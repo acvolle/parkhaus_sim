@@ -33,11 +33,11 @@ FOR i <- 0 TO Config pointer->simulation_duration-1 DO
         OUTPUT error message
         break for loop //shuts down the simulation, doesn't return as allocated memory must still be freed
     END IF
-    IF ui_print_stats(Stats pointer)) == -1 THEN  
+    IF ui_print_stats(Stats pointer)) == -1 THEN
         OUTPUT error message
         break for loop //shuts down the simulation, doesn't return as allocated memory must still be freed
     END IF
-    IF ui_write_stats(Stats pointer, text file) == -1 THEN 
+    IF ui_write_stats(Stats pointer, text file) == -1 THEN
         OUTPUT error message
         break for loop //shuts down the simulation, doesn't return as allocated memory must still be freed
     END IF
@@ -71,16 +71,55 @@ return 0
 
 */
 {
-////// SETUP //////
+    ////// SETUP //////
 
     // Open new text file
     FILE *fp_log = fopen("parkhaus_sim_log.txt", "w");
-    if (fp_log == NULL) {
+    if (fp_log == NULL)
+    {
         printf("Error: Could not create txt file\n");
         return 1;
     }
 
     ui_print_welcome();
+
+    // Create simulation config
+    Config *p_config = new_config();
+    if(p_config == NULL)
+    {
+        printf("Error: Config creation failed.\n");
+        fclose(fp_log);
+        return 1;
+    }
+
+    // Parameters -> Config
+    if (ui_get_params(p_config) == -1)
+    {
+        printf("Error: Parameter input failed.\n");
+        free_config(p_config);
+        fclose(fp_log);
+        return 1;
+    }
+
+    // Write log file header
+    if (ui_write_head(p_config, fp_log) == -1)
+    {
+        free_config(p_config);
+        fclose(fp_log);
+        return 1;
+    }
+
+    // Initialize stats struct
+    Stats *p_stats = stats_create();
+    if(p_stats == NULL)
+    {
+        printf("Error: Stats structure creation failed.\n");
+        free_config(p_config);
+        fclose(fp_log);
+        return 1;
+    } 
+    
+
 
     return 0;
 }
