@@ -66,8 +66,7 @@ void create_test_file(const char *filename, int valid)
 
 void test_ui_process_final_stats()
 {
-
-        // test null pointer handling
+    // test null pointer handling
     assert(ui_process_final_stats(NULL) == -1);
     
     // test with valid file
