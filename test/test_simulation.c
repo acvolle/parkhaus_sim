@@ -212,4 +212,5 @@ int main(){
     test_input_new_car();
     test_run_timestep();
 
+    printf("All simulation unit tests passed!\n");
 }

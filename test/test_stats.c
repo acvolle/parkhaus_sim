@@ -178,10 +178,7 @@ int main()
     test_stats_clear();
     test_stats_delete();
     test_stats_occupancy_rate();
-
-    //test_stats_queue_stats();
-    printf("Warning: test_queue_stats skipped!\n");
-    
+    test_stats_queue_stats();
     test_stats_stress_score();
 
     printf("All stats.c unit tests passed!\n");

@@ -11,8 +11,9 @@
  * - queue_increase_wait_time
  */
 
-#include <stdio.h>
 #include "../include/queue.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 int queue_init(Queue *p_queue)
 /* PSEUDOCODE
@@ -27,7 +28,7 @@ return 0
 {
     if (p_queue == NULL)
     {
-        printf("queue_init: null pointer");
+        printf("queue_init: null pointer\n");
         return -1;
     }
 
@@ -41,7 +42,7 @@ return 0
 int queue_is_empty(const Queue *p_queue)
 /* PSEUDOCODE
 IF p_queue = NULL THEN
-    return 0
+    return -1
 ELSE IF p_queue->count = 0 THEN
     return 1
 ELSE
@@ -52,9 +53,9 @@ END IF
     if (p_queue == NULL)
     {
         printf("queue_is_empty: null pointer\n");
-        return 0;
+        return -1;
     }
-    else if (p_queue->count == 0)
+    if (p_queue->p_head == NULL || p_queue->count == 0)
     {
         return 1;
     }
@@ -91,21 +92,21 @@ return 0
 {
     if (p_queue == NULL || (p_car == NULL))
     {
-        printf("enqueue: null pointer");
+        printf("enqueue: null pointer\n");
         return -1;
     }
 
     Node *p_new_node = malloc(sizeof *p_new_node);
     if (p_new_node == NULL)
     {
-        printf("enqueue: memory allocation error");
+        printf("enqueue: memory allocation error\n");
         return -1;
     }
 
     p_new_node->p_car = p_car;
     p_new_node->p_next = NULL;
 
-    if (queue_is_empty(p_queue))
+    if (queue_is_empty(p_queue) == 1)
     {
         p_queue->p_head = p_new_node;
     }
@@ -143,17 +144,17 @@ return 0
 {
     if (p_queue == NULL || (pp_dequeued_car == NULL))
     {
-        printf("dequeue: null pointer");
+        printf("dequeue: null pointer\n");
         return -1;
     }
-    if (queue_is_empty(p_queue))
+    if (queue_is_empty(p_queue) == 1)
     {
         return 1;
     }
 
     if (p_queue->p_head->p_car == NULL)
     {
-        printf("dequeue: incomplete node");
+        printf("dequeue: incomplete node\n");
         return -1;
     }
     *pp_dequeued_car = p_queue->p_head->p_car;
@@ -170,7 +171,7 @@ return 0
 
     if (p_queue->count < 0)
     {
-        printf("dequeue: arithmetic error");
+        printf("dequeue: arithmetic error\n");
         return -1;
     }
 
@@ -192,7 +193,7 @@ return 0
 {
     if (p_queue == NULL)
     {
-        printf("queue_increase_wait_time: null pointer");
+        printf("queue_increase_wait_time: null pointer\n");
         return -1;
     }
 
@@ -232,23 +233,20 @@ return 0
 {
     if (p_queue == NULL)
     {
-        printf("queue_clear: null pointer");
+        printf("queue_clear: null pointer\n");
         return -1;
     }
-    int status_code = 0;
 
-    Car *p_temp = NULL;
-    while (status_code == 0)
+    Car *p_temp_car = NULL;
+    // loop to remove all cars from queue and delete them
+    while (dequeue(p_queue, &p_temp_car) == 0)
     {
-        status_code = dequeue(p_queue, &p_temp);
-        if (status_code == -1)
+        if (p_temp_car != NULL)
         {
-            printf("queue_clear: dequeue error");
-            return -1;
+            delete_car(p_temp_car);
         }
-        delete_car(p_temp);
-        p_temp = NULL;
     }
+
     queue_init(p_queue); //resets all queue values
     return 0;
 }

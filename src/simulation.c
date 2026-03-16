@@ -2,6 +2,9 @@
 
 #include "../include/simulation.h"
 
+// global variable for the current simulation timestep
+int current_timestep = 0;
+
 //Initializes a new Config struct
 Config *new_config()
 /*

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 #include "../include/queue.h"
 
@@ -89,7 +90,7 @@ void test_dequeue(){
     //test that dequeue on an empty queue doesn't change the Car pointer
     assert(p_dequeued_car == NULL);
 
-    free(p_car);
+    delete_car(p_car);
     queue_clear(&q);
 
 }
@@ -116,7 +117,7 @@ void test_queue_is_empty(){
     //test that is empty return 1 again when the car has been dequeued
     assert(queue_is_empty(&q) == 1);
 
-    free(p_car);
+    delete_car(p_car);
 
 }
 

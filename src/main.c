@@ -1,8 +1,6 @@
 #include "../include/simulation.h"
 #include "../include/ui.h"
 
-// initialize global variable
-int current_timestep = 0;
 
 int main()
 /* PSEUDOCODE
