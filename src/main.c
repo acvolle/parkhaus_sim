@@ -129,7 +129,7 @@ return 0
     {
         printf("Error: Parkhaus creation failed.\n");
         free_config(p_config);
-        free(p_stats);
+        stats_delete(p_stats);
         fclose(fp_log);
         return 1;
     }
@@ -164,7 +164,7 @@ return 0
             printf("Error at run_timestep: A stats function failed at timestep %d!\n", current_timestep);
             break;
         case -1:
-            printf("\nError: running timestep no. %d failed!\n", current_timestep, current_timestep);
+            printf("\nError: running timestep no. %d failed!\n", current_timestep);
             break;
         default:
             printf("\nError: running timestep no. %d failed!\n", current_timestep);
@@ -201,18 +201,18 @@ return 0
     printf("Done simulating %d timesteps\n", current_timestep);
 
     // open log file (reading mode)
-    FILE *fp_read = fopen("simulation_results.txt", "r");
-    if (fp_read == NULL)
+    FILE *fp_results = fopen("parkhaus_sim_log.txt", "r");
+    if (fp_results == NULL)
     {
         printf("Error: Could not read results from log file!\n");
     }
     else // file was opened in reading mode
     {
-        if (ui_process_final_stats(fp_read) == -1)
+        if (ui_process_final_stats(fp_results) == -1)
         {
             printf("Error: Could not process results from log file!\n");
         }
-        fclose(fp_read);
+        fclose(fp_results);
     }
 
     // Delete config struct
