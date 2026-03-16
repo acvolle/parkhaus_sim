@@ -60,9 +60,9 @@ void test_gen_park_duration(){
     
     for(int i = 0; i < 100; i++){
         //tests that over 100 attempts gen_park_duration never returns anything higher than the input maximum
-        assert(tw_gen_park_duration(30) <= 31);
+        assert(tw_gen_park_duration(30) <= 30);
         //tests that over 100 attempts gen_park_duration never returns anything lower than the predefined min of 5
-        assert(tw_gen_park_duration(30) >= 5);
+        assert(tw_gen_park_duration(30) >= MIN_PARKING_DURATION);
     }
 
 }
@@ -110,6 +110,7 @@ void test_input_new_car(){
     //END
     queue_clear(&q);
     close_parkhaus(p_parkhaus);
+    free_config(p_config);
 
 }
 
