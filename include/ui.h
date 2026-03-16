@@ -62,11 +62,10 @@ int ui_get_params(Config *p_config);
  * @note File has to be opened already, close the file if the function returns -1
  * 
  * @param[in] p_config reference to struct Config
- * @param[in] stats_names string containing all the stats names seperated by commas
  * @param[out] fp reference to the txt file
  * @return 0 for success, -1 for error, 1 for file error
  */
-int ui_write_head(const Config *p_config, const char *stats_names, FILE *fp);
+int ui_write_head(const Config *p_config, FILE *fp);
 
 /**
  * @brief Write statistics from struct Stats into a txt file.

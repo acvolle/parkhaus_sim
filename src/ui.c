@@ -126,7 +126,7 @@ return 0
     return 0;
 }
 
-int ui_write_head(const Config *p_config, const char *stats_names, FILE *fp)
+int ui_write_head(const Config *p_config, FILE *fp)
 /* PSEUDOCODE
 // file should be opened in main.c and passed
 IF p_config = NULL OR fp = NULL THEN
