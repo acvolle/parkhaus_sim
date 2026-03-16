@@ -11,8 +11,9 @@
  * - queue_increase_wait_time
  */
 
-#include <stdio.h>
 #include "../include/queue.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 int queue_init(Queue *p_queue)
 /* PSEUDOCODE
@@ -235,20 +236,17 @@ return 0
         printf("queue_clear: null pointer");
         return -1;
     }
-    int status_code = 0;
 
-    Car *p_temp = NULL;
-    while (status_code == 0)
+    Car *p_temp_car = NULL;
+    // loop to remove all cars from queue and delete them
+    while (dequeue(p_queue, &p_temp_car) == 0)
     {
-        status_code = dequeue(p_queue, &p_temp);
-        if (status_code == -1)
+        if (p_temp_car != NULL)
         {
-            printf("queue_clear: dequeue error");
-            return -1;
+            delete_car(p_temp_car);
         }
-        delete_car(p_temp);
-        p_temp = NULL;
     }
+
     queue_init(p_queue); //resets all queue values
     return 0;
 }
