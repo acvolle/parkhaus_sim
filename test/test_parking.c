@@ -1,0 +1,109 @@
+#include "../include/parking.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+void test_init_parking()
+{
+    Parkhaus *p_parkhaus = init_parkhaus(90);
+    if (p_parkhaus!=NULL )
+    {
+        assert(p_parkhaus->occupied_spaces == 0);
+        assert(p_parkhaus->p_spaces != NULL );
+        assert(p_parkhaus->size == 90);
+
+    }
+    else
+    {
+        printf("Error: init_Parkhaus Null, test failed");
+    }
+    free(p_parkhaus);
+
+}
+void test_close_parking()
+{
+    Parkhaus *p_parkhaus = init_parkhaus(90);
+    if(p_parkhaus!=NULL)
+    {
+        assert(close_parkhaus(p_parkhaus) == 0);
+    }
+    else
+    {
+        printf("Close Parkhaus failed");
+    }
+    free(p_parkhaus);
+}
+
+void test_park_car()
+{
+    Parkhaus *p_parkhaus = init_parkhaus(1);
+    Car *p_newcar = init_car(1,1,1);
+    Car *p_newcar2 = init_car(2,2,2);
+    
+    if(p_parkhaus!= NULL||p_newcar!= NULL||p_newcar2 != NULL)
+    {
+        assert(park_car(p_parkhaus,p_newcar,1)==0);
+        park_car(p_parkhaus,p_newcar,1);
+        assert(park_car(p_parkhaus,p_newcar2,1)==-1);
+    }
+    else
+    {
+        printf("Error, park car has failed ");
+    }
+    free(p_newcar2);
+    free(p_newcar);
+    free(p_parkhaus);
+}
+
+void test_update_parkhaus()
+{
+    Parkhaus *p_parkhaus = init_parkhaus(1);
+    Car *p_newcar = init_car(1,1,2);
+
+    if(p_parkhaus!=NULL||p_newcar!=NULL)
+    {
+        park_car(p_parkhaus,p_newcar,1);
+        assert(update_parkhaus(p_parkhaus)==0);
+        p_newcar->park_span=0;
+        assert(update_parkhaus(p_parkhaus)==0);
+        p_newcar = NULL;
+        assert(update_parkhaus(p_parkhaus)==-1);
+    }
+    else
+    {
+        printf("Error, Test for update_car failed");
+    }
+    free(p_newcar);
+    free(p_parkhaus);
+}
+
+void test_parkhaus_is_full()
+{
+    Parkhaus *p_parkhaus = init_parkhaus(1);
+    Car *p_newcar = init_car(1,1,2);
+    if(p_parkhaus!=NULL||p_newcar != NULL)
+    {
+        assert(parkhaus_is_full(p_parkhaus)==0);
+        park_car(p_parkhaus,p_newcar,1);
+        assert(parkhaus_is_full(p_parkhaus)==1);
+        p_parkhaus = NULL;
+        assert(parkhaus_is_full(p_parkhaus)==-1);
+    }
+    else
+    {
+        printf("Error: Test for parkaus_is_full failed");
+    }
+    free(p_newcar);
+    free(p_parkhaus);
+}
+
+int main()
+{
+    test_init_parking();
+    test_close_parking();
+    test_park_car();
+    test_update_parkhaus();
+    test_parkhaus_is_full();
+
+    return 0;
+}
