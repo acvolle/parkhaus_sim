@@ -1,13 +1,3 @@
-#ifndef SIMULATION_H
-#define SIMULATION_H
-
-#include <stdlib.h>
-#include "parking.h"
-#include "stats.h"
-#include "queue.h"
-
-
-
 /* SIMULATION OPERATIONS HEADER FILE
    This module includes all the structs and functions that are needed to actually run the simulation step by 
    step. It includes the Config struct, which saves the parameters of the simulation (the number of spaces in 
@@ -27,6 +17,16 @@
    run_timestep() outsources some functionalities to. 
 
 */
+#ifndef SIMULATION_H
+#define SIMULATION_H
+
+#include <stdlib.h>
+#include "parking.h"
+#include "stats.h"
+#include "queue.h"
+
+// minimum parking duration timesteps
+#define MIN_PARKING_DURATION 5 
 
 /* This global variable saves the timestep the simulation is currently at, and is incremented by 1 every timestep
 */

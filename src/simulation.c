@@ -2,9 +2,6 @@
 
 // FOR DOCUMENTATION OF NON-STATIC FUNCTIONS, SEE SIMULATION.H
 
-// minimum parking duration timesteps
-#define MIN_PARKING_DURATION 5 
-
 int current_timestep = 0;
 
 //Initializes a new Config struct
@@ -124,7 +121,6 @@ parameters
     return duration;
 }
 
-
 /**
 * @brief Initializes new Car struct and either parks or enqueues it
 *
@@ -178,9 +174,6 @@ static int input_new_car(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config)
     
     return 0;
 }
-
-
-
 
 int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *p_stats)
 /*
