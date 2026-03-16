@@ -193,5 +193,27 @@ return 0
         // increase timestep count
         current_timestep++;
     }
+    
+////// SHUTDOWN //////
+
+    // close log file (writing mode)
+    fclose(fp_log);
+    printf("Done simulating %d timesteps\n", current_timestep);
+
+    // open log file (reading mode)
+    FILE *fp_read = fopen("simulation_results.txt", "r");
+    if (fp_read == NULL)
+    {
+        printf("Error: Could not read results from log file!\n");
+    }
+    else // file was opened in reading mode
+    {
+        if(ui_process_final_stats(fp_read) == -1)
+        {
+            printf("Error: Could not process results from log file!\n");
+        }
+        fclose(fp_read);
+    }
+
 
 }
