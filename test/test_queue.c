@@ -21,8 +21,9 @@ void test_init_queue(){
 
 void test_enqueue(){
     Queue q;
-    queue_init(&q);
-
+    if(queue_init(&q) == -1){
+        return;
+    }
     Car *p_car = init_car(1, 1, 5);
     if(p_car == NULL){
         printf("car returned as null pointer");
@@ -51,14 +52,19 @@ void test_enqueue(){
 
 void test_dequeue(){
     Queue q;
-    queue_init(&q);
+    if(queue_init(&q) == -1){
+        return;
+    }
     Car *p_car = init_car(1, 1, 5);
     if(p_car == NULL){
         printf("Car pointer in null: error");
         return;
     }
 
-    enqueue(&q, p_car);
+    if(enqueue(&q, p_car) == -1){
+        printf("failed to enqueue");
+        return;
+    }
 
     Car *p_dequeued_car = NULL;
     //test if dequeue works
@@ -77,7 +83,9 @@ void test_dequeue(){
 
 void test_queue_is_empty(){
     Queue q;
-    queue_init(&q);
+    if(queue_init(&q)== -1){
+        return;
+    }
     Car *p_car = init_car(1, 1, 5);
     Car *p_dequeued_car = NULL;
     
@@ -122,7 +130,9 @@ void test_queue_clear(){
 
 void test_queue_increase_wait_time(){
     Queue q;
-    queue_init(&q);
+    if(queue_init(&q) == -1){
+        return;
+    }
     Car *p_car = init_car(1, 1, 5);
     Car *p_second_car = init_car(2, 2, 10);
 
