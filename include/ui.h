@@ -24,6 +24,7 @@
 #define UI_H
 
 #include <stdio.h>
+#include <limits.h>
 #include "simulation.h"
 
 // number of lines in the beginning of the txt file that do not contain data
