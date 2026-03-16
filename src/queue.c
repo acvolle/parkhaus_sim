@@ -28,7 +28,7 @@ return 0
 {
     if (p_queue == NULL)
     {
-        printf("queue_init: null pointer");
+        printf("queue_init: null pointer\n");
         return -1;
     }
 
@@ -92,14 +92,14 @@ return 0
 {
     if (p_queue == NULL || (p_car == NULL))
     {
-        printf("enqueue: null pointer");
+        printf("enqueue: null pointer\n");
         return -1;
     }
 
     Node *p_new_node = malloc(sizeof *p_new_node);
     if (p_new_node == NULL)
     {
-        printf("enqueue: memory allocation error");
+        printf("enqueue: memory allocation error\n");
         return -1;
     }
 
@@ -144,7 +144,7 @@ return 0
 {
     if (p_queue == NULL || (pp_dequeued_car == NULL))
     {
-        printf("dequeue: null pointer");
+        printf("dequeue: null pointer\n");
         return -1;
     }
     if (queue_is_empty(p_queue) == 1)
@@ -154,7 +154,7 @@ return 0
 
     if (p_queue->p_head->p_car == NULL)
     {
-        printf("dequeue: incomplete node");
+        printf("dequeue: incomplete node\n");
         return -1;
     }
     *pp_dequeued_car = p_queue->p_head->p_car;
@@ -171,7 +171,7 @@ return 0
 
     if (p_queue->count < 0)
     {
-        printf("dequeue: arithmetic error");
+        printf("dequeue: arithmetic error\n");
         return -1;
     }
 
@@ -193,7 +193,7 @@ return 0
 {
     if (p_queue == NULL)
     {
-        printf("queue_increase_wait_time: null pointer");
+        printf("queue_increase_wait_time: null pointer\n");
         return -1;
     }
 
@@ -233,7 +233,7 @@ return 0
 {
     if (p_queue == NULL)
     {
-        printf("queue_clear: null pointer");
+        printf("queue_clear: null pointer\n");
         return -1;
     }
 
