@@ -16,6 +16,8 @@ void test_init_queue(){
     assert(q.p_tail == NULL);
     //test if the queue elements count was set to 0
     assert(q.count == 0);
+    //test that a null pointer leads to an error
+    assert(queue_init(NULL) == -1);
 
 }
 
@@ -38,6 +40,7 @@ void test_enqueue(){
     //test for null pointers
     assert(enqueue(NULL, p_car) == -1);
     assert(enqueue(&q, NULL) == -1);
+    assert(enqueue(NULL, NULL) == -1);
 
     Car *p_second_car = init_car(2, 2, 8);
     
@@ -70,6 +73,11 @@ void test_dequeue(){
         return;
     }
 
+    //test if null pointers return errors
+    assert(enqueue(NULL, NULL) == -1);
+    assert(enqueue(&q, NULL) == -1);
+    assert(enqueue(NULL, p_car) == -1);
+
     Car *p_dequeued_car = NULL;
     //test if dequeue works
     assert(dequeue(&q, &p_dequeued_car) == 0);
@@ -82,6 +90,7 @@ void test_dequeue(){
     assert(p_dequeued_car == NULL);
 
     free(p_car);
+    queue_clear(&q);
 
 }
 
@@ -92,6 +101,9 @@ void test_queue_is_empty(){
     }
     Car *p_car = init_car(1, 1, 5);
     Car *p_dequeued_car = NULL;
+    
+    //test that a null pointer returns an error
+    assert(queue_is_empty(NULL) == -1);
     
     //test that a newly initialized queue is seen as empty
     assert(queue_is_empty(&q) == 1);
@@ -125,6 +137,9 @@ void test_queue_clear(){
     assert(q.p_head == NULL);
     //checks that tail has also been set to NULL (all nodes removed)
     assert(q.p_tail == NULL);
+
+    //test that a null pointer returns an error
+    assert(queue_clear(NULL) == -1);
     
     //cars have been freed by queue_clear
     p_car = NULL;
@@ -153,6 +168,9 @@ void test_queue_increase_wait_time(){
     assert(p_car->time_in_queue == 1);
     //tests that the car's time in queue has been incremented
     assert(p_second_car->time_in_queue == 1);
+
+    //test that a null pointer returns an error
+    assert(queue_increase_wait_time(NULL) == -1);
 
     queue_clear(&q);
 
