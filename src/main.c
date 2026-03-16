@@ -85,7 +85,7 @@ return 0
 
     // Create simulation config
     Config *p_config = new_config();
-    if(p_config == NULL)
+    if (p_config == NULL)
     {
         printf("Error: Config creation failed.\n");
         fclose(fp_log);
@@ -111,31 +111,63 @@ return 0
 
     // Initialize stats struct
     Stats *p_stats = stats_create();
-    if(p_stats == NULL)
+    if (p_stats == NULL)
     {
         printf("Error: Stats structure creation failed.\n");
         free_config(p_config);
         fclose(fp_log);
         return 1;
-    } 
-    
+    }
+
     // Initialize queue
     Queue q;
     queue_init(&q);
 
     // Initialize Parkhaus
     Parkhaus *p_parkhaus = init_parkhaus(p_config->num_spaces);
-    if(p_parkhaus == NULL)
+    if (p_parkhaus == NULL)
     {
         printf("Error: Parkhaus creation failed.\n");
         free_config(p_config);
         free(p_stats);
         fclose(fp_log);
         return 1;
-    } 
+    }
 
     // Set seet for rand() function
     srand((unsigned int)p_config->random_seed);
-    
+
+    ////// LOOP //////
+
+    printf("\nNow simulating %d timesteps...\n\n", p_config->simulation_duration);
+
+    // Run loop for the amount of times input by the user
+    for (int i = 0; i < p_config->simulation_duration; i++)
+    {
+        // Simulation
+        if (run_timestep(p_parkhaus, &q, p_config, p_stats) == -1)
+        {
+            printf("\nError: running timestep no. %d failed!\n", current_timestep);
+            break;
+        }
+
+        // Stats -> console
+        if (ui_print_stats(p_stats) == -1)
+        {
+            printf("\nError: Printing stats failed at timestep %d!\n", current_timestep);
+            break;
+        }
+
+        // Stats -> log file
+        if (ui_write_stats(p_stats, fp_log) == -1)
+        {
+            printf("\nError: Writing into log file failed at timestep %d!\n", current_timestep);
+            break;
+        }
+        // increase timestep count
+        current_timestep++;
+    }
+
+
     return 0;
 }
