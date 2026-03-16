@@ -55,7 +55,7 @@ END IF
         printf("queue_is_empty: null pointer\n");
         return 0;
     }
-    else if (p_queue->count == 0)
+    if (p_queue->p_head == NULL || p_queue->count == 0)
     {
         return 1;
     }
