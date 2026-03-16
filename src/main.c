@@ -77,7 +77,7 @@ return 0
     FILE *fp_log = fopen("parkhaus_sim_log.txt", "w");
     if (fp_log == NULL)
     {
-        printf("Error: Could not create txt file\n");
+        printf("Error: Could not create txt file!\n");
         return 1;
     }
 
@@ -87,7 +87,7 @@ return 0
     Config *p_config = new_config();
     if (p_config == NULL)
     {
-        printf("Error: Config creation failed.\n");
+        printf("Error: Config creation failed!\n");
         fclose(fp_log);
         return 1;
     }
@@ -95,7 +95,7 @@ return 0
     // Parameters -> Config
     if (ui_get_params(p_config) == -1)
     {
-        printf("Error: Parameter input failed.\n");
+        printf("Error: Parameter input failed!\n");
         free_config(p_config);
         fclose(fp_log);
         return 1;
@@ -104,6 +104,7 @@ return 0
     // Write log file header
     if (ui_write_head(p_config, fp_log) == -1)
     {
+        printf("Error: Writing into log file failed!\n");
         free_config(p_config);
         fclose(fp_log);
         return 1;
@@ -113,7 +114,7 @@ return 0
     Stats *p_stats = stats_create();
     if (p_stats == NULL)
     {
-        printf("Error: Stats structure creation failed.\n");
+        printf("Error: Stats structure creation failed!\n");
         free_config(p_config);
         fclose(fp_log);
         return 1;
@@ -127,7 +128,7 @@ return 0
     Parkhaus *p_parkhaus = init_parkhaus(p_config->num_spaces);
     if (p_parkhaus == NULL)
     {
-        printf("Error: Parkhaus creation failed.\n");
+        printf("Error: Parkhaus creation failed!\n");
         free_config(p_config);
         stats_delete(p_stats);
         fclose(fp_log);
