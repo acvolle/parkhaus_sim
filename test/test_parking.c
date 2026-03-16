@@ -17,7 +17,7 @@ void test_init_parking()
     {
         printf("Error: init_Parkhaus Null, test failed");
     }
-    free(p_parkhaus);
+    close_parkhaus(p_parkhaus);
 
 }
 void test_close_parking()
@@ -45,7 +45,7 @@ void test_park_car()
         close_parkhaus(p_parkhaus);
         return;
     }
-    Car *p_newcar2 = init_car(2,2,2)
+    Car *p_newcar2 = init_car(2,2,2);
     if(p_newcar2 == NULL){
         close_parkhaus(p_parkhaus);
         delete_car(p_newcar);
