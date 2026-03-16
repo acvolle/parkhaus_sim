@@ -224,7 +224,7 @@ int run_timestep(Parkhaus *p_parkhaus, Queue *p_queue, Config *p_config, Stats *
     Car* p_temp_car = NULL;
 
     // put cars from queue into free spaces
-    while (parkhaus_is_full(p_parkhaus) == 1 && queue_is_empty(p_queue) == 0)
+    while (!parkhaus_is_full(p_parkhaus) && !queue_is_empty(p_queue))
     {
         if(dequeue(p_queue, &p_temp_car))
         {
