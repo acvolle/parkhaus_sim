@@ -31,7 +31,6 @@ void test_close_parking()
     {
         printf("Close Parkhaus failed");
     }
-    free(p_parkhaus);
 }
 
 void test_park_car()
@@ -40,7 +39,7 @@ void test_park_car()
     Car *p_newcar = init_car(1,1,1);
     Car *p_newcar2 = init_car(2,2,2);
     
-    if(p_parkhaus!= NULL||p_newcar!= NULL||p_newcar2 != NULL)
+    if(p_parkhaus!= NULL&&p_newcar!= NULL&&p_newcar2 != NULL)
     {
         assert(park_car(p_parkhaus,p_newcar,1)==0);
         park_car(p_parkhaus,p_newcar,1);
@@ -50,9 +49,9 @@ void test_park_car()
     {
         printf("Error, park car has failed ");
     }
-    free(p_newcar2);
-    free(p_newcar);
-    free(p_parkhaus);
+    delete_car(p_newcar2);
+    delete_car(p_newcar);
+    close_parkhaus(p_parkhaus);
 }
 
 void test_update_parkhaus()
@@ -60,7 +59,7 @@ void test_update_parkhaus()
     Parkhaus *p_parkhaus = init_parkhaus(1);
     Car *p_newcar = init_car(1,1,2);
 
-    if(p_parkhaus!=NULL||p_newcar!=NULL)
+    if(p_parkhaus!=NULL&&p_newcar!=NULL)
     {
         park_car(p_parkhaus,p_newcar,1);
         assert(update_parkhaus(p_parkhaus)==0);
@@ -73,15 +72,14 @@ void test_update_parkhaus()
     {
         printf("Error, Test for update_car failed");
     }
-    free(p_newcar);
-    free(p_parkhaus);
+    close_parkhaus(p_parkhaus);
 }
 
 void test_parkhaus_is_full()
 {
     Parkhaus *p_parkhaus = init_parkhaus(1);
     Car *p_newcar = init_car(1,1,2);
-    if(p_parkhaus!=NULL||p_newcar != NULL)
+    if(p_parkhaus!=NULL&&p_newcar != NULL)
     {
         assert(parkhaus_is_full(p_parkhaus)==0);
         park_car(p_parkhaus,p_newcar,1);
@@ -93,8 +91,8 @@ void test_parkhaus_is_full()
     {
         printf("Error: Test for parkaus_is_full failed");
     }
-    free(p_newcar);
-    free(p_parkhaus);
+    close_parkhaus(p_parkhaus);
+    delete_car(p_newcar);
 }
 
 int main()
@@ -104,6 +102,7 @@ int main()
     test_park_car();
     test_update_parkhaus();
     test_parkhaus_is_full();
+    printf("Test successfull");
 
     return 0;
 }
