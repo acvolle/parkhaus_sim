@@ -172,7 +172,7 @@ return 0
         }
 
         // Break the for loop if any error occured at running timestep
-        if(run_timestep_status_code)
+        if (run_timestep_status_code)
         {
             break;
         }
@@ -193,8 +193,8 @@ return 0
         // increase timestep count
         current_timestep++;
     }
-    
-////// SHUTDOWN //////
+
+    ////// SHUTDOWN //////
 
     // close log file (writing mode)
     fclose(fp_log);
@@ -208,12 +208,35 @@ return 0
     }
     else // file was opened in reading mode
     {
-        if(ui_process_final_stats(fp_read) == -1)
+        if (ui_process_final_stats(fp_read) == -1)
         {
             printf("Error: Could not process results from log file!\n");
         }
         fclose(fp_read);
     }
 
+    // Delete config struct
+    if (free_config(p_config))
+    {
+        printf("Error: free_config failed!\n");
+    }
+    p_config = NULL;
 
+    // Delete stats struct
+    if (stats_delete(p_stats))
+    {
+        printf("Error: stats_delete failed!\n");
+    }
+    p_stats = NULL;
+
+    // Delete parkhaus struct
+    if (close_parkhaus(p_parkhaus))
+    {
+        printf("Error: close_parkhaus failed!\n");
+    }
+    p_parkhaus = NULL;
+
+    queue_clear(&q);
+
+    return 0;
 }
