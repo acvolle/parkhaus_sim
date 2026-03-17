@@ -181,7 +181,7 @@ return 0
         return -1;
     }
 
-    if (fprintf(fp, "%d,%.2f,%d,%d,%.2f,%.2f\n",
+    if (fprintf(fp, "%d, %.2f, %d, %d, %.2f, %.2f\n",
                 current_timestep,
                 p_stats->occupancy_rate,
                 p_stats->cars_waiting,
@@ -242,13 +242,20 @@ return 0
 static void ui_print_final_stats(
                 const Config *p_config,
                 const float avg_occupancy,
-                const int max_occupancy,
+                const float max_occupancy,
                 const float avg_waiting_duration,
                 const int max_waiting_duration,
                 const float avg_stress_score)
 {
     ui_print_border();
-    printf("End of P4 Rauenegg simulation\n\n");
+    printf("+++ End of P4 Rauenegg simulation +++\n\n");
+    printf("The simulation used the parameters:\n");
+    printf("Number of spaces: %d\nMax. parking time: %d\nDuration: %d\nGen. probability: %d\nSeed: %d\n\n",
+                p_config->num_spaces,
+                p_config->max_parking_time,
+                p_config->simulation_duration,
+                p_config->gen_probability,
+                p_config->random_seed);
     printf("Overall results for this simulation:\n");
     printf("Average occupancy rate:     %.2f %%\n", avg_occupancy);
     printf("Maximum occupancy rate:     %d %%\n", max_occupancy);
@@ -275,7 +282,7 @@ int ui_process_final_stats(FILE *fp, const Config *p_config)
     float sum_stress = 0.0f;
     int line_counter = 0;
     // variables for overall maximums
-    int alltime_max_occ = 0;
+    float alltime_max_occ = 0;
     int alltime_max_wait = 0;
     // variables for temporary data extraction
     int timestamp = 0;
