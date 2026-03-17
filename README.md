@@ -26,8 +26,10 @@ Example: Occupation 50% -> Score 12.5
 If every space is occupied, the score will be at least 50, and cars queueing up and waiting to get in will gradually increase the score up to 100.
 
 After the simulation is finished, you will also instantly see averages printed out on the console.
-- How occupied the garage was on average (ideally about 80%)
+- How occupied the garage was on average (ideally about 80% for efficiency)
 - What the average waiting time was for a car to be able to get in (ideally 0)
+- The maximum occupancy throughout the entire simulation (ideally <100%)
+- The maximum time a car has waited to get in (ideally <10 or a tolerable amount)
 - The average stress score throughout the entire simulated period (ideally 30-35)
 
 To analyze the generated data, you can find the values for each timestep (csv format) inside the file "parkhaus_sim_log.txt".
