@@ -249,9 +249,11 @@ static void ui_print_final_stats(
 {
     ui_print_border();
     printf("End of P4 Rauenegg simulation\n\n");
-    printf("Overall statistics:\n");
+    printf("Overall results for this simulation:\n");
     printf("Average occupancy rate:     %.2f %%\n", avg_occupancy);
+    printf("Maximum occupancy rate:     %d %%\n", max_occupancy);
     printf("Average wait time in Queue: %.2f timesteps\n", avg_waiting_duration);
+    printf("Maximum wait time in Queue: %d timesteps\n", max_waiting_duration);
     printf("Average stress score:       %.2f out of 100\n", avg_stress_score);
     ui_print_border();
     printf("(c) Rolls-Royce Power Solutions\n");
@@ -315,7 +317,7 @@ int ui_process_final_stats(FILE *fp, const Config *p_config)
             {
                 alltime_max_wait = max_wait;
             }
-            
+
             // count every line which was read from
             line_counter++;
         }
