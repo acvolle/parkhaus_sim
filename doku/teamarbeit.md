@@ -1,7 +1,7 @@
 ## Schwierigkeiten und Herausforderungen bei der Zusammenarbeit
 ### Arbeitsverteilung
-Die Arbeitsverteilung war für unser Team eine Herausforderung, da die Aufgaben von
-unterschiedlichen Teammitgliedern unterschiedlich gut funktioniert hat.
+Die Arbeitsverteilung war für unser Team eine Herausforderung, da das Bearbeiten von Aufgaben
+bei unterschiedlichen Teammitgliedern unterschiedlich gut funktioniert hat.
 Bei der Bearbeitung der Aufgaben durch ein Teammitglied kam es häufiger zu 
 Verzögerungen und Mängeln, sodass einerseits sehr detaillierte Code-Reviews der anderen
 Teammitglieder nötig waren, aber auch (durch die Verzögerung) Aufgaben umverteilt werden
@@ -11,7 +11,7 @@ Teammitgliedern, was an dem großen Unterschied der Anzahl von Commits und Pull 
 zwischen den Teammitgliedern sichtbar wird.
 Uns ist rückblickend dadurch klar geworden, dass wir Verantwortlichkeiten im Projekt nicht
 klar genug definiert haben und auch für den Umgang mit überschrittenen Deadlines keine
-konkrete Vorgehensweise im Voraus festgelet hatten.
+konkrete Vorgehensweise im Voraus festgelegt hatten.
 
 ### Reviewen von Pull-Requests
 Die Möglichkeit, Feedback und Verbesserungsvorschläge mit einzubringen, wurde von den 
