@@ -123,8 +123,8 @@ return 0
     queue_init(&q);
 
     // Initialize Parkhaus
-    Parkhaus *p_parkhaus = init_parkhaus(p_config->num_spaces);
-    if (p_parkhaus == NULL)
+    Parkhaus *p_rauenegg = init_parkhaus(p_config->num_spaces);
+    if (p_rauenegg == NULL)
     {
         printf("Error: Parkhaus creation failed!\n");
         free_config(p_config);
@@ -145,7 +145,7 @@ return 0
     {
 
         // Status code for execution of run_timestep function
-        int run_timestep_status_code = run_timestep(p_parkhaus, &q, p_config, p_stats);
+        int run_timestep_status_code = run_timestep(p_rauenegg, &q, p_config, p_stats);
         switch (run_timestep_status_code)
         {
         case 0:
@@ -207,7 +207,7 @@ return 0
     }
     else // file was opened in reading mode
     {
-        if (ui_process_final_stats(fp_results) == -1)
+        if (ui_process_final_stats(fp_results, p_config) == -1)
         {
             printf("Error: Could not process results from log file!\n");
         }
@@ -229,11 +229,11 @@ return 0
     p_stats = NULL;
 
     // Delete parkhaus struct
-    if (close_parkhaus(p_parkhaus))
+    if (close_parkhaus(p_rauenegg))
     {
         printf("Error: close_parkhaus failed!\n");
     }
-    p_parkhaus = NULL;
+    p_rauenegg = NULL;
 
     queue_clear(&q);
 
