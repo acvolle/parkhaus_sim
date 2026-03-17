@@ -8,6 +8,16 @@ Welche Tasks wer Übernahm wurde über das Kanban Board geregelt, dabei konnte m
 Nachdem die grundliegenden Probleme, wie welche Funktionen oder welche Statisken benötigt wurden geregelt waren
 und ein Repository auf Basis der Vorgaben mit den dazugehörigen Header-Files erstellt war begann der Prozess des Pseudocode schreibens.
 
+#Struktur
+Man entschied sich die Module in car, parking,queue, stats, ui, simulation und main aufzuteilen,
+welche die Grundlegenden Funktionen darstellen welche aufeinander aufbauen. Car ist dabei der Grunstein,
+da es Autos (car structs) definiert, sie generiert und löscht. Darüber steht parking, welche das Parkhaus definiert, wie es erstellt wird ,wie die Autos dort gespeichert werden und wie das
+Parkhaus gelöscht wird. Ähnlich ist Queue welches auch car nutzt, und diese als Nodes in einer Liste
+speichert, sollte das Parkhaus voll sein. Stats wiederrum verwendet queue um eine liste der
+Statistiken zu erstellen. Simulation nutzt diese drei plus die Inputs des Nutzers um die
+eigentliche simulation durchzuführen. Die Inputs werden wiederrum über UI abgefragt, all das kommt
+in Main zusammen.
+
 #Pseudocode
 Der Pseudocode und die Beschreibungen in den Headerfiles wurden auf Basis der Vorgespräche erstellt.
 Dabei sollten sie möglichst nahe an echten Code sein und Erklärungen sowie die Inputs und Outputs enthalten.
