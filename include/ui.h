@@ -94,16 +94,17 @@ int ui_write_stats(const Stats *p_stats, FILE *fp);
 int ui_print_stats(const Stats *p_stats);
 
 /**
- * @brief Calculate averages from the log file and print them on the console
+ * @brief Calculate averages and maximums from the log file and print them on the console
  *
  * To be called after successful simulation
  *
- * @note File has to be opened already, close the file if the function returns -1
+ * @note File has to be opened already in reading mode, close the file if the function returns -1
  * @warning This function does not close the file
  * 
  * @param[in] fp reference to the txt file
+ * @param[in] p_config reference to the Config struct
  * @return 0 for success, -1 for error
  */
-int ui_process_final_stats(FILE *fp);
+int ui_process_final_stats(FILE *fp, const Config *p_config);
 
 #endif

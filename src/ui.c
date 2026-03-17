@@ -113,7 +113,7 @@ return 0
 {
     if (p_config == NULL)
     {
-        printf("ui_get_pasams: null pointer");
+        printf("ui_get_params: null pointer");
         return -1;
     }
 
@@ -181,7 +181,7 @@ return 0
         return -1;
     }
 
-    if (fprintf(fp, "%d,%.2f,%d,%d,%.2f,%.2f\n",
+    if (fprintf(fp, "%d, %.2f, %d, %d, %.2f, %.2f\n",
                 current_timestep,
                 p_stats->occupancy_rate,
                 p_stats->cars_waiting,
@@ -234,24 +234,45 @@ return 0
  * To be called by the ui_process_final_stats
  *
  * @param[in] avg_occupancy
+ * @param[in] max_occupancy
  * @param[in] avg_waiting_duration
- * @param[in] avg_waiting_count
+ * @param[in] max_waiting_duration
+ * @param[in] avg_stress_score
  */
-static void ui_print_final_stats(float avg_occupancy, float avg_waiting_duration, float avg_stress_score)
+static void ui_print_final_stats(
+                const Config *p_config,
+                const float avg_occupancy,
+                const float max_occupancy,
+                const float avg_waiting_duration,
+                const int max_waiting_duration,
+                const float avg_stress_score)
 {
     ui_print_border();
-    printf("End of P4 Rauenegg simulation\n\n");
-    printf("Overall statistics:\n");
+    printf("+++ End of P4 Rauenegg simulation +++\n\n");
+    printf("The simulation used the parameters:\n");
+    printf( "Number of spaces:  %d\n"
+            "Max. parking time: %d\n"
+            "Duration:          %d\n"
+            "Gen. probability:  %d\n"
+            "Seed:              %d\n\n",
+            p_config->num_spaces,
+            p_config->max_parking_time,
+            p_config->simulation_duration,
+            p_config->gen_probability,
+            p_config->random_seed);
+    printf("Overall results for this simulation:\n");
     printf("Average occupancy rate:     %.2f %%\n", avg_occupancy);
+    printf("Maximum occupancy rate:     %.2f %%\n", max_occupancy);
     printf("Average wait time in Queue: %.2f timesteps\n", avg_waiting_duration);
+    printf("Maximum wait time in Queue: %d timesteps\n", max_waiting_duration);
     printf("Average stress score:       %.2f out of 100\n", avg_stress_score);
     ui_print_border();
     printf("(c) Rolls-Royce Power Solutions\n");
 }
 
-int ui_process_final_stats(FILE *fp)
+int ui_process_final_stats(FILE *fp, const Config *p_config)
 {
-    if (fp == NULL)
+    if (fp == NULL || p_config == NULL)
     {
         return -1;
     }
@@ -264,6 +285,9 @@ int ui_process_final_stats(FILE *fp)
     float sum_wait = 0.0f;
     float sum_stress = 0.0f;
     int line_counter = 0;
+    // variables for overall maximums
+    float alltime_max_occ = 0;
+    int alltime_max_wait = 0;
     // variables for temporary data extraction
     int timestamp = 0;
     int waiting = 0;
@@ -290,9 +314,21 @@ int ui_process_final_stats(FILE *fp)
         if (sscanf(buffer, "%d, %f, %d, %d, %f, %f",
                    &timestamp, &occ, &waiting, &max_wait, &avg_wait, &stress) == 6)
         {
+            // update sums
             sum_occ += occ;
             sum_wait += (float)max_wait;
             sum_stress += stress;
+
+            //update alltime maximums if needed
+            if(occ > alltime_max_occ)
+            {
+                alltime_max_occ = occ;
+            }
+            if(max_wait > alltime_max_wait)
+            {
+                alltime_max_wait = max_wait;
+            }
+
             // count every line which was read from
             line_counter++;
         }
@@ -306,8 +342,11 @@ int ui_process_final_stats(FILE *fp)
 
     // calculate averages to be printed
     ui_print_final_stats(
+        p_config,
         sum_occ / (float)line_counter,
+        alltime_max_occ,
         sum_wait / (float)line_counter,
+        alltime_max_wait,
         sum_stress / (float)line_counter
     );
 
