@@ -21,7 +21,7 @@ dass die Last der Qualitätssicherung primär bei zwei Personen lag.
 
 ## Was im Team einfach gefallen bzw. gut gelungen ist
 ### Task-Management
-Als Task Manager nutzten wie wie vorgegeben die in Github bereitgestellten Funktionen
+Als Task Manager nutzten wir wie vorgegeben die in Github bereitgestellten Funktionen
 (Erstellen von Issues und Kanban Board). Dieses Management wurde auch das gesamte
 Projekt über gut gepflegt. So konnte jedes Teammitglied jederzeit den Fortschritt der Anderen
 und auch den Fortschritt des Gesamtprojekts nachverfolgen. Außerdem wurde hierdurch
