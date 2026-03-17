@@ -5,7 +5,7 @@ Im folgenden werden einige alternative Umsetzungsmöglichkeiten, die wir uns ang
 #### Modularisierung
 Zu Beginn das Projekts war ein geringerer Grad der Modularisierung vorgesehen, beispielsweise stand im Raum stats und simulation zu einem Modul zusammenzufassen oder deren Funktionalität auf Main, Parkhaus, Queue und UI aufzuteilen. Dagegen sprach aber, das so wenig wie möglich Funktionalität in main() untergebracht werden sollte. Die hohe Modularisierung beitet hingegen den Vorteil, dass einzelne Source-Dateien kompakter und übersichtlicher sind, was allein schon die Arbeitsteilung in kleinere Arbeitspakete und die Wartung vereinfacht.
 
-#### "Call by Refernce" und FUnktionsrückgabewerte
+#### "Call by Reference" und FUnktionsrückgabewerte
 Viele der implementierten Funktionen müssen mit einem Pointer als input aufgerufen werden ("call by reference"), da die Operationen wirklich auf dem spezifischen Objekt ausgeführt werden mussten (z. B. dem Parkhaus). Dieses Prinzip haben wir aber auch so viel wie sinnvoll auch in anderen Funktionen eingesetzt, etwa bei dequeue(), bei dem ein Pointer auf einen Pointer übergeben wird und der Pointer dann auf die Adresse des aus der Queue entfernten Cars gesetzt wird. In der Gruppe wurde haben wir darüber diskutiert, ob die einfache Rückgabe des Pointers einfacher und simpler wäre, diese Lösung sorgt aber dafür, dass ein Status-Code int als Rückgabewert dient - somit haben wir einheitlichere und differenzierbare Rückgabewerte (die Funktion kann zwischen leerer Queue '1' und NULL-Pointer '-1' unterscheiden).
 
 #### Dynamische Allokation
