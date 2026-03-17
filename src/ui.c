@@ -258,7 +258,7 @@ static void ui_print_final_stats(
                 p_config->random_seed);
     printf("Overall results for this simulation:\n");
     printf("Average occupancy rate:     %.2f %%\n", avg_occupancy);
-    printf("Maximum occupancy rate:     %d %%\n", max_occupancy);
+    printf("Maximum occupancy rate:     %.2f %%\n", max_occupancy);
     printf("Average wait time in Queue: %.2f timesteps\n", avg_waiting_duration);
     printf("Maximum wait time in Queue: %d timesteps\n", max_waiting_duration);
     printf("Average stress score:       %.2f out of 100\n", avg_stress_score);
