@@ -250,12 +250,16 @@ static void ui_print_final_stats(
     ui_print_border();
     printf("+++ End of P4 Rauenegg simulation +++\n\n");
     printf("The simulation used the parameters:\n");
-    printf("Number of spaces: %d\nMax. parking time: %d\nDuration: %d\nGen. probability: %d\nSeed: %d\n\n",
-                p_config->num_spaces,
-                p_config->max_parking_time,
-                p_config->simulation_duration,
-                p_config->gen_probability,
-                p_config->random_seed);
+    printf( "Number of spaces:  %d\n"
+            "Max. parking time: %d\n"
+            "Duration:          %d\n"
+            "Gen. probability:  %d\n"
+            "Seed:              %d\n\n",
+            p_config->num_spaces,
+            p_config->max_parking_time,
+            p_config->simulation_duration,
+            p_config->gen_probability,
+            p_config->random_seed);
     printf("Overall results for this simulation:\n");
     printf("Average occupancy rate:     %.2f %%\n", avg_occupancy);
     printf("Maximum occupancy rate:     %.2f %%\n", max_occupancy);
