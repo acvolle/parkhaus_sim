@@ -234,10 +234,18 @@ return 0
  * To be called by the ui_process_final_stats
  *
  * @param[in] avg_occupancy
+ * @param[in] max_occupancy
  * @param[in] avg_waiting_duration
- * @param[in] avg_waiting_count
+ * @param[in] max_waiting_duration
+ * @param[in] avg_stress_score
  */
-static void ui_print_final_stats(const Config *p_config, const float avg_occupancy, const float avg_waiting_duration, const float avg_stress_score)
+static void ui_print_final_stats(
+                const Config *p_config,
+                const float avg_occupancy,
+                const int max_occupancy,
+                const float avg_waiting_duration,
+                const int max_waiting_duration,
+                const float avg_stress_score)
 {
     ui_print_border();
     printf("End of P4 Rauenegg simulation\n\n");
@@ -264,6 +272,9 @@ int ui_process_final_stats(FILE *fp, const Config *p_config)
     float sum_wait = 0.0f;
     float sum_stress = 0.0f;
     int line_counter = 0;
+    // variables for overall maximums
+    int alltime_max_occ = 0;
+    int alltime_max_wait = 0;
     // variables for temporary data extraction
     int timestamp = 0;
     int waiting = 0;
@@ -308,7 +319,9 @@ int ui_process_final_stats(FILE *fp, const Config *p_config)
     ui_print_final_stats(
         p_config,
         sum_occ / (float)line_counter,
+        alltime_max_occ,
         sum_wait / (float)line_counter,
+        alltime_max_wait,
         sum_stress / (float)line_counter
     );
 
