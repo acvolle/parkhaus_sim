@@ -301,9 +301,21 @@ int ui_process_final_stats(FILE *fp, const Config *p_config)
         if (sscanf(buffer, "%d, %f, %d, %d, %f, %f",
                    &timestamp, &occ, &waiting, &max_wait, &avg_wait, &stress) == 6)
         {
+            // update sums
             sum_occ += occ;
             sum_wait += (float)max_wait;
             sum_stress += stress;
+
+            //update alltime maximums if needed
+            if(occ > alltime_max_occ)
+            {
+                alltime_max_occ = occ;
+            }
+            if(max_wait > alltime_max_wait)
+            {
+                alltime_max_wait = max_wait;
+            }
+            
             // count every line which was read from
             line_counter++;
         }
