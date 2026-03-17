@@ -7,17 +7,18 @@ Verzögerungen und Mängeln, sodass einerseits sehr detaillierte Code-Reviews de
 Teammitglieder nötig waren, aber auch (durch die Verzögerung) Aufgaben umverteilt werden
 mussten, um eine rechtzeitige Abgabe möglich zu machen. 
 Am Ende führte das zu einer starken Ungleichverteilung des Umfangs der Arbeit unter den
-Teammitgliedern, was an der Statistik "Contributors" im Projekt unter "Insights" sichtbar wird.
+Teammitgliedern, was an dem großen Unterschied der Anzahl von Commits und Pull Requests
+zwischen den Teammitgliedern sichtbar wird.
 Uns ist rückblickend dadurch klar geworden, dass wir Verantwortlichkeiten im Projekt nicht
 klar genug definiert haben und auch für den Umgang mit überschrittenen Deadlines keine
 konkrete Vorgehensweise im Voraus festgelet hatten.
 
 ### Reviewen von Pull-Requests
 Die Möglichkeit, Feedback und Verbesserungsvorschläge mit einzubringen, wurde von den 
-Teammitgliedern ebenfalls unterschiedlich stark genutzt. Während zwischen zwei Teammitgliedern 
-ein reger Austausch mit konstruktiven Verbesserungsvorschlägen ("Request Changes" mit Kommentaren
-bei Pull Requests) stattfand, blieb die Beteiligungan anderer Stelle gering. Dies führte dazu,
-dass die Last der Qualitätssicherung primär bei zwei Personen lag.
+Teammitgliedern ebenfalls unterschiedlich stark genutzt. Teilweise kam es zu einem
+regen Austausch mit konstruktiven Verbesserungsvorschlägen ("Request Changes" mit Kommentaren
+bei Pull Requests), aber teilweise auch zu geringer Beteiligung und Reviews ohne Kommentare. 
+Dies führte dazu, dass die Last der Qualitätssicherung ebenfalls ungleich verteilt war.
 
 ## Was im Team einfach gefallen bzw. gut gelungen ist
 ### Task-Management
