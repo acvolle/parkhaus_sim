@@ -66,14 +66,17 @@ void create_test_file(const char *filename, int valid)
 
 void test_ui_process_final_stats()
 {
-    // test null pointer handling
-    assert(ui_process_final_stats(NULL) == -1);
-    
-    // test with valid file
     create_test_file("valid_test_log_file.txt", 1);
     FILE *valid_fp = fopen("valid_test_log_file.txt", "r");
+    Config test_config = {100, 10, 69, 42, 333};
+
+    // test null pointer handling
+    assert(ui_process_final_stats(NULL, &test_config) == -1);
+    assert(ui_process_final_stats(valid_fp, NULL) == -1);
+    
+    // test with valid file
     assert(valid_fp != NULL);
-    assert(ui_process_final_stats(valid_fp) == 0);
+    assert(ui_process_final_stats(valid_fp, &test_config) == 0);
     fclose(valid_fp);
     remove("valid_test_log_file.txt");
 
@@ -81,7 +84,7 @@ void test_ui_process_final_stats()
     create_test_file("short_test_log_file.txt", 0);
     FILE *invalid_fp = fopen("short_test_log_file.txt", "r");
     assert(invalid_fp != NULL);
-    assert(ui_process_final_stats(invalid_fp) == -1);
+    assert(ui_process_final_stats(invalid_fp, &test_config) == -1);
     fclose(invalid_fp);
     remove("short_test_log_file.txt");
 }

@@ -113,7 +113,7 @@ return 0
 {
     if (p_config == NULL)
     {
-        printf("ui_get_pasams: null pointer");
+        printf("ui_get_params: null pointer");
         return -1;
     }
 
@@ -268,7 +268,7 @@ static void ui_print_final_stats(
 
 int ui_process_final_stats(FILE *fp, const Config *p_config)
 {
-    if (fp == NULL)
+    if (fp == NULL || p_config == NULL)
     {
         return -1;
     }
