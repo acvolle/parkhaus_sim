@@ -98,12 +98,13 @@ int ui_print_stats(const Stats *p_stats);
  *
  * To be called after successful simulation
  *
- * @note File has to be opened already, close the file if the function returns -1
+ * @note File has to be opened already in reading mode, close the file if the function returns -1
  * @warning This function does not close the file
  * 
  * @param[in] fp reference to the txt file
+ * @param[in] p_config reference to the Config struct
  * @return 0 for success, -1 for error
  */
-int ui_process_final_stats(FILE *fp);
+int ui_process_final_stats(FILE *fp, const Config *p_config);
 
 #endif

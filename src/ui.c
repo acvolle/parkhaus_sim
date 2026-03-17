@@ -237,7 +237,7 @@ return 0
  * @param[in] avg_waiting_duration
  * @param[in] avg_waiting_count
  */
-static void ui_print_final_stats(float avg_occupancy, float avg_waiting_duration, float avg_stress_score)
+static void ui_print_final_stats(const Config *p_config, const float avg_occupancy, const float avg_waiting_duration, const float avg_stress_score)
 {
     ui_print_border();
     printf("End of P4 Rauenegg simulation\n\n");
@@ -249,7 +249,7 @@ static void ui_print_final_stats(float avg_occupancy, float avg_waiting_duration
     printf("(c) Rolls-Royce Power Solutions\n");
 }
 
-int ui_process_final_stats(FILE *fp)
+int ui_process_final_stats(FILE *fp, const Config *p_config)
 {
     if (fp == NULL)
     {
@@ -306,6 +306,7 @@ int ui_process_final_stats(FILE *fp)
 
     // calculate averages to be printed
     ui_print_final_stats(
+        p_config,
         sum_occ / (float)line_counter,
         sum_wait / (float)line_counter,
         sum_stress / (float)line_counter
