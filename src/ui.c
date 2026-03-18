@@ -117,10 +117,10 @@ return 0
         return -1;
     }
 
-    p_config->num_spaces = ui_get_int("Enter number of spaces: ", MIN_INPUT, MAX_INPUT);
-    p_config->max_parking_time = ui_get_int("Enter max. parking duration in timesteps: ", MIN_PARKING_DURATION, MAX_INPUT);
-    p_config->simulation_duration = ui_get_int("Enter how many timesteps should be simulated: ", MIN_INPUT, MAX_INPUT);
-    p_config->gen_probability = ui_get_int("Enter probability for new cars to arrive per timestep (%%): ", MIN_INPUT, 100);
+    p_config->num_spaces = ui_get_int("Enter number of spaces: ", MIN_USER_INPUT, MAX_USER_INPUT);
+    p_config->max_parking_time = ui_get_int("Enter max. parking duration in timesteps: ", MIN_PARKING_DURATION, MAX_USER_INPUT);
+    p_config->simulation_duration = ui_get_int("Enter how many timesteps should be simulated: ", MIN_USER_INPUT, MAX_USER_INPUT);
+    p_config->gen_probability = ui_get_int("Enter probability for new cars to arrive per timestep (%%): ", MIN_USER_INPUT, 100);
     p_config->random_seed = ui_get_int("Enter your seed (random number): ", 0, 32767);
 
     return 0;
