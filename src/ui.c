@@ -28,9 +28,9 @@ OUTPUT welcome message
     printf("Welcome to the Parkhaus P4 Rauenegg simultion tool!\n");
     ui_print_border();
     printf("- You will be asked to input simulation parameters\n");
-    printf("- The simulation will run, and statistics for each timeste pwill be printed\n");
+    printf("- The simulation will run, and statistics for each timestep will be printed\n");
     printf("- Final statistics will be printed at the end\n");
-    printf("- The simulation will end and all stats will be readable in a stats.txt file\n");
+    printf("- After the simulation, all stats will be found in the parkhaus_sim_log.txt file\n");
     ui_print_border();
 }
 
