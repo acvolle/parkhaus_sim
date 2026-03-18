@@ -81,10 +81,13 @@ Wir haben uns bereits im Vorfeld über die Coding-Konventionen, den Aufbau der F
 #### Merge-Konflikte
 Durch die eigenständige Bearbeitung von Issues und Modulen konnten Merge-Konflikte durch Pull-Requests zum Zusammentragen der Arbeiten fast vollständig vermieden werden.
 
+## Anhänge:
+Folgende Dokumente sind fürs weitere Verständnis des Projekts im doku-Ordner vorhanden.
+* modules-overview.pdf beschreibt die verschiedenen Module
+* gruppierung_und_strukturen.md gibt einen Überblick über den Aufbau und die Modularisierung des Projekts
+* parkhaus_sim_example.xlsx zeigt besipeilhaft das einsetzen der log-file in einer .csv-Datei
 
-
-
-
+* in README findet sich eine Nutzungsanleitung für die Parkhaus-Simulation
 
 
 
