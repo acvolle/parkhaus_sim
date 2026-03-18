@@ -34,6 +34,7 @@
 ##### Struct Parkhaus:
 * Array von pointern auf Cars der Größe \[Anzahl von Parkplätzen]
 * Anzahl an Stellplätzen
+* Anzahl der besetzten Stellplätze
 
 ##### Struct Config:
 * Space count
