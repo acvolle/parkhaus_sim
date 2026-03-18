@@ -55,6 +55,38 @@ Wir entschieden uns stattdessen für die erstgenannte Implementierung, da die Be
 Jede Car-Struktur benötigt eine eindeutige ID. Da diese nicht zwingend fortlaufend sein muss, wurde erwogen, einfach den Zeitpunkt der Erstellung des Fahrzeugs als ID zu verwenden. Somit hätten wir uns eine globale Variable erspart.
 Wir entschieden uns jedoch, eine statische, fortlaufende Variable current_car_id einzuführen. Dieser Ansatz bringt praktisch keinen Mehraufwand mit sich, macht den Code aber lesbarer und würde uns ermöglichen, mehrere Cars pro Zeitschritt zu generieren.
 
+## Zusammenarbeit
+
+### Schwierigkeiten und Herausforderungen
+#### Arbeitsverteilung
+Die Arbeitsverteilung war für unser Team eine Herausforderung, da das Bearbeiten von Aufgaben bei verschiedenen Teammitgliedern unterschiedlich gut funktioniert hat.
+Bei der Bearbeitung der Aufgaben durch ein Teammitglied kam es häufiger zu Verzögerungen und Mängeln, sodass einerseits sehr detaillierte Code-Reviews der anderen Teammitglieder nötig waren, andererseits (durch die Verzögerung) Aufgaben umverteilt werden mussten, um eine rechtzeitige Abgabe zu ermöglichen.
+Am Ende führte das zu einer starken Ungleichverteilung des Umfangs der Arbeit unter den Teammitgliedern, was am großen Unterschied in der Anzahl von Commits und Pull Requests zwischen den Teammitgliedern sichtbar wird.
+Uns ist rückblickend dadurch klar geworden, dass wir Verantwortlichkeiten im Projekt nicht klar genug definiert haben und auch für den Umgang mit überschrittenen Deadlines keine konkrete Vorgehensweise im Voraus festgelegt hatten.
+#### Reviewen von Pull-Requests
+Die Möglichkeit, Feedback und Verbesserungsvorschläge einzubringen, wurde von den Teammitgliedern ebenfalls unterschiedlich stark genutzt. Teilweise kam es zu einem regen Austausch mit konstruktiven Verbesserungsvorschlägen („Request Changes“ mit Kommentaren bei Pull Requests), aber teilweise auch zu geringerer Beteiligung und Reviews ohne Kommentare.
+Dies führte dazu, dass die Last der Qualitätssicherung ebenfalls ungleich verteilt war.
+
+### Was gelungen ist
+#### Task-Management
+Als Task-Manager nutzten wir, wie vorgegeben, die in GitHub bereitgestellten Funktionen (Erstellen von Issues und Kanban-Board). Dieses Management wurde auch das gesamte Projekt über gut gepflegt. So konnte jedes Teammitglied jederzeit den Fortschritt der anderen und auch den Fortschritt des Gesamtprojekts nachverfolgen. Außerdem wurde hierdurch die Koordination der Aufgaben erleichtert, da jeder Issues erstellen und sich Issues zuordnen (assignen) konnte.
+#### Qualitätssicherung
+Wie schon oben teilweise angesprochen, wurden Pull Requests stets von den anderen Teammitgliedern reviewed, bevor diese in den Main-Branch gemerged wurden. Hier kam es oftmals zur Erkennung von Fehlern im Code, sodass diese sofort vom Ersteller des Pull Requests angepasst/korrigiert wurden und ein Mergen von fehlerhaftem Code in den meisten Fällen frühzeitig verhindert werden konnte.
+Neben der Korrektur von Fehlern wurden dadurch immer wieder auch Vorschläge zur Optimierung der einzelnen Funktionalitäten sowie der Struktur des Gesamtprojekts eingebracht und anschließend auch realisiert.
+Auch dass zum Zusammenfügen der Module und für den fehlerfreien Durchlauf der Unit-Tests nur sehr wenige Änderungen (insgesamt an 2–3 Stellen im Programm) nötig waren, zeigt die für unsere Verhältnisse hohe Qualität des Quellcodes (war überwiegend frei von Fehlern).
+#### Austausch von Wissen
+Die detaillierten Code-Reviews haben auch dazu geführt, dass wir den Code der anderen gesehen und verstanden haben. Immer wieder konnten durch den gegenseitigen Austausch das eigene Wissen und die Methodik beim Schreiben von Quellcode optimiert werden.
+#### Einheitlichkeit
+Wir haben uns bereits im Vorfeld über die Coding-Konventionen, den Aufbau der Funktions-Header, die Benennung von Funktionen und die Rückgabewerte von Funktionen geeinigt. Diese Abmachungen wurden auch stets eingehalten, was zur Übersichtlichkeit des Projekts und zum guten Zusammenspiel der Module beigetragen hat.
+#### Merge-Konflikte
+Durch die eigenständige Bearbeitung von Issues und Modulen konnten Merge-Konflikte durch Pull-Requests zum Zusammentragen der Arbeiten fast vollständig vermieden werden.
+
+
+
+
+
+
+
 
 
 
