@@ -28,7 +28,40 @@ Statische Funktionen wurden getestet, indem für sie nicht-statische Funkttionsw
 ### Main
 Der Zusammenschluss der einzelnen Elemente und der Test in Main bildeten den letzten Teil der Codierungsarbeit. Dabei zeigten sich noch einmal verbleibende Fehler oder Unstimmigkeiten innerhalb des Codes und der Header-Dateien, die korrigiert wurden.
 
-## 
+## Umsetzung und Alternativen
+Im Folgenden werden einige alternative Umsetzungsmöglichkeiten vorgestellt, die wir uns angeschaut haben. Zudem werden die Gründe genannt, warum wir uns letztendlich für die gewählte Umsetzung entschieden haben.
+Wir haben einserseits unser Projekt insbesondere auf Modularität und Wartbarkeit optimiert um Flexibilität und Skalierbarkeit zu gewährleisten. Andererseits lag der Fokus auch auf Lesbarkeit und Robustheit des Codes, um zukünftige Anpassungen zu erleichtern.
+
+### Modularisierung
+Zu Beginn des Projekts war ein geringerer Grad der Modularisierung vorgesehen. So stand zur Diskussion, Stats und Simulation zu einem Modul zusammenzufassen oder deren Funktionalität auf main, Parkhaus, Queue und UI aufzuteilen. Dagegen sprach jedoch, dass möglichst wenig Funktionalität in main() untergebracht werden sollte.
+Die hohe Modularisierung bietet hingegen den Vorteil, dass einzelne Source-Dateien kompakter und übersichtlicher sind. Dies vereinfacht nicht nur die Arbeitsteilung in kleinere Arbeitspakete, sondern auch die Wartung.
+
+### "Call by Reference" und Funktionsrückgabewerte
+Viele der implementierten Funktionen müssen mit einem Pointer als Input aufgerufen werden ("Call by Reference"), da die Operationen direkt auf dem spezifischen Objekt ausgeführt werden müssten (z. B. dem Parkhaus).
+Dieses Prinzip haben wir auch in anderen Funktionen eingesetzt, zu Beispiel bei dequeue(). Dort wird ein Pointer auf einen Pointer übergeben, und der Pointer wird dann auf die Adresse des aus der Queue entfernten Cars gesetzt. Die Rückgabe eines Pointers von dequeue wäre hier simpler. 
+Im Team haben wir uns aber darauf geeinigt, als Rückgabewert einen Integer als status code festzulegen. Die Rückgabewerte sind somit differenziert (z. B. kann die Funktion zwischen einer leeren Queue ('1') und einem NULL-Pointer ('-1') unterscheiden) und über die verschiedenen Funktionen einheitlich.
+Auch bei der run_timestep() Funktion sind die differenzierten Rückgabewerte sichtbar, dies dient dort vor allem der Fehlererekennung.
+
+### Dynamische Allokation
+Fast alle Strukturen der Simulation (mit Ausnahme der Queue selbst) werden dynamisch allokiert. Einige davon, wie Parkhaus und Config, hätten wie die Queue statisch in main initialisiert werden können. Dies hätte uns den Aufwand der dynamischen Speicherverwaltung und damit verbundene Probleme erspart.
+Wir haben uns jedoch von Anfang an für die dynamische Allokation entschieden, um hinsichtlich der vielen Funktionsübergaben (siehe oben) möglichst viel Handlungsspielraum zu haben. Zudem sollten potenzielle Speicherprobleme von Projektbeginn an vermieden werden.
+
+### Berechnung der finalen Statistiken
+In unserer aktuellen Implementierung werden nur die aktuellen Statistiken in einer stats-Struktur gespeichert. Die finalen Statistiken werden erst am Ende der Simulation berechnet, indem alle Simulationsdaten aus der Log-Datei ausgelesen werden.
+Eine alternative Option wäre gewesen, die finalen Statistiken (Durchschnitte und Maximalwerte) in jedem Simulationsschritt zu berechnen. Am Ende wäre das Ergebnis dasselbe.
+Wir entschieden uns stattdessen für die erstgenannte Implementierung, da die Berechnung somit unabhängig vom Simulationsdurchlauf erfolgt. Dies gewährleistet eine höhere Modularisierung und einfachere Wartbarkeit des Programms. Diese Entscheidung zahlte sich später aus, als wir die Berechnung nachträglich ändern mussten, ohne den Code der eigentlichen Simulation anpassen zu müssen.
+
+### Fortlaufende Car-ID
+Jede Car-Struktur benötigt eine eindeutige ID. Da diese nicht zwingend fortlaufend sein muss, wurde erwogen, einfach den Zeitpunkt der Erstellung des Fahrzeugs als ID zu verwenden. Somit hätten wir uns eine globale Variable erspart.
+Wir entschieden uns jedoch, eine statische, fortlaufende Variable current_car_id einzuführen. Dieser Ansatz bringt praktisch keinen Mehraufwand mit sich, macht den Code aber lesbarer und würde uns ermöglichen, mehrere Cars pro Zeitschritt zu generieren.
+
+
+
+
+
+
+
+
 
 
 
